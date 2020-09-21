@@ -1,0 +1,870 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 52;
+	objects = {
+
+/* Begin PBXAggregateTarget section */
+		52B60EC2A583F24ACBB69C113F5488B9 /* SwiftLint */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = AE7B4FB01588B9E6DF09CB79FC7CE7BD /* Build configuration list for PBXAggregateTarget "SwiftLint" */;
+			buildPhases = (
+			);
+			dependencies = (
+			);
+			name = SwiftLint;
+		};
+/* End PBXAggregateTarget section */
+
+/* Begin PBXBuildFile section */
+		0B2BE4E922F114AF58D94A6B6489CB8A /* Pods-GiphyAppTests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 48F8953C42ADD2FC14259F10691B95B6 /* Pods-GiphyAppTests-dummy.m */; };
+		471CDFE870A0B9F92E085BE3A237DEC6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3212113385A8FBBDB272BD23C409FF61 /* Foundation.framework */; };
+		4B6CDB33C821BD3ED4A22A39FA2F9CBE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3212113385A8FBBDB272BD23C409FF61 /* Foundation.framework */; };
+		50E0249ED3679D2CAD6CC599252B71CC /* Pods-GiphyApp-GiphyAppUITests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = B235C08EE2AEAF88EA2C9E83C8C3C2DB /* Pods-GiphyApp-GiphyAppUITests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		731220A421CE88DB5826DEB54DE1CEB2 /* Pods-GiphyApp-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 92A51CEF7A45D83289FE712C602F3DC4 /* Pods-GiphyApp-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BC4420252CBBA3074AF6D321A453AD16 /* Pods-GiphyApp-GiphyAppUITests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = F8583899248E2B917213DAC50A100584 /* Pods-GiphyApp-GiphyAppUITests-dummy.m */; };
+		C21BB6EF8461CC57DB8EE6FF79CBCA4F /* Pods-GiphyApp-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A9508F6D6EC441A74C103023B6C2812 /* Pods-GiphyApp-dummy.m */; };
+		CC1F63971CA20243999E66AA626F2598 /* Pods-GiphyAppTests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A1B7D86566F3A59AE956ED011CA1158 /* Pods-GiphyAppTests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		FC0DE7F4C637CE2F0F110DFBEE3DEA29 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3212113385A8FBBDB272BD23C409FF61 /* Foundation.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		5DBEA29D8CB43BACDF5A36E7976AA5C0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 52B60EC2A583F24ACBB69C113F5488B9;
+			remoteInfo = SwiftLint;
+		};
+		B0FF414E198FCD8F2B51B98737382BE0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 940E433D1D877569F5292C0400BFEAD5;
+			remoteInfo = "Pods-GiphyApp";
+		};
+		DDAA2305E2EA2F94EED101F7532A4715 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 52B60EC2A583F24ACBB69C113F5488B9;
+			remoteInfo = SwiftLint;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		03BD53CDCF146AB50288559A0A48FCE7 /* Pods-GiphyAppTests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-GiphyAppTests.modulemap"; sourceTree = "<group>"; };
+		0A9508F6D6EC441A74C103023B6C2812 /* Pods-GiphyApp-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-GiphyApp-dummy.m"; sourceTree = "<group>"; };
+		12F2B536E38BC5BE0798F2990B821A82 /* Pods-GiphyAppTests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-GiphyAppTests-acknowledgements.plist"; sourceTree = "<group>"; };
+		31D9B891942F618FD7BE9AC5242B1B02 /* Pods-GiphyApp-GiphyAppUITests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-GiphyApp-GiphyAppUITests-acknowledgements.plist"; sourceTree = "<group>"; };
+		3212113385A8FBBDB272BD23C409FF61 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.2.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		3A1B7D86566F3A59AE956ED011CA1158 /* Pods-GiphyAppTests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-GiphyAppTests-umbrella.h"; sourceTree = "<group>"; };
+		3A2B43A61DB9CFEF443ED289589B3F06 /* Pods_GiphyApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_GiphyApp.framework; path = "Pods-GiphyApp.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3BFC040D43D414F4292FEB792CA08AB3 /* Pods-GiphyAppTests-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-GiphyAppTests-Info.plist"; sourceTree = "<group>"; };
+		3EC0124719FE8EF5FDDD72C26F8A2F57 /* SwiftLint.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SwiftLint.debug.xcconfig; sourceTree = "<group>"; };
+		43118691977CEA2BBD1ECB390D2F2230 /* Pods-GiphyApp-GiphyAppUITests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-GiphyApp-GiphyAppUITests.modulemap"; sourceTree = "<group>"; };
+		4886075B161ABC161BC4D21F2D4DBE79 /* Pods-GiphyApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-GiphyApp.release.xcconfig"; sourceTree = "<group>"; };
+		48F8953C42ADD2FC14259F10691B95B6 /* Pods-GiphyAppTests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-GiphyAppTests-dummy.m"; sourceTree = "<group>"; };
+		49A5E186E660444D86EEC614BE385A33 /* Pods-GiphyApp-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-GiphyApp-acknowledgements.markdown"; sourceTree = "<group>"; };
+		6954827F98A84C5357EEE5AA468778D5 /* Pods-GiphyAppTests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-GiphyAppTests-acknowledgements.markdown"; sourceTree = "<group>"; };
+		7EAB1DA481EDDC005A251D3A5E6BE4CD /* SwiftLint.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SwiftLint.release.xcconfig; sourceTree = "<group>"; };
+		92A51CEF7A45D83289FE712C602F3DC4 /* Pods-GiphyApp-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-GiphyApp-umbrella.h"; sourceTree = "<group>"; };
+		941382E852A568A713D4E2DF38110934 /* Pods-GiphyApp-GiphyAppUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-GiphyApp-GiphyAppUITests.release.xcconfig"; sourceTree = "<group>"; };
+		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		9F72B2D49E9D38F4B0B94B2904D8BD41 /* Pods-GiphyApp-GiphyAppUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-GiphyApp-GiphyAppUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		A2280FFB0CF473E3FD8301A11B435068 /* Pods-GiphyAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-GiphyAppTests.debug.xcconfig"; sourceTree = "<group>"; };
+		A87C81DE819661F4E98882B53B4F8FD4 /* Pods-GiphyApp-GiphyAppUITests-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-GiphyApp-GiphyAppUITests-Info.plist"; sourceTree = "<group>"; };
+		A91F88D23F3A4FA1F97496DB1DDAB9B3 /* Pods-GiphyAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-GiphyAppTests.release.xcconfig"; sourceTree = "<group>"; };
+		B235C08EE2AEAF88EA2C9E83C8C3C2DB /* Pods-GiphyApp-GiphyAppUITests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-GiphyApp-GiphyAppUITests-umbrella.h"; sourceTree = "<group>"; };
+		B41AE895B8DFF8F06E2C98B5CD347FDA /* Pods-GiphyApp-GiphyAppUITests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-GiphyApp-GiphyAppUITests-acknowledgements.markdown"; sourceTree = "<group>"; };
+		B478909AFC13364244C57D3186986601 /* Pods-GiphyApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-GiphyApp.debug.xcconfig"; sourceTree = "<group>"; };
+		BE4DD49829A13C6A9B80496DFAB99CDF /* Pods-GiphyApp-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-GiphyApp-acknowledgements.plist"; sourceTree = "<group>"; };
+		CECEAA0278699B6DCFD07FBF337C062F /* Pods_GiphyAppTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_GiphyAppTests.framework; path = "Pods-GiphyAppTests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		CF3DED89A6EDA20D6483867963DB9E6F /* Pods-GiphyApp-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-GiphyApp-Info.plist"; sourceTree = "<group>"; };
+		DA62D250311247F2065C720D76DB6915 /* Pods-GiphyApp.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-GiphyApp.modulemap"; sourceTree = "<group>"; };
+		F253F3B12EC5842935D910012FB8F42A /* Pods_GiphyApp_GiphyAppUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_GiphyApp_GiphyAppUITests.framework; path = "Pods-GiphyApp-GiphyAppUITests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F8583899248E2B917213DAC50A100584 /* Pods-GiphyApp-GiphyAppUITests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-GiphyApp-GiphyAppUITests-dummy.m"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		59E881AB09B3ADFA38625F139B08CAA4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				471CDFE870A0B9F92E085BE3A237DEC6 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		799696EC648040A356048A7BBC77143B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4B6CDB33C821BD3ED4A22A39FA2F9CBE /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A24A49384B89A8D696BF75627C1F32BF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FC0DE7F4C637CE2F0F110DFBEE3DEA29 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		5D947BC88F9E5783F94E45B01B4C659E /* Pods-GiphyApp */ = {
+			isa = PBXGroup;
+			children = (
+				DA62D250311247F2065C720D76DB6915 /* Pods-GiphyApp.modulemap */,
+				49A5E186E660444D86EEC614BE385A33 /* Pods-GiphyApp-acknowledgements.markdown */,
+				BE4DD49829A13C6A9B80496DFAB99CDF /* Pods-GiphyApp-acknowledgements.plist */,
+				0A9508F6D6EC441A74C103023B6C2812 /* Pods-GiphyApp-dummy.m */,
+				CF3DED89A6EDA20D6483867963DB9E6F /* Pods-GiphyApp-Info.plist */,
+				92A51CEF7A45D83289FE712C602F3DC4 /* Pods-GiphyApp-umbrella.h */,
+				B478909AFC13364244C57D3186986601 /* Pods-GiphyApp.debug.xcconfig */,
+				4886075B161ABC161BC4D21F2D4DBE79 /* Pods-GiphyApp.release.xcconfig */,
+			);
+			name = "Pods-GiphyApp";
+			path = "Target Support Files/Pods-GiphyApp";
+			sourceTree = "<group>";
+		};
+		643D256F00D02BF6E7286351487EF5A0 /* Pods-GiphyApp-GiphyAppUITests */ = {
+			isa = PBXGroup;
+			children = (
+				43118691977CEA2BBD1ECB390D2F2230 /* Pods-GiphyApp-GiphyAppUITests.modulemap */,
+				B41AE895B8DFF8F06E2C98B5CD347FDA /* Pods-GiphyApp-GiphyAppUITests-acknowledgements.markdown */,
+				31D9B891942F618FD7BE9AC5242B1B02 /* Pods-GiphyApp-GiphyAppUITests-acknowledgements.plist */,
+				F8583899248E2B917213DAC50A100584 /* Pods-GiphyApp-GiphyAppUITests-dummy.m */,
+				A87C81DE819661F4E98882B53B4F8FD4 /* Pods-GiphyApp-GiphyAppUITests-Info.plist */,
+				B235C08EE2AEAF88EA2C9E83C8C3C2DB /* Pods-GiphyApp-GiphyAppUITests-umbrella.h */,
+				9F72B2D49E9D38F4B0B94B2904D8BD41 /* Pods-GiphyApp-GiphyAppUITests.debug.xcconfig */,
+				941382E852A568A713D4E2DF38110934 /* Pods-GiphyApp-GiphyAppUITests.release.xcconfig */,
+			);
+			name = "Pods-GiphyApp-GiphyAppUITests";
+			path = "Target Support Files/Pods-GiphyApp-GiphyAppUITests";
+			sourceTree = "<group>";
+		};
+		7FDA596DBE0337ACDFE55A210D54EF26 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				3EC0124719FE8EF5FDDD72C26F8A2F57 /* SwiftLint.debug.xcconfig */,
+				7EAB1DA481EDDC005A251D3A5E6BE4CD /* SwiftLint.release.xcconfig */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/SwiftLint";
+			sourceTree = "<group>";
+		};
+		965877409E01FB3D85D85E90E6B30185 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				D96179D43A67C5D5323B0682D32C133C /* SwiftLint */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		A646E80D4DB313001CD5AA8F82E22B25 /* Targets Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				5D947BC88F9E5783F94E45B01B4C659E /* Pods-GiphyApp */,
+				643D256F00D02BF6E7286351487EF5A0 /* Pods-GiphyApp-GiphyAppUITests */,
+				C011FFC8E68F60197D06B92E6455E12A /* Pods-GiphyAppTests */,
+			);
+			name = "Targets Support Files";
+			sourceTree = "<group>";
+		};
+		C011FFC8E68F60197D06B92E6455E12A /* Pods-GiphyAppTests */ = {
+			isa = PBXGroup;
+			children = (
+				03BD53CDCF146AB50288559A0A48FCE7 /* Pods-GiphyAppTests.modulemap */,
+				6954827F98A84C5357EEE5AA468778D5 /* Pods-GiphyAppTests-acknowledgements.markdown */,
+				12F2B536E38BC5BE0798F2990B821A82 /* Pods-GiphyAppTests-acknowledgements.plist */,
+				48F8953C42ADD2FC14259F10691B95B6 /* Pods-GiphyAppTests-dummy.m */,
+				3BFC040D43D414F4292FEB792CA08AB3 /* Pods-GiphyAppTests-Info.plist */,
+				3A1B7D86566F3A59AE956ED011CA1158 /* Pods-GiphyAppTests-umbrella.h */,
+				A2280FFB0CF473E3FD8301A11B435068 /* Pods-GiphyAppTests.debug.xcconfig */,
+				A91F88D23F3A4FA1F97496DB1DDAB9B3 /* Pods-GiphyAppTests.release.xcconfig */,
+			);
+			name = "Pods-GiphyAppTests";
+			path = "Target Support Files/Pods-GiphyAppTests";
+			sourceTree = "<group>";
+		};
+		C0834CEBB1379A84116EF29F93051C60 /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				3212113385A8FBBDB272BD23C409FF61 /* Foundation.framework */,
+			);
+			name = iOS;
+			sourceTree = "<group>";
+		};
+		CF1408CF629C7361332E53B88F7BD30C = {
+			isa = PBXGroup;
+			children = (
+				9D940727FF8FB9C785EB98E56350EF41 /* Podfile */,
+				D210D550F4EA176C3123ED886F8F87F5 /* Frameworks */,
+				965877409E01FB3D85D85E90E6B30185 /* Pods */,
+				FA3CA461D6B5621D2AE2C87FF5D236D0 /* Products */,
+				A646E80D4DB313001CD5AA8F82E22B25 /* Targets Support Files */,
+			);
+			sourceTree = "<group>";
+		};
+		D210D550F4EA176C3123ED886F8F87F5 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				C0834CEBB1379A84116EF29F93051C60 /* iOS */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D96179D43A67C5D5323B0682D32C133C /* SwiftLint */ = {
+			isa = PBXGroup;
+			children = (
+				7FDA596DBE0337ACDFE55A210D54EF26 /* Support Files */,
+			);
+			name = SwiftLint;
+			path = SwiftLint;
+			sourceTree = "<group>";
+		};
+		FA3CA461D6B5621D2AE2C87FF5D236D0 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				3A2B43A61DB9CFEF443ED289589B3F06 /* Pods_GiphyApp.framework */,
+				F253F3B12EC5842935D910012FB8F42A /* Pods_GiphyApp_GiphyAppUITests.framework */,
+				CECEAA0278699B6DCFD07FBF337C062F /* Pods_GiphyAppTests.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		14AD1EA2234529AF4BBA13641FFC03EE /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				50E0249ED3679D2CAD6CC599252B71CC /* Pods-GiphyApp-GiphyAppUITests-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		65CA6A12F53F5E26F98BE3457A90AE27 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				731220A421CE88DB5826DEB54DE1CEB2 /* Pods-GiphyApp-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7EFB95A3DB8571321602FE95BE0B1827 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CC1F63971CA20243999E66AA626F2598 /* Pods-GiphyAppTests-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		4287B0315CD89F9B72C572AA11FFC894 /* Pods-GiphyAppTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F9BAF0C9E0C5080A978F7A5CA3A7F3C3 /* Build configuration list for PBXNativeTarget "Pods-GiphyAppTests" */;
+			buildPhases = (
+				7EFB95A3DB8571321602FE95BE0B1827 /* Headers */,
+				69AEEE05CD17D3028D854BFDDF40A879 /* Sources */,
+				799696EC648040A356048A7BBC77143B /* Frameworks */,
+				5084DC406721F1D2612C9C0F46CDE7A0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				3F324E32B4444F4265D4D092951D8AA4 /* PBXTargetDependency */,
+			);
+			name = "Pods-GiphyAppTests";
+			productName = "Pods-GiphyAppTests";
+			productReference = CECEAA0278699B6DCFD07FBF337C062F /* Pods_GiphyAppTests.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		7342DB6303FC44586BA586FB038747ED /* Pods-GiphyApp-GiphyAppUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 17140AB15FED6E85E8927882AA821152 /* Build configuration list for PBXNativeTarget "Pods-GiphyApp-GiphyAppUITests" */;
+			buildPhases = (
+				14AD1EA2234529AF4BBA13641FFC03EE /* Headers */,
+				8F9AEF4BA9123A75BE64D0E4071AC9C3 /* Sources */,
+				59E881AB09B3ADFA38625F139B08CAA4 /* Frameworks */,
+				6ED849C479E180DF4EDDDD53D0A0DF4E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				96FE75AB10CFD82AD46036755A605D11 /* PBXTargetDependency */,
+			);
+			name = "Pods-GiphyApp-GiphyAppUITests";
+			productName = "Pods-GiphyApp-GiphyAppUITests";
+			productReference = F253F3B12EC5842935D910012FB8F42A /* Pods_GiphyApp_GiphyAppUITests.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		940E433D1D877569F5292C0400BFEAD5 /* Pods-GiphyApp */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 537056E1DC4D2138633574211E5EA488 /* Build configuration list for PBXNativeTarget "Pods-GiphyApp" */;
+			buildPhases = (
+				65CA6A12F53F5E26F98BE3457A90AE27 /* Headers */,
+				AC58DC86E522A2BF8E5F7EFE0459EE7D /* Sources */,
+				A24A49384B89A8D696BF75627C1F32BF /* Frameworks */,
+				D3C9FF878C9987AEE2506B79479020D1 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				897EA3F8E3AB73C80ACF53782272AF4D /* PBXTargetDependency */,
+			);
+			name = "Pods-GiphyApp";
+			productName = "Pods-GiphyApp";
+			productReference = 3A2B43A61DB9CFEF443ED289589B3F06 /* Pods_GiphyApp.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		BFDFE7DC352907FC980B868725387E98 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1100;
+				LastUpgradeCheck = 1100;
+			};
+			buildConfigurationList = 4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */;
+			compatibilityVersion = "Xcode 11.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = CF1408CF629C7361332E53B88F7BD30C;
+			productRefGroup = FA3CA461D6B5621D2AE2C87FF5D236D0 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				940E433D1D877569F5292C0400BFEAD5 /* Pods-GiphyApp */,
+				7342DB6303FC44586BA586FB038747ED /* Pods-GiphyApp-GiphyAppUITests */,
+				4287B0315CD89F9B72C572AA11FFC894 /* Pods-GiphyAppTests */,
+				52B60EC2A583F24ACBB69C113F5488B9 /* SwiftLint */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		5084DC406721F1D2612C9C0F46CDE7A0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6ED849C479E180DF4EDDDD53D0A0DF4E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D3C9FF878C9987AEE2506B79479020D1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		69AEEE05CD17D3028D854BFDDF40A879 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0B2BE4E922F114AF58D94A6B6489CB8A /* Pods-GiphyAppTests-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8F9AEF4BA9123A75BE64D0E4071AC9C3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BC4420252CBBA3074AF6D321A453AD16 /* Pods-GiphyApp-GiphyAppUITests-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AC58DC86E522A2BF8E5F7EFE0459EE7D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C21BB6EF8461CC57DB8EE6FF79CBCA4F /* Pods-GiphyApp-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		3F324E32B4444F4265D4D092951D8AA4 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Pods-GiphyApp";
+			target = 940E433D1D877569F5292C0400BFEAD5 /* Pods-GiphyApp */;
+			targetProxy = B0FF414E198FCD8F2B51B98737382BE0 /* PBXContainerItemProxy */;
+		};
+		897EA3F8E3AB73C80ACF53782272AF4D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = SwiftLint;
+			target = 52B60EC2A583F24ACBB69C113F5488B9 /* SwiftLint */;
+			targetProxy = DDAA2305E2EA2F94EED101F7532A4715 /* PBXContainerItemProxy */;
+		};
+		96FE75AB10CFD82AD46036755A605D11 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = SwiftLint;
+			target = 52B60EC2A583F24ACBB69C113F5488B9 /* SwiftLint */;
+			targetProxy = 5DBEA29D8CB43BACDF5A36E7976AA5C0 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		0A6BB118A1625B7E636C83442124FD65 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4886075B161ABC161BC4D21F2D4DBE79 /* Pods-GiphyApp.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-GiphyApp/Pods-GiphyApp-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-GiphyApp/Pods-GiphyApp.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		13967C5C8F4B10B3EE4D6C208A0A7BEB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"POD_CONFIGURATION_DEBUG=1",
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRIP_INSTALLED_PRODUCT = NO;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				SYMROOT = "${SRCROOT}/../build";
+			};
+			name = Debug;
+		};
+		45FF6FA4F0B2B49C7B7D77E8052F34AA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = B478909AFC13364244C57D3186986601 /* Pods-GiphyApp.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-GiphyApp/Pods-GiphyApp-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-GiphyApp/Pods-GiphyApp.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		46EECD2DED30D7C5FE141C0B267C2D3F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3EC0124719FE8EF5FDDD72C26F8A2F57 /* SwiftLint.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		55DD740115BE746C8DBB7753806D85D5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7EAB1DA481EDDC005A251D3A5E6BE4CD /* SwiftLint.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		574C9589273A88F4F79C248912FB4B6B /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 941382E852A568A713D4E2DF38110934 /* Pods-GiphyApp-GiphyAppUITests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-GiphyApp-GiphyAppUITests/Pods-GiphyApp-GiphyAppUITests-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-GiphyApp-GiphyAppUITests/Pods-GiphyApp-GiphyAppUITests.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		6A50B6437040712584ED50BDDA95218B /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = A91F88D23F3A4FA1F97496DB1DDAB9B3 /* Pods-GiphyAppTests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-GiphyAppTests/Pods-GiphyAppTests-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-GiphyAppTests/Pods-GiphyAppTests.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		733CD33AB3A871917E8C7B7977D6F815 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9F72B2D49E9D38F4B0B94B2904D8BD41 /* Pods-GiphyApp-GiphyAppUITests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-GiphyApp-GiphyAppUITests/Pods-GiphyApp-GiphyAppUITests-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-GiphyApp-GiphyAppUITests/Pods-GiphyApp-GiphyAppUITests.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		871B6E28ABA34DAE69824AB9D22D3B7D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"POD_CONFIGURATION_RELEASE=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRIP_INSTALLED_PRODUCT = NO;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+				SYMROOT = "${SRCROOT}/../build";
+			};
+			name = Release;
+		};
+		8CB8F9DA2CE18FB104AF8EA4BDBB050F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = A2280FFB0CF473E3FD8301A11B435068 /* Pods-GiphyAppTests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-GiphyAppTests/Pods-GiphyAppTests-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-GiphyAppTests/Pods-GiphyAppTests.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		17140AB15FED6E85E8927882AA821152 /* Build configuration list for PBXNativeTarget "Pods-GiphyApp-GiphyAppUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				733CD33AB3A871917E8C7B7977D6F815 /* Debug */,
+				574C9589273A88F4F79C248912FB4B6B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				13967C5C8F4B10B3EE4D6C208A0A7BEB /* Debug */,
+				871B6E28ABA34DAE69824AB9D22D3B7D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		537056E1DC4D2138633574211E5EA488 /* Build configuration list for PBXNativeTarget "Pods-GiphyApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				45FF6FA4F0B2B49C7B7D77E8052F34AA /* Debug */,
+				0A6BB118A1625B7E636C83442124FD65 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AE7B4FB01588B9E6DF09CB79FC7CE7BD /* Build configuration list for PBXAggregateTarget "SwiftLint" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				46EECD2DED30D7C5FE141C0B267C2D3F /* Debug */,
+				55DD740115BE746C8DBB7753806D85D5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F9BAF0C9E0C5080A978F7A5CA3A7F3C3 /* Build configuration list for PBXNativeTarget "Pods-GiphyAppTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8CB8F9DA2CE18FB104AF8EA4BDBB050F /* Debug */,
+				6A50B6437040712584ED50BDDA95218B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+}
