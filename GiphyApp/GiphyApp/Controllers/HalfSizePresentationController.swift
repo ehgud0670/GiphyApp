@@ -12,9 +12,14 @@ final class HalfSizePresentationController: UIPresentationController {
     override var frameOfPresentedViewInContainerView: CGRect {
         guard let realCotainerView = containerView else { return .null }
         
-        return CGRect(x: realCotainerView.bounds.width * 0.1,
-                      y: realCotainerView.bounds.height * 0.25,
-                      width: realCotainerView.bounds.width * 0.8,
-                      height: realCotainerView.bounds.height * 0.5)
+        let presentedViewX = realCotainerView.bounds.width * 0.15
+        let presentedViewWidth = realCotainerView.bounds.width * 0.7
+        let presentedViewY = realCotainerView.bounds.height * 0.28
+        let presentedViewHeight = realCotainerView.bounds.height * 0.44
+        
+        return CGRect(x: presentedViewX,
+                      y: presentedViewY,
+                      width: presentedViewWidth,
+                      height: presentedViewHeight)
     }
 }
