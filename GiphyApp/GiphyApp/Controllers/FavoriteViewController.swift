@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  FavoriteViewController.swift
 //  GiphyApp
 //
 //  Created by kimdo2297 on 2020/09/22.
@@ -11,16 +11,15 @@ import UIKit
 import Then
 import SnapKit
 
-final class SearchViewController: UIViewController {
+final class FavoriteViewController: UIViewController {
     // MARK: - UI
-    private let searchView: SearchView = SearchTextField()
     private let giphyCollectionView = UICollectionView(
         frame: .zero,
         collectionViewLayout: UICollectionViewFlowLayout()
     )
     
     // MARK: - Properties
-    private let searchViewModel = SearchViewModel()
+    private let giphyViewModel = GiphyViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,42 +30,55 @@ final class SearchViewController: UIViewController {
 }
 
 // MARK: - Attributes & Layout
-extension SearchViewController {
+extension FavoriteViewController {
     private func configureAttributes() {
         giphyCollectionView.do {
             $0.backgroundColor = .systemBackground
             $0.register(GiphyCell.self, forCellWithReuseIdentifier: GiphyCell.reuseIdentifier)
-            $0.dataSource = searchViewModel.giphyViewModel
+            $0.dataSource = giphyViewModel
             $0.delegate = self
         }
     }
     
     private func configureLayout() {
-        self.view.addSubview(searchView)
-        searchView.snp.makeConstraints {
-            let safeArea = self.view.safeAreaLayoutGuide
-            let constant: CGFloat = 10
-            
-            $0.top.equalTo(safeArea).inset(constant)
-            $0.leading.trailing.equalTo(self.view).inset(constant)
-            $0.height.equalTo(searchView.snp.width).dividedBy(7)
-        }
-        
         self.view.addSubview(giphyCollectionView)
         giphyCollectionView.snp.makeConstraints {
             let constant: CGFloat = 10
             
-            $0.top.equalTo(searchView.snp.bottom).offset(constant)
+            $0.top.equalTo(self.view.safeAreaLayoutGuide).inset(constant)
             $0.leading.trailing.bottom.equalTo(self.view).inset(constant)
         }
     }
 }
 
 // MARK: - UICollectionView Delegate
-extension SearchViewController: UICollectionViewDelegate { }
+extension FavoriteViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let detailViewController = DetailViewController().then {
+            $0.modalPresentationStyle = .custom
+            $0.transitioningDelegate = self
+        }
+        
+        self.present(detailViewController, animated: true)
+    }
+}
+
+// MARK: - UIViewController Transitioning Delegate 
+extension FavoriteViewController: UIViewControllerTransitioningDelegate {
+    func presentationController(
+        forPresented presented: UIViewController,
+        presenting: UIViewController?,
+        source: UIViewController
+    ) -> UIPresentationController? {
+        return HalfSizePresentationController(
+            presentedViewController: presented,
+            presenting: presenting
+        )
+    }
+}
 
 // MARK: - UICollectionView Delegate FlowLayout
-extension SearchViewController: UICollectionViewDelegateFlowLayout {
+extension FavoriteViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(
         _ collectionView: UICollectionView,
         layout collectionViewLayout: UICollectionViewLayout,
