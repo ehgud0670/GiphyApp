@@ -26,8 +26,8 @@ final class SearchViewController: UIViewController, StoryboardView {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        configureSearchViewLayout()
-        configureSearchCollectionView()
+        configureAttributes()
+        configureLayout()
     }
     
     func bind(reactor: SearchReactor) { }
@@ -35,25 +35,7 @@ final class SearchViewController: UIViewController, StoryboardView {
 
 // MARK: - Attributes & Layout
 extension SearchViewController {
-    private func configureSearchViewLayout() {
-        self.view.addSubview(searchView)
-        
-        searchView.snp.makeConstraints {
-            let safeArea = self.view.safeAreaLayoutGuide
-            let constant: CGFloat = 10
-            
-            $0.top.equalTo(safeArea).inset(constant)
-            $0.leading.trailing.equalTo(self.view).inset(constant)
-            $0.height.equalTo(searchView.snp.width).dividedBy(7)
-        }
-    }
-    
-    private func configureSearchCollectionView() {
-        configureSearchCollectionAttributes()
-        configureSearchCollectionLayout()
-    }
-    
-    private func configureSearchCollectionAttributes() {
+    private func configureAttributes() {
         searchCollectionView.do {
             $0.backgroundColor = .systemBackground
             $0.register(GiphyCell.self, forCellWithReuseIdentifier: GiphyCell.reuseIdentifier)
@@ -62,9 +44,18 @@ extension SearchViewController {
         }
     }
     
-    private func configureSearchCollectionLayout() {
-        self.view.addSubview(searchCollectionView)
+    private func configureLayout() {
+        self.view.addSubview(searchView)
+        searchView.snp.makeConstraints {
+            let safeArea = self.view.safeAreaLayoutGuide
+            let constant: CGFloat = 10
+            
+            $0.top.equalTo(safeArea).inset(constant)
+            $0.leading.trailing.equalTo(self.view).inset(constant)
+            $0.height.equalTo(searchView.snp.width).dividedBy(7)
+        }
         
+        self.view.addSubview(searchCollectionView)
         searchCollectionView.snp.makeConstraints {
             let constant: CGFloat = 10
             
