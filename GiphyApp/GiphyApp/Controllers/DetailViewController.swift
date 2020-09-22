@@ -57,7 +57,7 @@ extension DetailViewController {
     private func configureLayout() {
         self.view.addSubview(closeButton)
         closeButton.snp.makeConstraints {
-            let constant = 23
+            let constant = 18
             $0.top.equalTo(self.view).offset(constant)
             $0.trailing.equalTo(self.view).offset(-constant)
         }
@@ -80,7 +80,7 @@ extension DetailViewController {
             $0.width.equalTo(self.view).multipliedBy(0.8)
             $0.height.equalTo(shareButton.snp.width).multipliedBy(0.2)
             $0.centerX.equalTo(self.view.snp.centerX)
-            $0.centerY.equalTo(self.view).dividedBy(0.6)
+            $0.centerY.equalTo(self.view).dividedBy(0.57)
         }
     }
 }
