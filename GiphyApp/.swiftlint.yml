@@ -2,5 +2,5 @@ disabled_rules:
 - trailing_whitespace
 
 excluded:
-- Pods
+- Pod
 - Carthage
