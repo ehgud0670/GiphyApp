@@ -9,19 +9,17 @@
 import UIKit
 
 import Then
-import RxSwift
 import SnapKit
 
 final class SearchViewController: UIViewController {
     // MARK: - UI
     private let searchView: SearchView = SearchTextField()
-    private let searchCollectionView = UICollectionView(
+    private let giphyCollectionView = UICollectionView(
         frame: .zero,
         collectionViewLayout: UICollectionViewFlowLayout()
     )
     
     // MARK: - Properties
-    var disposeBag = DisposeBag()
     private let searchViewModel = SearchViewModel()
     
     override func viewDidLoad() {
@@ -35,7 +33,7 @@ final class SearchViewController: UIViewController {
 // MARK: - Attributes & Layout
 extension SearchViewController {
     private func configureAttributes() {
-        searchCollectionView.do {
+        giphyCollectionView.do {
             $0.backgroundColor = .systemBackground
             $0.register(GiphyCell.self, forCellWithReuseIdentifier: GiphyCell.reuseIdentifier)
             $0.dataSource = searchViewModel.giphyViewModel
@@ -54,8 +52,8 @@ extension SearchViewController {
             $0.height.equalTo(searchView.snp.width).dividedBy(7)
         }
         
-        self.view.addSubview(searchCollectionView)
-        searchCollectionView.snp.makeConstraints {
+        self.view.addSubview(giphyCollectionView)
+        giphyCollectionView.snp.makeConstraints {
             let constant: CGFloat = 10
             
             $0.top.equalTo(searchView.snp.bottom).offset(constant)
