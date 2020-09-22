@@ -16,16 +16,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         willConnectTo session: UISceneSession,
         options connectionOptions: UIScene.ConnectionOptions
     ) {
-        configureReactors()
+        
     }
     
-    private func configureReactors() {
-        guard let tabBarController = window?.rootViewController as? UITabBarController,
-        let searchViewController = tabBarController.children.first as? SearchViewController else { return }
-        
-        searchViewController.reactor = SearchReactor()
-    }
-
     func sceneDidDisconnect(_ scene: UIScene) {
         // Called as the scene is being released by the system.
         // This occurs shortly after the scene enters the background, or when its session is discarded.

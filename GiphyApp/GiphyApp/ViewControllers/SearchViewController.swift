@@ -8,11 +8,11 @@
 
 import UIKit
 
-import ReactorKit
 import Then
+import RxSwift
 import SnapKit
 
-final class SearchViewController: UIViewController, StoryboardView {
+final class SearchViewController: UIViewController {
     // MARK: - UI
     private let searchView: SearchView = SearchTextField()
     private let searchCollectionView = UICollectionView(
@@ -22,6 +22,7 @@ final class SearchViewController: UIViewController, StoryboardView {
     
     // MARK: - Properties
     var disposeBag = DisposeBag()
+    private let searchViewModel = SearchViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,8 +30,6 @@ final class SearchViewController: UIViewController, StoryboardView {
         configureAttributes()
         configureLayout()
     }
-    
-    func bind(reactor: SearchReactor) { }
 }
 
 // MARK: - Attributes & Layout
@@ -39,7 +38,7 @@ extension SearchViewController {
         searchCollectionView.do {
             $0.backgroundColor = .systemBackground
             $0.register(GiphyCell.self, forCellWithReuseIdentifier: GiphyCell.reuseIdentifier)
-            $0.dataSource = reactor
+            $0.dataSource = searchViewModel.giphyViewModel
             $0.delegate = self
         }
     }

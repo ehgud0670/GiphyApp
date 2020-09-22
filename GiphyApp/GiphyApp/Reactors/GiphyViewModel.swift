@@ -1,5 +1,5 @@
 //
-//  SearchReactor.swift
+//  GiphyReactor.swift
 //  GiphyApp
 //
 //  Created by kimdo2297 on 2020/09/22.
@@ -8,22 +8,12 @@
 
 import UIKit
 
-import ReactorKit
-
-final class SearchReactor: NSObject, Reactor {
-    var initialState = State()
+class GiphyViewModel: NSObject {
     
-    enum Action {
-        
-    }
-    
-    struct State {
-        
-    }
 }
 
 // MARK: - UICollectionView DataSource
-extension SearchReactor: UICollectionViewDataSource {
+extension GiphyViewModel: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 10
     }

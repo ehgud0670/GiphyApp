@@ -17,21 +17,19 @@
 		5A02C4D02519C57B009AEC55 /* GiphyAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A02C4CF2519C57B009AEC55 /* GiphyAppTests.swift */; };
 		5A02C4DB2519C57B009AEC55 /* GiphyAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A02C4DA2519C57B009AEC55 /* GiphyAppUITests.swift */; };
 		5A02C4EA2519C90B009AEC55 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A02C4E92519C90B009AEC55 /* Alamofire.framework */; };
-		5A02C4EC2519C913009AEC55 /* ReactorKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A02C4EB2519C913009AEC55 /* ReactorKit.framework */; };
-		5A02C4EE2519C915009AEC55 /* ReactorKitRuntime.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A02C4ED2519C915009AEC55 /* ReactorKitRuntime.framework */; };
 		5A02C4F02519C918009AEC55 /* Kingfisher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A02C4EF2519C918009AEC55 /* Kingfisher.framework */; };
 		5A02C4F22519C92B009AEC55 /* SnapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A02C4F12519C92B009AEC55 /* SnapKit.framework */; };
 		5A02C4F42519C931009AEC55 /* RxRelay.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A02C4F32519C931009AEC55 /* RxRelay.framework */; };
 		5A02C4F62519C933009AEC55 /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A02C4F52519C933009AEC55 /* RxCocoa.framework */; };
 		5A02C4F82519C975009AEC55 /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A02C4F72519C975009AEC55 /* RxSwift.framework */; };
-		5A02C4FA2519C991009AEC55 /* WeakMapTable.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A02C4F92519C991009AEC55 /* WeakMapTable.framework */; };
 		5A03DFC82519E619003C43D7 /* GiphyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A03DFC72519E619003C43D7 /* GiphyCell.swift */; };
 		5A03DFCA2519E634003C43D7 /* ReuseIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A03DFC92519E634003C43D7 /* ReuseIdentifier.swift */; };
+		5A5BF1102519FC5B00AE95E4 /* GiphyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A5BF10F2519FC5B00AE95E4 /* GiphyViewModel.swift */; };
 		5AA719192519CD5C00BC5962 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 5AA719182519CD5C00BC5962 /* .swiftlint.yml */; };
 		5AA7191C2519CE7F00BC5962 /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = 5AA7191B2519CE7F00BC5962 /* Then */; };
 		5AA719202519CFC500BC5962 /* FavoriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AA7191F2519CFC500BC5962 /* FavoriteViewController.swift */; };
 		5AA719222519D04100BC5962 /* RandomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AA719212519D04100BC5962 /* RandomViewController.swift */; };
-		5AA719252519D26000BC5962 /* SearchReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AA719242519D26000BC5962 /* SearchReactor.swift */; };
+		5AA719252519D26000BC5962 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AA719242519D26000BC5962 /* SearchViewModel.swift */; };
 		5AA719282519D55F00BC5962 /* SearchTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AA719272519D55F00BC5962 /* SearchTextField.swift */; };
 		5AA7192A2519DC4E00BC5962 /* Shadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AA719292519DC4E00BC5962 /* Shadow.swift */; };
 		5AA7192D2519DD5F00BC5962 /* UIColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AA7192C2519DD5F00BC5962 /* UIColorExtensions.swift */; };
@@ -86,10 +84,11 @@
 		5A02C4F92519C991009AEC55 /* WeakMapTable.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WeakMapTable.framework; path = Carthage/Build/iOS/WeakMapTable.framework; sourceTree = "<group>"; };
 		5A03DFC72519E619003C43D7 /* GiphyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GiphyCell.swift; sourceTree = "<group>"; };
 		5A03DFC92519E634003C43D7 /* ReuseIdentifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReuseIdentifier.swift; sourceTree = "<group>"; };
+		5A5BF10F2519FC5B00AE95E4 /* GiphyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GiphyViewModel.swift; sourceTree = "<group>"; };
 		5AA719182519CD5C00BC5962 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		5AA7191F2519CFC500BC5962 /* FavoriteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteViewController.swift; sourceTree = "<group>"; };
 		5AA719212519D04100BC5962 /* RandomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomViewController.swift; sourceTree = "<group>"; };
-		5AA719242519D26000BC5962 /* SearchReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchReactor.swift; sourceTree = "<group>"; };
+		5AA719242519D26000BC5962 /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
 		5AA719272519D55F00BC5962 /* SearchTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTextField.swift; sourceTree = "<group>"; };
 		5AA719292519DC4E00BC5962 /* Shadow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shadow.swift; sourceTree = "<group>"; };
 		5AA7192C2519DD5F00BC5962 /* UIColorExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtensions.swift; sourceTree = "<group>"; };
@@ -106,15 +105,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				5A02C4F02519C918009AEC55 /* Kingfisher.framework in Frameworks */,
-				5A02C4EE2519C915009AEC55 /* ReactorKitRuntime.framework in Frameworks */,
 				5AA7191C2519CE7F00BC5962 /* Then in Frameworks */,
-				5A02C4EC2519C913009AEC55 /* ReactorKit.framework in Frameworks */,
 				5A02C4EA2519C90B009AEC55 /* Alamofire.framework in Frameworks */,
 				5A02C4F22519C92B009AEC55 /* SnapKit.framework in Frameworks */,
 				5A02C4F62519C933009AEC55 /* RxCocoa.framework in Frameworks */,
 				5A02C4F42519C931009AEC55 /* RxRelay.framework in Frameworks */,
 				5A02C4F82519C975009AEC55 /* RxSwift.framework in Frameworks */,
-				5A02C4FA2519C991009AEC55 /* WeakMapTable.framework in Frameworks */,
 				2312062120554E1F342F661C /* Pods_GiphyApp.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -228,7 +224,8 @@
 		5AA719232519D24B00BC5962 /* Reactors */ = {
 			isa = PBXGroup;
 			children = (
-				5AA719242519D26000BC5962 /* SearchReactor.swift */,
+				5AA719242519D26000BC5962 /* SearchViewModel.swift */,
+				5A5BF10F2519FC5B00AE95E4 /* GiphyViewModel.swift */,
 			);
 			path = Reactors;
 			sourceTree = "<group>";
@@ -459,9 +456,6 @@
 				"$(SRCROOT)/Carthage/Build/iOS/RxCocoa.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/RxRelay.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/RxSwift.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/ReactorKit.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/WeakMapTable.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/ReactorKitRuntime.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/Kingfisher.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/SnapKit.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/Alamofire.framework",
@@ -522,6 +516,7 @@
 			files = (
 				5AA7192D2519DD5F00BC5962 /* UIColorExtensions.swift in Sources */,
 				5AA719222519D04100BC5962 /* RandomViewController.swift in Sources */,
+				5A5BF1102519FC5B00AE95E4 /* GiphyViewModel.swift in Sources */,
 				5A02C4BD2519C577009AEC55 /* SearchViewController.swift in Sources */,
 				5A02C4B92519C577009AEC55 /* AppDelegate.swift in Sources */,
 				5AA719202519CFC500BC5962 /* FavoriteViewController.swift in Sources */,
@@ -529,7 +524,7 @@
 				5A03DFCA2519E634003C43D7 /* ReuseIdentifier.swift in Sources */,
 				5AA7192A2519DC4E00BC5962 /* Shadow.swift in Sources */,
 				5A03DFC82519E619003C43D7 /* GiphyCell.swift in Sources */,
-				5AA719252519D26000BC5962 /* SearchReactor.swift in Sources */,
+				5AA719252519D26000BC5962 /* SearchViewModel.swift in Sources */,
 				5A02C4BB2519C577009AEC55 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
