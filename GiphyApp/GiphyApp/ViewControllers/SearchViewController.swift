@@ -8,8 +8,17 @@
 
 import UIKit
 
-final class SearchViewController: UIViewController {
+import ReactorKit
+
+final class SearchViewController: UIViewController, StoryboardView {
+    var disposeBag = DisposeBag()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+    }
+    
+    func bind(reactor: SearchReactor) {
+        
     }
 }
