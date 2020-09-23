@@ -184,6 +184,7 @@ extension SearchViewController {
 extension SearchViewController {
     private func configureBindings() {
         searchTextField.rx.text.orEmpty
+            .distinctUntilChanged()
             .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .userInteractive))
             .do(onNext: { _ in
                 self.gifsViewModel.clear()
