@@ -12,6 +12,7 @@ import Then
 import SnapKit
 import RxSwift
 import RxCocoa
+import Kingfisher
 
 final class SearchViewController: UIViewController {
     // MARK: - UI
@@ -44,6 +45,12 @@ final class SearchViewController: UIViewController {
         super.viewWillAppear(animated)
         
         configureBindings()
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        
+        ImageCache.default.clearCache()
     }
     
     private func configureObservers() {

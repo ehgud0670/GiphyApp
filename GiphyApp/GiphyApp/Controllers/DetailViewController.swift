@@ -25,6 +25,12 @@ final class DetailViewController: UIViewController {
         configureAttributes()
         configureLayout()
     }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        
+        ImageCache.default.clearCache()
+    }
 }
 
 extension DetailViewController {
