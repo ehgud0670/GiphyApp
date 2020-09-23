@@ -32,7 +32,6 @@ final class SearchViewController: UIViewController {
         configureAttributes()
         configureLayout()
         configureObserver()
-        loadFirstTrendyGIFs()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -119,6 +118,12 @@ extension SearchViewController {
             .disposed(by: disposeBag)
     }
     
+    private func loadFirstSearchGIFs(with query: String) {
+        gifsTask.perform(SearchRequest(query: query))
+            .bind(onNext: { self.searchViewModel.gifsViewModel.update(with: $0)})
+            .disposed(by: disposeBag)
+    }
+    
     private func loadMoreTrendyGIFs() {
         guard let pagination = searchViewModel.gifsViewModel.pagination else { return }
         let nextOffset = pagination.count + pagination.offset
@@ -137,7 +142,14 @@ extension SearchViewController {
 // MARK: - Binding
 extension SearchViewController {
     private func configureBindings() {
-        
+        searchTextField.rx.text.orEmpty
+            .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .userInteractive))
+            .do(onNext: { _ in
+                self.searchViewModel.gifsViewModel.clear()
+            })
+            .subscribe(onNext: {
+                $0 == "" ? self.loadFirstTrendyGIFs() : self.loadFirstSearchGIFs(with: $0)
+            }).disposed(by: disposeBag)
     }
 }
 
