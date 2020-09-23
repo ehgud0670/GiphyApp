@@ -21,10 +21,12 @@ extension UIImageView {
         }
         
         guard let url = URL(string: urlString) else { return}
+        
         self.kf.setImage(with: url, placeholder: placeholder) { response in
             switch response {
             case .success(let result):
                 self.image = result.image
+                cache.store(result.image, forKey: urlString)
             default:
                 break
             }
