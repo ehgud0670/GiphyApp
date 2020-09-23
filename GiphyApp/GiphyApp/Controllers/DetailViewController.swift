@@ -54,9 +54,11 @@ extension DetailViewController {
         }
         
         shareButton.do {
-            $0.backgroundColor = .green
-            $0.setTitle("Share", for: .normal)
+            $0.layer.cornerRadius = 20
+            $0.backgroundColor = .systemBlue
+            $0.setTitle("공유", for: .normal)
             $0.setTitleColor(.black, for: .normal)
+            $0.setTitleColor(UIColor.black.withAlphaComponent(0.5), for: .highlighted)
             $0.addTarget(self, action: #selector(share), for: .touchUpInside)
         }
     }
