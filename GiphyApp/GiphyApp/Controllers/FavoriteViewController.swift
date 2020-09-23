@@ -19,7 +19,7 @@ final class FavoriteViewController: UIViewController {
     )
     
     // MARK: - Properties
-    private let giphyViewModel = GifViewModel()
+    private let giphyViewModel = GifsViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,7 +35,7 @@ extension FavoriteViewController {
         gifCollectionView.do {
             $0.backgroundColor = .systemBackground
             $0.register(GifCell.self, forCellWithReuseIdentifier: GifCell.reuseIdentifier)
-            $0.dataSource = giphyViewModel
+            
             $0.delegate = self
         }
     }

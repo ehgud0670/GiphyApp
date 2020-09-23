@@ -10,6 +10,8 @@ import UIKit
 
 import Then
 import SnapKit
+import RxSwift
+import RxCocoa
 
 final class SearchViewController: UIViewController {
     // MARK: - UI
@@ -22,6 +24,7 @@ final class SearchViewController: UIViewController {
     // MARK: - Properties
     private let searchViewModel = SearchViewModel()
     private let gifsUseCase = GifsUseCase(gifsTask: GifsTask())
+    private var disposeBag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,6 +32,18 @@ final class SearchViewController: UIViewController {
         configureAttributes()
         configureLayout()
         loadTrendyGIFs()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        disposeBag = DisposeBag()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        configureBindings()
     }
 }
 
@@ -38,7 +53,6 @@ extension SearchViewController {
         gifCollectionView.do {
             $0.backgroundColor = .systemBackground
             $0.register(GifCell.self, forCellWithReuseIdentifier: GifCell.reuseIdentifier)
-            $0.dataSource = searchViewModel.gifViewModel
             $0.delegate = self
         }
     }
@@ -69,12 +83,28 @@ extension SearchViewController {
     private func loadTrendyGIFs() {
         gifsUseCase.request(
             TrendRequest(),
-            completionHandler: { response in
-            
-        },
+            completionHandler: { [weak self] response in
+                self?.searchViewModel.gifsViewModel.update(with: response)
+            },
             failureHandler: { _ in
-            
+                
         })
+    }
+}
+
+// MARK: - Binding
+extension SearchViewController {
+    private func configureBindings() {
+        // binding collectionView
+        searchViewModel.gifsViewModel.gifs
+            .bind(to: gifCollectionView.rx.items(
+                cellIdentifier: GifCell.reuseIdentifier,
+                cellType: GifCell.self)
+            ) {
+                index, item, cell in
+                
+                
+        }.disposed(by: disposeBag)
     }
 }
 
