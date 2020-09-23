@@ -37,7 +37,7 @@ final class TrendRequestTests: XCTestCase {
         let url = try XCTUnwrap(urlRequest.url)
         XCTAssertEqual(
             url.absoluteString,
-            "api.giphy.com/v1/gifs/trending?api_key=jzwguAwyjE6meldZ3VssS39SWnNA3kDF&limit=24"
+            "https://api.giphy.com/v1/gifs/trending?api_key=jzwguAwyjE6meldZ3VssS39SWnNA3kDF&limit=24&offset=0"
         )
     }
 }
