@@ -97,12 +97,13 @@ extension SearchViewController {
 // MARK: - Scroll
 extension SearchViewController {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if searchTextField.isEditing {
+            view.endEditing(true)
+        }
+        
         guard scrollView.isBouncingBottom else { return }
         
-        if isSearching {
-            return
-        }
-        loadMoreTrendyGIFs()
+        isSearching ? loadMoreSearchGIFs(with: searchTextField.text!) : loadMoreTrendyGIFs()
     }
     
     private var isSearching: Bool {
@@ -114,12 +115,14 @@ extension SearchViewController {
 extension SearchViewController {
     private func loadFirstTrendyGIFs() {
         gifsTask.perform(TrendRequest())
+            .take(1)
             .bind(onNext: { self.searchViewModel.gifsViewModel.update(with: $0)})
             .disposed(by: disposeBag)
     }
     
     private func loadFirstSearchGIFs(with query: String) {
         gifsTask.perform(SearchRequest(query: query))
+            .take(1)
             .bind(onNext: { self.searchViewModel.gifsViewModel.update(with: $0)})
             .disposed(by: disposeBag)
     }
@@ -129,6 +132,18 @@ extension SearchViewController {
         let nextOffset = pagination.count + pagination.offset
         
         gifsTask.perform(TrendRequest(offset: nextOffset))
+            .take(1)
+            .filter { self.isNotRepeat(with: $0.pagination.offset) }
+            .bind(onNext: { self.searchViewModel.gifsViewModel.update(with: $0)})
+            .disposed(by: disposeBag)
+    }
+    
+    private func loadMoreSearchGIFs(with query: String) {
+        guard let pagination = searchViewModel.gifsViewModel.pagination else { return }
+        let nextOffset = pagination.count + pagination.offset
+        
+        gifsTask.perform(SearchRequest(query: query, offset: nextOffset))
+            .take(1)
             .filter { self.isNotRepeat(with: $0.pagination.offset) }
             .bind(onNext: { self.searchViewModel.gifsViewModel.update(with: $0)})
             .disposed(by: disposeBag)
@@ -149,7 +164,8 @@ extension SearchViewController {
             })
             .subscribe(onNext: {
                 $0 == "" ? self.loadFirstTrendyGIFs() : self.loadFirstSearchGIFs(with: $0)
-            }).disposed(by: disposeBag)
+            })
+            .disposed(by: disposeBag)
     }
 }
 
