@@ -100,7 +100,14 @@ extension SearchViewController {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         guard scrollView.isBouncingBottom else { return }
         
+        if isSearching {
+            return
+        }
         loadMoreTrendyGIFs()
+    }
+    
+    private var isSearching: Bool {
+        return searchTextField.text != nil && searchTextField.text != ""
     }
 }
 
