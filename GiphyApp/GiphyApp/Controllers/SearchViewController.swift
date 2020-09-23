@@ -32,7 +32,7 @@ final class SearchViewController: UIViewController {
         configureAttributes()
         configureLayout()
         configureObserver()
-        loadTrendyGIFs()
+        loadFirstTrendyGIFs()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -95,9 +95,19 @@ extension SearchViewController {
     }
 }
 
+// MARK: - Scroll
+extension SearchViewController {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        
+        if scrollView.isBouncingBottom {
+            loadMoreTrendyGIFs()
+        }
+    }
+}
+
 // MARK: - Networks
 extension SearchViewController {
-    private func loadTrendyGIFs() {
+    private func loadFirstTrendyGIFs() {
         gifsUseCase.request(
             TrendRequest(),
             completionHandler: { [weak self] response in
@@ -106,6 +116,27 @@ extension SearchViewController {
             failureHandler: { _ in
                 
         })
+    }
+    
+    private func loadMoreTrendyGIFs() {
+        guard let pagination = searchViewModel.gifsViewModel.pagination else { return }
+        let nextOffset = pagination.count + pagination.offset
+        
+        gifsUseCase.request(
+            TrendRequest(offset: nextOffset),
+            completionHandler: { [weak self] response in
+                guard let self = self,
+                self.isNotRepeat(with: response.pagination.offset) else { return }
+                
+                self.searchViewModel.gifsViewModel.update(with: response)
+            },
+            failureHandler: { _ in
+                
+        })
+    }
+    
+    private func isNotRepeat(with responseOffset: Int) -> Bool {
+        return responseOffset != searchViewModel.gifsViewModel.pagination?.offset
     }
 }
 

@@ -28,6 +28,7 @@
 		5A3219B9251B24D0002FA565 /* GifsTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A3219B8251B24D0002FA565 /* GifsTask.swift */; };
 		5A3219BB251B4797002FA565 /* UIImageViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A3219BA251B4797002FA565 /* UIImageViewExtensions.swift */; };
 		5A3219BD251B4D62002FA565 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A3219BC251B4D62002FA565 /* Constant.swift */; };
+		5A39ED10251B6737004C6FE3 /* ScrollViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A39ED0F251B6737004C6FE3 /* ScrollViewExtensions.swift */; };
 		5A44884F251B021F0005CF22 /* TrendRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A44884E251B021F0005CF22 /* TrendRequest.swift */; };
 		5A448851251B024D0005CF22 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A448850251B024D0005CF22 /* Request.swift */; };
 		5A448854251B08170005CF22 /* TrendRequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A448853251B08170005CF22 /* TrendRequestTests.swift */; };
@@ -102,6 +103,7 @@
 		5A3219B8251B24D0002FA565 /* GifsTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GifsTask.swift; sourceTree = "<group>"; };
 		5A3219BA251B4797002FA565 /* UIImageViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageViewExtensions.swift; sourceTree = "<group>"; };
 		5A3219BC251B4D62002FA565 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
+		5A39ED0F251B6737004C6FE3 /* ScrollViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollViewExtensions.swift; sourceTree = "<group>"; };
 		5A44884E251B021F0005CF22 /* TrendRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendRequest.swift; sourceTree = "<group>"; };
 		5A448850251B024D0005CF22 /* Request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
 		5A448853251B08170005CF22 /* TrendRequestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendRequestTests.swift; sourceTree = "<group>"; };
@@ -335,6 +337,7 @@
 				5A44885D251B1D430005CF22 /* DataExtensions.swift */,
 				5A3219BA251B4797002FA565 /* UIImageViewExtensions.swift */,
 				5A3219BC251B4D62002FA565 /* Constant.swift */,
+				5A39ED0F251B6737004C6FE3 /* ScrollViewExtensions.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -610,6 +613,7 @@
 				5A44885E251B1D430005CF22 /* DataExtensions.swift in Sources */,
 				5AA92FE7251A0C6000422E4D /* HalfSizePresentationController.swift in Sources */,
 				5AA7192D2519DD5F00BC5962 /* UIColorExtensions.swift in Sources */,
+				5A39ED10251B6737004C6FE3 /* ScrollViewExtensions.swift in Sources */,
 				5A44884F251B021F0005CF22 /* TrendRequest.swift in Sources */,
 				5A3219B9251B24D0002FA565 /* GifsTask.swift in Sources */,
 				5AA719222519D04100BC5962 /* RandomViewController.swift in Sources */,
