@@ -87,8 +87,12 @@ final class SearchViewController: UIViewController {
 // MARK: - Attributes & Layout
 extension SearchViewController {
     private func configureAttributes() {
+        self.view.do {
+            $0.backgroundColor = .systemPurple
+        }
+        
         gifCollectionView.do {
-            $0.backgroundColor = .systemBackground
+            $0.backgroundColor = .systemPurple
             $0.register(GifCell.self, forCellWithReuseIdentifier: GifCell.reuseIdentifier)
             $0.dataSource = gifsViewModel
             $0.delegate = self

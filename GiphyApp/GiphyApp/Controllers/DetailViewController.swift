@@ -36,7 +36,7 @@ final class DetailViewController: UIViewController {
 extension DetailViewController {
     private func configureAttributes() {
         self.view.do {
-            $0.backgroundColor = .systemBackground
+            $0.backgroundColor = .systemTeal
             $0.layer.cornerRadius = 20
         }
         
