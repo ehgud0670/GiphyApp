@@ -12,22 +12,38 @@ import RxSwift
 
 final class GifsViewModel: NSObject {
     enum Notification {
-        static let update = Foundation.Notification.Name("GifsViewModeldDidUpdate")
+        static let updateFirst = Foundation.Notification.Name("GifsViewModeldDidUpdateFirst")
+        static let updateMore = Foundation.Notification.Name("GifsViewModeldDidUpdateMore")
     }
     
-    var gifs = [GiphyData]() {
-        didSet { NotificationCenter.default.post(name: Notification.update, object: self) }
-    }
+    var gifs = [GiphyData]()
     var pagination: Pagination?
     
-    func update(with response: GiphyResponse) {
+    func updateFirst(with response: GiphyResponse) {
+        gifs = response.data
+        pagination = response.pagination
+        
+        NotificationCenter.default.post(name: Notification.updateFirst, object: self)
+    }
+    
+    func updateMore(with response: GiphyResponse) {
         gifs.append(contentsOf: response.data)
         pagination = response.pagination
+        
+        let startIndex = gifs.count - response.data.count
+        let endIndex = startIndex + response.data.count
+        NotificationCenter.default.post(
+            name: Notification.updateMore,
+            object: self,
+            userInfo: ["newItems": (startIndex ..< endIndex).map { IndexPath(item: $0, section: 0) }]
+        )
     }
     
     func clear() {
         gifs = []
         pagination = nil
+        
+        NotificationCenter.default.post(name: Notification.updateFirst, object: self)
     }
 }
 
@@ -44,6 +60,7 @@ extension GifsViewModel: UICollectionViewDataSource {
             withReuseIdentifier: GifCell.reuseIdentifier,
             for: indexPath
             ) as? GifCell else { return GifCell() }
+        guard indexPath.item < gifs.count else { return giphyCell }
         
         let giphyData = gifs[indexPath.item]
         giphyCell.onData.onNext(giphyData)

@@ -31,7 +31,7 @@ final class SearchViewController: UIViewController {
         
         configureAttributes()
         configureLayout()
-        configureObserver()
+        configureObservers()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -46,18 +46,33 @@ final class SearchViewController: UIViewController {
         configureBindings()
     }
     
-    private func configureObserver() {
+    private func configureObservers() {
         NotificationCenter.default.addObserver(
             self,
-            selector: #selector(updateCollectionView),
-            name: GifsViewModel.Notification.update,
+            selector: #selector(reloadDataCollectionView),
+            name: GifsViewModel.Notification.updateFirst,
+            object: searchViewModel.gifsViewModel
+        )
+        
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(reloadItemsCollectionView(_:)),
+            name: GifsViewModel.Notification.updateMore,
             object: searchViewModel.gifsViewModel
         )
     }
     
-    @objc private func updateCollectionView() {
+    @objc private func reloadDataCollectionView() {
         DispatchQueue.main.async { [weak self] in
             self?.gifCollectionView.reloadData()
+        }
+    }
+    
+    @objc private func reloadItemsCollectionView(_ notification: Notification) {
+        guard let newItems = notification.userInfo?["newItems"] as? [IndexPath] else { return }
+        
+        DispatchQueue.main.async { [weak self] in
+            self?.gifCollectionView.insertItems(at: newItems)
         }
     }
 }
@@ -116,14 +131,14 @@ extension SearchViewController {
     private func loadFirstTrendyGIFs() {
         gifsTask.perform(TrendRequest())
             .take(1)
-            .bind(onNext: { self.searchViewModel.gifsViewModel.update(with: $0)})
+            .bind(onNext: { self.searchViewModel.gifsViewModel.updateFirst(with: $0)})
             .disposed(by: disposeBag)
     }
     
     private func loadFirstSearchGIFs(with query: String) {
         gifsTask.perform(SearchRequest(query: query))
             .take(1)
-            .bind(onNext: { self.searchViewModel.gifsViewModel.update(with: $0)})
+            .bind(onNext: { self.searchViewModel.gifsViewModel.updateFirst(with: $0)})
             .disposed(by: disposeBag)
     }
     
@@ -134,7 +149,7 @@ extension SearchViewController {
         gifsTask.perform(TrendRequest(offset: nextOffset))
             .take(1)
             .filter { self.isNotRepeat(with: $0.pagination.offset) }
-            .bind(onNext: { self.searchViewModel.gifsViewModel.update(with: $0)})
+            .bind(onNext: { self.searchViewModel.gifsViewModel.updateMore(with: $0)})
             .disposed(by: disposeBag)
     }
     
@@ -145,7 +160,7 @@ extension SearchViewController {
         gifsTask.perform(SearchRequest(query: query, offset: nextOffset))
             .take(1)
             .filter { self.isNotRepeat(with: $0.pagination.offset) }
-            .bind(onNext: { self.searchViewModel.gifsViewModel.update(with: $0)})
+            .bind(onNext: { self.searchViewModel.gifsViewModel.updateMore(with: $0)})
             .disposed(by: disposeBag)
     }
     
