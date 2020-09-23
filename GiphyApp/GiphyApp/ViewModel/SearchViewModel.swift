@@ -8,6 +8,8 @@
 
 import UIKit
 
+import RxSwift
+
 final class SearchViewModel: NSObject {
-    let giphyViewModel = GiphyViewModel()
+    let gifsViewModel = GifsViewModel()
 }

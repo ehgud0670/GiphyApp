@@ -13,13 +13,13 @@ import SnapKit
 
 final class FavoriteViewController: UIViewController {
     // MARK: - UI
-    private let giphyCollectionView = UICollectionView(
+    private let gifCollectionView = UICollectionView(
         frame: .zero,
         collectionViewLayout: UICollectionViewFlowLayout()
     )
     
     // MARK: - Properties
-    private let giphyViewModel = GiphyViewModel()
+    private let giphyViewModel = GifsViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,17 +32,17 @@ final class FavoriteViewController: UIViewController {
 // MARK: - Attributes & Layout
 extension FavoriteViewController {
     private func configureAttributes() {
-        giphyCollectionView.do {
+        gifCollectionView.do {
             $0.backgroundColor = .systemBackground
-            $0.register(GiphyCell.self, forCellWithReuseIdentifier: GiphyCell.reuseIdentifier)
-            $0.dataSource = giphyViewModel
+            $0.register(GifCell.self, forCellWithReuseIdentifier: GifCell.reuseIdentifier)
+            
             $0.delegate = self
         }
     }
     
     private func configureLayout() {
-        self.view.addSubview(giphyCollectionView)
-        giphyCollectionView.snp.makeConstraints {
+        self.view.addSubview(gifCollectionView)
+        gifCollectionView.snp.makeConstraints {
             let constant: CGFloat = 10
             
             $0.top.equalTo(self.view.safeAreaLayoutGuide).inset(constant)

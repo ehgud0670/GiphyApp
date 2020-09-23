@@ -10,33 +10,66 @@ import UIKit
 
 import Then
 import SnapKit
+import RxSwift
+import RxCocoa
 
 final class SearchViewController: UIViewController {
     // MARK: - UI
     private let searchView: SearchView = SearchTextField()
-    private let giphyCollectionView = UICollectionView(
+    private let gifCollectionView = UICollectionView(
         frame: .zero,
         collectionViewLayout: UICollectionViewFlowLayout()
     )
     
     // MARK: - Properties
     private let searchViewModel = SearchViewModel()
+    private let gifsTask = GifsTask()
+    private var disposeBag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         configureAttributes()
         configureLayout()
+        configureObserver()
+        loadFirstTrendyGIFs()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        disposeBag = DisposeBag()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        configureBindings()
+    }
+    
+    private func configureObserver() {
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(updateCollectionView),
+            name: GifsViewModel.Notification.update,
+            object: searchViewModel.gifsViewModel
+        )
+    }
+    
+    @objc private func updateCollectionView() {
+        DispatchQueue.main.async { [weak self] in
+            self?.gifCollectionView.reloadData()
+        }
     }
 }
 
 // MARK: - Attributes & Layout
 extension SearchViewController {
     private func configureAttributes() {
-        giphyCollectionView.do {
+        gifCollectionView.do {
             $0.backgroundColor = .systemBackground
-            $0.register(GiphyCell.self, forCellWithReuseIdentifier: GiphyCell.reuseIdentifier)
-            $0.dataSource = searchViewModel.giphyViewModel
+            $0.register(GifCell.self, forCellWithReuseIdentifier: GifCell.reuseIdentifier)
+            $0.dataSource = searchViewModel.gifsViewModel
             $0.delegate = self
         }
     }
@@ -52,13 +85,52 @@ extension SearchViewController {
             $0.height.equalTo(searchView.snp.width).dividedBy(7)
         }
         
-        self.view.addSubview(giphyCollectionView)
-        giphyCollectionView.snp.makeConstraints {
+        self.view.addSubview(gifCollectionView)
+        gifCollectionView.snp.makeConstraints {
             let constant: CGFloat = 10
             
             $0.top.equalTo(searchView.snp.bottom).offset(constant)
             $0.leading.trailing.bottom.equalTo(self.view).inset(constant)
         }
+    }
+}
+
+// MARK: - Scroll
+extension SearchViewController {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        guard scrollView.isBouncingBottom else { return }
+        
+        loadMoreTrendyGIFs()
+    }
+}
+
+// MARK: - Networks
+extension SearchViewController {
+    private func loadFirstTrendyGIFs() {
+        gifsTask.perform(TrendRequest())
+            .bind(onNext: { self.searchViewModel.gifsViewModel.update(with: $0)})
+            .disposed(by: disposeBag)
+    }
+    
+    private func loadMoreTrendyGIFs() {
+        guard let pagination = searchViewModel.gifsViewModel.pagination else { return }
+        let nextOffset = pagination.count + pagination.offset
+        
+        gifsTask.perform(TrendRequest(offset: nextOffset))
+            .filter { self.isNotRepeat(with: $0.pagination.offset) }
+            .bind(onNext: { self.searchViewModel.gifsViewModel.update(with: $0)})
+            .disposed(by: disposeBag)
+    }
+    
+    private func isNotRepeat(with responseOffset: Int) -> Bool {
+        return responseOffset != searchViewModel.gifsViewModel.pagination?.offset
+    }
+}
+
+// MARK: - Binding
+extension SearchViewController {
+    private func configureBindings() {
+        
     }
 }
 
