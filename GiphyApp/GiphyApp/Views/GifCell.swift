@@ -24,6 +24,7 @@ final class GifCell: UICollectionViewCell, ReuseIdentifier {
         
         super.init(frame: frame)
         
+        configureAttributes()
         configureLayout()
         bindUI()
     }
@@ -34,11 +35,19 @@ final class GifCell: UICollectionViewCell, ReuseIdentifier {
         
         super.init(coder: coder)
         
+        configureAttributes()
         configureLayout()
         bindUI()
     }
     
-    // MARK: - Layout
+    // MARK: - Attributes & Layout
+    private func configureAttributes() {
+        gifImageView.do {
+            $0.contentMode = .scaleAspectFill
+            $0.layer.masksToBounds = true
+        }
+    }
+    
     private func configureLayout() {
         self.contentView.addSubview(gifImageView)
         

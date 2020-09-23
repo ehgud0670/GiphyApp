@@ -39,8 +39,9 @@ extension DetailViewController {
         }
         
         gifImageView.do {
-            guard let urlString = giphyData?.images.original?.url else { return }
+            $0.contentMode = .scaleAspectFit
             
+            guard let urlString = giphyData?.images.original?.url else { return }
             $0.setImageWithMemoryCache(
                 urlString: urlString,
                 placeholder: Images.gifPlaceholder)
