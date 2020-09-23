@@ -15,7 +15,7 @@ import RxCocoa
 
 final class SearchViewController: UIViewController {
     // MARK: - UI
-    private let searchView: SearchView = SearchTextField()
+    private let searchTextField = SearchTextField()
     private let gifCollectionView = UICollectionView(
         frame: .zero,
         collectionViewLayout: UICollectionViewFlowLayout()
@@ -75,21 +75,21 @@ extension SearchViewController {
     }
     
     private func configureLayout() {
-        self.view.addSubview(searchView)
-        searchView.snp.makeConstraints {
+        self.view.addSubview(searchTextField)
+        searchTextField.snp.makeConstraints {
             let safeArea = self.view.safeAreaLayoutGuide
             let constant: CGFloat = 10
             
             $0.top.equalTo(safeArea).inset(constant)
             $0.leading.trailing.equalTo(self.view).inset(constant)
-            $0.height.equalTo(searchView.snp.width).dividedBy(7)
+            $0.height.equalTo(searchTextField.snp.width).dividedBy(7)
         }
         
         self.view.addSubview(gifCollectionView)
         gifCollectionView.snp.makeConstraints {
             let constant: CGFloat = 10
             
-            $0.top.equalTo(searchView.snp.bottom).offset(constant)
+            $0.top.equalTo(searchTextField.snp.bottom).offset(constant)
             $0.leading.trailing.bottom.equalTo(self.view).inset(constant)
         }
     }
