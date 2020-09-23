@@ -23,8 +23,6 @@
 		5A02C4F82519C975009AEC55 /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A02C4F72519C975009AEC55 /* RxSwift.framework */; };
 		5A03DFC82519E619003C43D7 /* GifCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A03DFC72519E619003C43D7 /* GifCell.swift */; };
 		5A03DFCA2519E634003C43D7 /* ReuseIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A03DFC92519E634003C43D7 /* ReuseIdentifier.swift */; };
-		5A3219B4251B23C7002FA565 /* GifsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A3219B3251B23C7002FA565 /* GifsUseCase.swift */; };
-		5A3219B7251B24B9002FA565 /* NetworkTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A3219B6251B24B9002FA565 /* NetworkTask.swift */; };
 		5A3219B9251B24D0002FA565 /* GifsTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A3219B8251B24D0002FA565 /* GifsTask.swift */; };
 		5A3219BB251B4797002FA565 /* UIImageViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A3219BA251B4797002FA565 /* UIImageViewExtensions.swift */; };
 		5A3219BD251B4D62002FA565 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A3219BC251B4D62002FA565 /* Constant.swift */; };
@@ -98,8 +96,6 @@
 		5A02C4F92519C991009AEC55 /* WeakMapTable.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WeakMapTable.framework; path = Carthage/Build/iOS/WeakMapTable.framework; sourceTree = "<group>"; };
 		5A03DFC72519E619003C43D7 /* GifCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GifCell.swift; sourceTree = "<group>"; };
 		5A03DFC92519E634003C43D7 /* ReuseIdentifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReuseIdentifier.swift; sourceTree = "<group>"; };
-		5A3219B3251B23C7002FA565 /* GifsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GifsUseCase.swift; sourceTree = "<group>"; };
-		5A3219B6251B24B9002FA565 /* NetworkTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkTask.swift; sourceTree = "<group>"; };
 		5A3219B8251B24D0002FA565 /* GifsTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GifsTask.swift; sourceTree = "<group>"; };
 		5A3219BA251B4797002FA565 /* UIImageViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageViewExtensions.swift; sourceTree = "<group>"; };
 		5A3219BC251B4D62002FA565 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
@@ -190,7 +186,6 @@
 		5A02C4B72519C577009AEC55 /* GiphyApp */ = {
 			isa = PBXGroup;
 			children = (
-				5A44885C251B1D2F0005CF22 /* UseCases */,
 				5A44884D251B02030005CF22 /* Networks */,
 				5A448849251AFFEA0005CF22 /* Models */,
 				5AA7192B2519DD4F00BC5962 /* Utils */,
@@ -248,7 +243,6 @@
 		5A3219B5251B2427002FA565 /* Tasks */ = {
 			isa = PBXGroup;
 			children = (
-				5A3219B6251B24B9002FA565 /* NetworkTask.swift */,
 				5A3219B8251B24D0002FA565 /* GifsTask.swift */,
 			);
 			path = Tasks;
@@ -287,14 +281,6 @@
 				5A448858251B1C390005CF22 /* GiphyResponse.json */,
 			);
 			path = JSONData;
-			sourceTree = "<group>";
-		};
-		5A44885C251B1D2F0005CF22 /* UseCases */ = {
-			isa = PBXGroup;
-			children = (
-				5A3219B3251B23C7002FA565 /* GifsUseCase.swift */,
-			);
-			path = UseCases;
 			sourceTree = "<group>";
 		};
 		5AA7191E2519CF9000BC5962 /* Controllers */ = {
@@ -627,9 +613,7 @@
 				5AA719282519D55F00BC5962 /* SearchTextField.swift in Sources */,
 				5A03DFCA2519E634003C43D7 /* ReuseIdentifier.swift in Sources */,
 				5AA7192A2519DC4E00BC5962 /* Shadow.swift in Sources */,
-				5A3219B4251B23C7002FA565 /* GifsUseCase.swift in Sources */,
 				5A03DFC82519E619003C43D7 /* GifCell.swift in Sources */,
-				5A3219B7251B24B9002FA565 /* NetworkTask.swift in Sources */,
 				5A448856251B0CF50005CF22 /* GiphyResponse.swift in Sources */,
 				5AA719252519D26000BC5962 /* SearchViewModel.swift in Sources */,
 				5A02C4BB2519C577009AEC55 /* SceneDelegate.swift in Sources */,

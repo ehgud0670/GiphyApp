@@ -23,7 +23,7 @@ final class SearchViewController: UIViewController {
     
     // MARK: - Properties
     private let searchViewModel = SearchViewModel()
-    private let gifsUseCase = GifsUseCase(gifsTask: GifsTask())
+    private let gifsTask = GifsTask()
     private var disposeBag = DisposeBag()
     
     override func viewDidLoad() {
@@ -107,31 +107,19 @@ extension SearchViewController {
 // MARK: - Networks
 extension SearchViewController {
     private func loadFirstTrendyGIFs() {
-        gifsUseCase.request(
-            TrendRequest(),
-            completionHandler: { [weak self] response in
-                self?.searchViewModel.gifsViewModel.update(with: response)
-            },
-            failureHandler: { _ in
-                
-        })
+        gifsTask.perform(TrendRequest())
+            .bind(onNext: { self.searchViewModel.gifsViewModel.update(with: $0)})
+            .disposed(by: disposeBag)
     }
     
     private func loadMoreTrendyGIFs() {
         guard let pagination = searchViewModel.gifsViewModel.pagination else { return }
         let nextOffset = pagination.count + pagination.offset
         
-        gifsUseCase.request(
-            TrendRequest(offset: nextOffset),
-            completionHandler: { [weak self] response in
-                guard let self = self,
-                self.isNotRepeat(with: response.pagination.offset) else { return }
-                
-                self.searchViewModel.gifsViewModel.update(with: response)
-            },
-            failureHandler: { _ in
-                
-        })
+        gifsTask.perform(TrendRequest(offset: nextOffset))
+            .filter { self.isNotRepeat(with: $0.pagination.offset) }
+            .bind(onNext: { self.searchViewModel.gifsViewModel.update(with: $0)})
+            .disposed(by: disposeBag)
     }
     
     private func isNotRepeat(with responseOffset: Int) -> Bool {

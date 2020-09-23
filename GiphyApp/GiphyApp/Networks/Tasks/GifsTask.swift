@@ -9,8 +9,9 @@
 import Foundation
 
 import Alamofire
+import RxSwift
 
-final class GifsTask: NetworkTask {
+final class GifsTask {
     typealias Input = GiphyRequest
     typealias Output = GiphyResponse
     
@@ -20,11 +21,22 @@ final class GifsTask: NetworkTask {
         self.session = session
     }
     
-    func perform(_ request: Input, completionHandler: @escaping (Output?, Error?) -> Void) {
-        guard let urlRequest = request.urlRequest() else { return }
-        
-        session.request(urlRequest).validate().responseDecodable(of: Output.self) { response in
-            completionHandler(response.value, response.error)
+    func perform(_ request: Input) -> Observable<GiphyResponse> {
+        return Observable.create { [weak self] emitter in
+            guard let self = self,
+            let urlRequest = request.urlRequest() else { return Disposables.create() }
+            self.session.request(urlRequest)
+                .validate()
+                .responseDecodable(of: Output.self) { response in
+                    guard response.error == nil else {
+                        emitter.onError(response.error!)
+                        return
+                    }
+                    
+                    guard let giphyResponse = response.value else { return }
+                    emitter.onNext(giphyResponse)
+            }
+            return Disposables.create()
         }
     }
 }
