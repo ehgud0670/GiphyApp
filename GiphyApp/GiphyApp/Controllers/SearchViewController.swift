@@ -15,7 +15,7 @@ import RxCocoa
 
 final class SearchViewController: UIViewController {
     // MARK: - UI
-    private let searchView: SearchView = SearchTextField()
+    private let searchTextField = SearchTextField()
     private let gifCollectionView = UICollectionView(
         frame: .zero,
         collectionViewLayout: UICollectionViewFlowLayout()
@@ -31,8 +31,7 @@ final class SearchViewController: UIViewController {
         
         configureAttributes()
         configureLayout()
-        configureObserver()
-        loadFirstTrendyGIFs()
+        configureObservers()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -47,18 +46,33 @@ final class SearchViewController: UIViewController {
         configureBindings()
     }
     
-    private func configureObserver() {
+    private func configureObservers() {
         NotificationCenter.default.addObserver(
             self,
-            selector: #selector(updateCollectionView),
-            name: GifsViewModel.Notification.update,
+            selector: #selector(reloadDataCollectionView),
+            name: GifsViewModel.Notification.updateFirst,
+            object: searchViewModel.gifsViewModel
+        )
+        
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(reloadItemsCollectionView(_:)),
+            name: GifsViewModel.Notification.updateMore,
             object: searchViewModel.gifsViewModel
         )
     }
     
-    @objc private func updateCollectionView() {
+    @objc private func reloadDataCollectionView() {
         DispatchQueue.main.async { [weak self] in
             self?.gifCollectionView.reloadData()
+        }
+    }
+    
+    @objc private func reloadItemsCollectionView(_ notification: Notification) {
+        guard let newItems = notification.userInfo?["newItems"] as? [IndexPath] else { return }
+        
+        DispatchQueue.main.async { [weak self] in
+            self?.gifCollectionView.insertItems(at: newItems)
         }
     }
 }
@@ -75,21 +89,21 @@ extension SearchViewController {
     }
     
     private func configureLayout() {
-        self.view.addSubview(searchView)
-        searchView.snp.makeConstraints {
+        self.view.addSubview(searchTextField)
+        searchTextField.snp.makeConstraints {
             let safeArea = self.view.safeAreaLayoutGuide
             let constant: CGFloat = 10
             
             $0.top.equalTo(safeArea).inset(constant)
             $0.leading.trailing.equalTo(self.view).inset(constant)
-            $0.height.equalTo(searchView.snp.width).dividedBy(7)
+            $0.height.equalTo(searchTextField.snp.width).dividedBy(7)
         }
         
         self.view.addSubview(gifCollectionView)
         gifCollectionView.snp.makeConstraints {
             let constant: CGFloat = 10
             
-            $0.top.equalTo(searchView.snp.bottom).offset(constant)
+            $0.top.equalTo(searchTextField.snp.bottom).offset(constant)
             $0.leading.trailing.bottom.equalTo(self.view).inset(constant)
         }
     }
@@ -98,9 +112,17 @@ extension SearchViewController {
 // MARK: - Scroll
 extension SearchViewController {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if searchTextField.isEditing {
+            view.endEditing(true)
+        }
+        
         guard scrollView.isBouncingBottom else { return }
         
-        loadMoreTrendyGIFs()
+        isSearching ? loadMoreSearchGIFs(with: searchTextField.text!) : loadMoreTrendyGIFs()
+    }
+    
+    private var isSearching: Bool {
+        return searchTextField.text != nil && searchTextField.text != ""
     }
 }
 
@@ -108,7 +130,15 @@ extension SearchViewController {
 extension SearchViewController {
     private func loadFirstTrendyGIFs() {
         gifsTask.perform(TrendRequest())
-            .bind(onNext: { self.searchViewModel.gifsViewModel.update(with: $0)})
+            .take(1)
+            .bind(onNext: { self.searchViewModel.gifsViewModel.updateFirst(with: $0)})
+            .disposed(by: disposeBag)
+    }
+    
+    private func loadFirstSearchGIFs(with query: String) {
+        gifsTask.perform(SearchRequest(query: query))
+            .take(1)
+            .bind(onNext: { self.searchViewModel.gifsViewModel.updateFirst(with: $0)})
             .disposed(by: disposeBag)
     }
     
@@ -117,8 +147,20 @@ extension SearchViewController {
         let nextOffset = pagination.count + pagination.offset
         
         gifsTask.perform(TrendRequest(offset: nextOffset))
+            .take(1)
             .filter { self.isNotRepeat(with: $0.pagination.offset) }
-            .bind(onNext: { self.searchViewModel.gifsViewModel.update(with: $0)})
+            .bind(onNext: { self.searchViewModel.gifsViewModel.updateMore(with: $0)})
+            .disposed(by: disposeBag)
+    }
+    
+    private func loadMoreSearchGIFs(with query: String) {
+        guard let pagination = searchViewModel.gifsViewModel.pagination else { return }
+        let nextOffset = pagination.count + pagination.offset
+        
+        gifsTask.perform(SearchRequest(query: query, offset: nextOffset))
+            .take(1)
+            .filter { self.isNotRepeat(with: $0.pagination.offset) }
+            .bind(onNext: { self.searchViewModel.gifsViewModel.updateMore(with: $0)})
             .disposed(by: disposeBag)
     }
     
@@ -130,7 +172,15 @@ extension SearchViewController {
 // MARK: - Binding
 extension SearchViewController {
     private func configureBindings() {
-        
+        searchTextField.rx.text.orEmpty
+            .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .userInteractive))
+            .do(onNext: { _ in
+                self.searchViewModel.gifsViewModel.clear()
+            })
+            .subscribe(onNext: {
+                $0 == "" ? self.loadFirstTrendyGIFs() : self.loadFirstSearchGIFs(with: $0)
+            })
+            .disposed(by: disposeBag)
     }
 }
 

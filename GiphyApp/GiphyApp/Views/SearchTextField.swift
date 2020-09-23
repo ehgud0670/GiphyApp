@@ -10,9 +10,7 @@ import UIKit
 
 import Then
 
-protocol SearchView: UIView { }
-
-final class SearchTextField: UITextField, SearchView, Shadow {
+final class SearchTextField: UITextField, Shadow {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
