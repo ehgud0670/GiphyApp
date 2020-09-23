@@ -39,7 +39,7 @@ extension DetailViewController {
         }
         
         gifImageView.do {
-            guard let urlString = giphyData?.images.downsized?.url else { return }
+            guard let urlString = giphyData?.images.original?.url else { return }
             
             $0.setImageWithMemoryCache(
                 urlString: urlString,
@@ -50,11 +50,22 @@ extension DetailViewController {
             $0.backgroundColor = .green
             $0.setTitle("Share", for: .normal)
             $0.setTitleColor(.black, for: .normal)
+            $0.addTarget(self, action: #selector(share), for: .touchUpInside)
         }
     }
     
     @objc private func close() {
         self.dismiss(animated: true)
+    }
+    
+    @objc private func share() {
+        guard let imageURLString = giphyData?.images.original?.url else { return }
+        
+        let textToShare = [imageURLString]
+        let activityViewController = UIActivityViewController(activityItems: textToShare, applicationActivities: nil)
+        activityViewController.excludedActivityTypes = [ UIActivity.ActivityType.airDrop ]
+    
+        self.present(activityViewController, animated: true, completion: nil)
     }
     
     private func configureLayout() {
