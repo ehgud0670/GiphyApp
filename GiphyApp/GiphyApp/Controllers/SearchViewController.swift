@@ -100,10 +100,9 @@ extension SearchViewController {
             .bind(to: gifCollectionView.rx.items(
                 cellIdentifier: GifCell.reuseIdentifier,
                 cellType: GifCell.self)
-            ) {
-                index, item, cell in
-                
-                
+            ) { _, item, cell in
+                cell.onData.onNext(item)
+    
         }.disposed(by: disposeBag)
     }
 }

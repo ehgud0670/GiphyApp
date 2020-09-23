@@ -26,6 +26,8 @@
 		5A3219B4251B23C7002FA565 /* GifsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A3219B3251B23C7002FA565 /* GifsUseCase.swift */; };
 		5A3219B7251B24B9002FA565 /* NetworkTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A3219B6251B24B9002FA565 /* NetworkTask.swift */; };
 		5A3219B9251B24D0002FA565 /* GifsTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A3219B8251B24D0002FA565 /* GifsTask.swift */; };
+		5A3219BB251B4797002FA565 /* UIImageViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A3219BA251B4797002FA565 /* UIImageViewExtensions.swift */; };
+		5A3219BD251B4D62002FA565 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A3219BC251B4D62002FA565 /* Constant.swift */; };
 		5A44884F251B021F0005CF22 /* TrendRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A44884E251B021F0005CF22 /* TrendRequest.swift */; };
 		5A448851251B024D0005CF22 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A448850251B024D0005CF22 /* Request.swift */; };
 		5A448854251B08170005CF22 /* TrendRequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A448853251B08170005CF22 /* TrendRequestTests.swift */; };
@@ -98,6 +100,8 @@
 		5A3219B3251B23C7002FA565 /* GifsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GifsUseCase.swift; sourceTree = "<group>"; };
 		5A3219B6251B24B9002FA565 /* NetworkTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkTask.swift; sourceTree = "<group>"; };
 		5A3219B8251B24D0002FA565 /* GifsTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GifsTask.swift; sourceTree = "<group>"; };
+		5A3219BA251B4797002FA565 /* UIImageViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageViewExtensions.swift; sourceTree = "<group>"; };
+		5A3219BC251B4D62002FA565 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
 		5A44884E251B021F0005CF22 /* TrendRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendRequest.swift; sourceTree = "<group>"; };
 		5A448850251B024D0005CF22 /* Request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
 		5A448853251B08170005CF22 /* TrendRequestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendRequestTests.swift; sourceTree = "<group>"; };
@@ -329,6 +333,8 @@
 			children = (
 				5AA7192C2519DD5F00BC5962 /* UIColorExtensions.swift */,
 				5A44885D251B1D430005CF22 /* DataExtensions.swift */,
+				5A3219BA251B4797002FA565 /* UIImageViewExtensions.swift */,
+				5A3219BC251B4D62002FA565 /* Constant.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -607,9 +613,11 @@
 				5A44884F251B021F0005CF22 /* TrendRequest.swift in Sources */,
 				5A3219B9251B24D0002FA565 /* GifsTask.swift in Sources */,
 				5AA719222519D04100BC5962 /* RandomViewController.swift in Sources */,
+				5A3219BB251B4797002FA565 /* UIImageViewExtensions.swift in Sources */,
 				5A5BF1102519FC5B00AE95E4 /* GifsViewModel.swift in Sources */,
 				5A02C4BD2519C577009AEC55 /* SearchViewController.swift in Sources */,
 				5A448851251B024D0005CF22 /* Request.swift in Sources */,
+				5A3219BD251B4D62002FA565 /* Constant.swift in Sources */,
 				5A02C4B92519C577009AEC55 /* AppDelegate.swift in Sources */,
 				5AA719202519CFC500BC5962 /* FavoriteViewController.swift in Sources */,
 				5AA719282519D55F00BC5962 /* SearchTextField.swift in Sources */,
