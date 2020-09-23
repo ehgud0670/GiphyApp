@@ -98,10 +98,9 @@ extension SearchViewController {
 // MARK: - Scroll
 extension SearchViewController {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        guard scrollView.isBouncingBottom else { return }
         
-        if scrollView.isBouncingBottom {
-            loadMoreTrendyGIFs()
-        }
+        loadMoreTrendyGIFs()
     }
 }
 
