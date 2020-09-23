@@ -193,7 +193,7 @@
 				5A448849251AFFEA0005CF22 /* Models */,
 				5AA7192B2519DD4F00BC5962 /* Utils */,
 				5AA719262519D53C00BC5962 /* Views */,
-				5AA719232519D24B00BC5962 /* Reactors */,
+				5AA719232519D24B00BC5962 /* ViewModel */,
 				5AA7191E2519CF9000BC5962 /* Controllers */,
 				5A02C4B82519C577009AEC55 /* AppDelegate.swift */,
 				5A02C4BA2519C577009AEC55 /* SceneDelegate.swift */,
@@ -307,13 +307,13 @@
 			path = Controllers;
 			sourceTree = "<group>";
 		};
-		5AA719232519D24B00BC5962 /* Reactors */ = {
+		5AA719232519D24B00BC5962 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
 				5AA719242519D26000BC5962 /* SearchViewModel.swift */,
 				5A5BF10F2519FC5B00AE95E4 /* GifsViewModel.swift */,
 			);
-			path = Reactors;
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		5AA719262519D53C00BC5962 /* Views */ = {

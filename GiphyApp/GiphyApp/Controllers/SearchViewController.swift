@@ -31,6 +31,7 @@ final class SearchViewController: UIViewController {
         
         configureAttributes()
         configureLayout()
+        configureObserver()
         loadTrendyGIFs()
     }
     
@@ -45,6 +46,21 @@ final class SearchViewController: UIViewController {
         
         configureBindings()
     }
+    
+    private func configureObserver() {
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(updateCollectionView),
+            name: GifsViewModel.Notification.update,
+            object: searchViewModel.gifsViewModel
+        )
+    }
+    
+    @objc private func updateCollectionView() {
+        DispatchQueue.main.async { [weak self] in
+            self?.gifCollectionView.reloadData()
+        }
+    }
 }
 
 // MARK: - Attributes & Layout
@@ -53,6 +69,7 @@ extension SearchViewController {
         gifCollectionView.do {
             $0.backgroundColor = .systemBackground
             $0.register(GifCell.self, forCellWithReuseIdentifier: GifCell.reuseIdentifier)
+            $0.dataSource = searchViewModel.gifsViewModel
             $0.delegate = self
         }
     }
@@ -95,15 +112,7 @@ extension SearchViewController {
 // MARK: - Binding
 extension SearchViewController {
     private func configureBindings() {
-        // binding collectionView
-        searchViewModel.gifsViewModel.gifs
-            .bind(to: gifCollectionView.rx.items(
-                cellIdentifier: GifCell.reuseIdentifier,
-                cellType: GifCell.self)
-            ) { _, item, cell in
-                cell.onData.onNext(item)
-    
-        }.disposed(by: disposeBag)
+        
     }
 }
 
