@@ -21,12 +21,14 @@ final class SearchViewController: UIViewController {
     
     // MARK: - Properties
     private let searchViewModel = SearchViewModel()
+    private let gifsUseCase = GifsUseCase(gifsTask: GifsTask())
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         configureAttributes()
         configureLayout()
+        loadTrendyGIFs()
     }
 }
 
@@ -59,6 +61,20 @@ extension SearchViewController {
             $0.top.equalTo(searchView.snp.bottom).offset(constant)
             $0.leading.trailing.bottom.equalTo(self.view).inset(constant)
         }
+    }
+}
+
+// MARK: - Networks
+extension SearchViewController {
+    private func loadTrendyGIFs() {
+        gifsUseCase.request(
+            TrendRequest(),
+            completionHandler: { response in
+            
+        },
+            failureHandler: { _ in
+            
+        })
     }
 }
 

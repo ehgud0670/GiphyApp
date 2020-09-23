@@ -23,7 +23,7 @@ final class TrendRequestTests: XCTestCase {
     }
     
     func test_isCorrectAttributes() {
-        XCTAssertEqual(request.path, "api.giphy.com/v1/gifs/trending")
+        XCTAssertEqual(request.path, "https://api.giphy.com/v1/gifs/trending")
         XCTAssertEqual(request.method, HTTPMethod.get)
         XCTAssertEqual(
             request.queryItems!,

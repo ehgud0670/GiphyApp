@@ -8,8 +8,10 @@
 
 import Foundation
 
-struct TrendRequest: Request {
-    var path: String { "api.giphy.com/v1/gifs/trending" }
+protocol GiphyRequest: Request { }
+
+struct TrendRequest: GiphyRequest {
+    var path: String { "https://api.giphy.com/v1/gifs/trending" }
     var queryItems: [URLQueryItem]? {
         [URLQueryItem(name: "api_key", value: "jzwguAwyjE6meldZ3VssS39SWnNA3kDF"),
         URLQueryItem(name: "limit", value: "24")]
