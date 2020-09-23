@@ -9,5 +9,5 @@
 import UIKit
 
 final class SearchViewModel: NSObject {
-    let giphyViewModel = GiphyViewModel()
+    let gifViewModel = GifViewModel()
 }

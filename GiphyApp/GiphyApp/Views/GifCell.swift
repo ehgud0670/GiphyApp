@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class GiphyCell: UICollectionViewCell, ReuseIdentifier {
+final class GifCell: UICollectionViewCell, ReuseIdentifier {
     override init(frame: CGRect) {
         super.init(frame: frame)
         

@@ -14,7 +14,7 @@ import SnapKit
 final class SearchViewController: UIViewController {
     // MARK: - UI
     private let searchView: SearchView = SearchTextField()
-    private let giphyCollectionView = UICollectionView(
+    private let gifCollectionView = UICollectionView(
         frame: .zero,
         collectionViewLayout: UICollectionViewFlowLayout()
     )
@@ -33,10 +33,10 @@ final class SearchViewController: UIViewController {
 // MARK: - Attributes & Layout
 extension SearchViewController {
     private func configureAttributes() {
-        giphyCollectionView.do {
+        gifCollectionView.do {
             $0.backgroundColor = .systemBackground
-            $0.register(GiphyCell.self, forCellWithReuseIdentifier: GiphyCell.reuseIdentifier)
-            $0.dataSource = searchViewModel.giphyViewModel
+            $0.register(GifCell.self, forCellWithReuseIdentifier: GifCell.reuseIdentifier)
+            $0.dataSource = searchViewModel.gifViewModel
             $0.delegate = self
         }
     }
@@ -52,8 +52,8 @@ extension SearchViewController {
             $0.height.equalTo(searchView.snp.width).dividedBy(7)
         }
         
-        self.view.addSubview(giphyCollectionView)
-        giphyCollectionView.snp.makeConstraints {
+        self.view.addSubview(gifCollectionView)
+        gifCollectionView.snp.makeConstraints {
             let constant: CGFloat = 10
             
             $0.top.equalTo(searchView.snp.bottom).offset(constant)

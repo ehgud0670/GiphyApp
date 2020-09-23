@@ -8,12 +8,12 @@
 
 import UIKit
 
-class GiphyViewModel: NSObject {
+class GifViewModel: NSObject {
     
 }
 
 // MARK: - UICollectionView DataSource
-extension GiphyViewModel: UICollectionViewDataSource {
+extension GifViewModel: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 10
     }
@@ -23,9 +23,9 @@ extension GiphyViewModel: UICollectionViewDataSource {
         cellForItemAt indexPath: IndexPath
     ) -> UICollectionViewCell {
         guard let giphyCell = collectionView.dequeueReusableCell(
-            withReuseIdentifier: GiphyCell.reuseIdentifier,
+            withReuseIdentifier: GifCell.reuseIdentifier,
             for: indexPath
-            ) as? GiphyCell else { return GiphyCell() }
+            ) as? GifCell else { return GifCell() }
         
         return giphyCell
     }

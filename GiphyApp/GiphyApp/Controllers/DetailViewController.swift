@@ -12,7 +12,7 @@ import Then
 import SnapKit
 
 final class DetailViewController: UIViewController {
-    private let giphyView = UIImageView()
+    private let gifView = UIImageView()
     private let nameLabel = UILabel()
     private let closeButton = CloseButton()
     private let shareButton = UIButton()
@@ -35,7 +35,7 @@ extension DetailViewController {
             $0.addTarget(self, action: #selector(close), for: .touchUpInside)
         }
         
-        giphyView.do {
+        gifView.do {
             $0.backgroundColor = .cyan
         }
         
@@ -62,8 +62,8 @@ extension DetailViewController {
             $0.trailing.equalTo(self.view).offset(-constant)
         }
         
-        self.view.addSubview(giphyView)
-        giphyView.snp.makeConstraints {
+        self.view.addSubview(gifView)
+        gifView.snp.makeConstraints {
             $0.centerX.equalTo(self.view)
             $0.centerY.equalTo(self.view).dividedBy(1.27)
             $0.width.height.equalTo(160)
@@ -71,8 +71,8 @@ extension DetailViewController {
         
         self.view.addSubview(nameLabel)
         nameLabel.snp.makeConstraints {
-            $0.top.equalTo(giphyView.snp.bottom).offset(5)
-            $0.centerX.equalTo(giphyView.snp.centerX)
+            $0.top.equalTo(gifView.snp.bottom).offset(5)
+            $0.centerX.equalTo(gifView.snp.centerX)
         }
         
         self.view.addSubview(shareButton)
