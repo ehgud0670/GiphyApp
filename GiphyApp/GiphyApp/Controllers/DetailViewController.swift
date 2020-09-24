@@ -22,6 +22,7 @@ final class DetailViewController: UIViewController {
     
     var giphyData: GiphyData?
     private var disposeBag = DisposeBag()
+    private let imageTask = ImageTask()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,8 +51,10 @@ extension DetailViewController {
         
         gifImageView.do {
             $0.contentMode = .scaleAspectFit
+            $0.image = Images.gifPlaceholder
             guard let urlString = giphyData?.images.downsized?.url else { return }
-            ImageTask().getImageWithRx(with: urlString, with: .zero)
+            let max: CGFloat = 160
+            ImageTask().getImageWithRx(with: urlString, with: CGSize(width: max, height: max))
                 .bind(to: $0.rx.image)
                 .disposed(by: disposeBag)
         }
