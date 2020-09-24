@@ -27,7 +27,7 @@ final class CloseButton: UIButton {
         self.do {
             let cancelImage = UIImage(systemName: "x.circle")
             $0.setImage(cancelImage, for: .normal)
-            $0.imageView?.contentMode = .scaleAspectFill
+            $0.imageView?.contentMode = .scaleAspectFit
             $0.imageEdgeInsets = UIEdgeInsets(top: 30, left: 30, bottom: 30, right: 30)
             $0.tintColor = .black
         }

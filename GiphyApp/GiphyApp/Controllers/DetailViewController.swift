@@ -17,6 +17,7 @@ final class DetailViewController: UIViewController {
     private let nameLabel = UILabel()
     private let closeButton = CloseButton()
     private let shareButton = UIButton()
+    private let favoriteButton = FavoriteButton()
     var giphyData: GiphyData?
     
     override func viewDidLoad() {
@@ -46,11 +47,11 @@ extension DetailViewController {
         
         gifImageView.do {
             $0.contentMode = .scaleAspectFit
-            
             guard let urlString = giphyData?.images.original?.url else { return }
             $0.setImageWithMemoryCache(
                 urlString: urlString,
                 placeholder: Images.gifPlaceholder)
+            $0.backgroundColor = .black
         }
         
         shareButton.do {
@@ -60,6 +61,10 @@ extension DetailViewController {
             $0.setTitleColor(.black, for: .normal)
             $0.setTitleColor(UIColor.black.withAlphaComponent(0.5), for: .highlighted)
             $0.addTarget(self, action: #selector(share), for: .touchUpInside)
+        }
+        
+        favoriteButton.do {
+            $0.addTarget(self, action: #selector(like), for: .touchUpInside)
         }
     }
     
@@ -77,6 +82,10 @@ extension DetailViewController {
         self.present(activityViewController, animated: true, completion: nil)
     }
     
+    @objc private func like() {
+        favoriteButton.toggle()
+    }
+    
     private func configureLayout() {
         self.view.addSubview(closeButton)
         closeButton.snp.makeConstraints {
@@ -89,7 +98,19 @@ extension DetailViewController {
         gifImageView.snp.makeConstraints {
             $0.centerX.equalTo(self.view)
             $0.centerY.equalTo(self.view).dividedBy(1.27)
-            $0.width.height.equalTo(160)
+            
+            guard let size = gifImageView.image?.size else { return }
+            let max: CGFloat = 160
+            if size.height > size.width {
+                $0.height.equalTo(max)
+                let ratio = size.width / size.height
+                $0.width.equalTo(gifImageView.snp.height).multipliedBy(ratio)
+                return
+            }
+            
+            let ratio = size.height / size.width
+            $0.width.equalTo(max)
+            $0.height.equalTo(gifImageView.snp.width).multipliedBy(ratio)
         }
         
         self.view.addSubview(nameLabel)
@@ -104,6 +125,12 @@ extension DetailViewController {
             $0.height.equalTo(shareButton.snp.width).multipliedBy(0.2)
             $0.centerX.equalTo(self.view.snp.centerX)
             $0.centerY.equalTo(self.view).dividedBy(0.57)
+        }
+        
+        self.view.addSubview(favoriteButton)
+        favoriteButton.snp.makeConstraints {
+            $0.top.equalTo(gifImageView).offset(-10)
+            $0.trailing.equalTo(gifImageView).offset(10)
         }
     }
 }

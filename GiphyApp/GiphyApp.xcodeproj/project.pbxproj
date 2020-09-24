@@ -23,6 +23,7 @@
 		5A02C4F82519C975009AEC55 /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A02C4F72519C975009AEC55 /* RxSwift.framework */; };
 		5A03DFC82519E619003C43D7 /* GifCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A03DFC72519E619003C43D7 /* GifCell.swift */; };
 		5A03DFCA2519E634003C43D7 /* ReuseIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A03DFC92519E634003C43D7 /* ReuseIdentifier.swift */; };
+		5A0A16DB251C774A003037C3 /* FavoriteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A0A16DA251C774A003037C3 /* FavoriteButton.swift */; };
 		5A3219B9251B24D0002FA565 /* GifsTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A3219B8251B24D0002FA565 /* GifsTask.swift */; };
 		5A3219BB251B4797002FA565 /* UIImageViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A3219BA251B4797002FA565 /* UIImageViewExtensions.swift */; };
 		5A3219BD251B4D62002FA565 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A3219BC251B4D62002FA565 /* Constant.swift */; };
@@ -96,6 +97,7 @@
 		5A02C4F92519C991009AEC55 /* WeakMapTable.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WeakMapTable.framework; path = Carthage/Build/iOS/WeakMapTable.framework; sourceTree = "<group>"; };
 		5A03DFC72519E619003C43D7 /* GifCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GifCell.swift; sourceTree = "<group>"; };
 		5A03DFC92519E634003C43D7 /* ReuseIdentifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReuseIdentifier.swift; sourceTree = "<group>"; };
+		5A0A16DA251C774A003037C3 /* FavoriteButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteButton.swift; sourceTree = "<group>"; };
 		5A3219B8251B24D0002FA565 /* GifsTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GifsTask.swift; sourceTree = "<group>"; };
 		5A3219BA251B4797002FA565 /* UIImageViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageViewExtensions.swift; sourceTree = "<group>"; };
 		5A3219BC251B4D62002FA565 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
@@ -312,6 +314,7 @@
 				5AA719272519D55F00BC5962 /* SearchTextField.swift */,
 				5AA719292519DC4E00BC5962 /* Shadow.swift */,
 				5AA92FEA251A119B00422E4D /* CloseButton.swift */,
+				5A0A16DA251C774A003037C3 /* FavoriteButton.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -598,6 +601,7 @@
 				5AA92FEB251A119B00422E4D /* CloseButton.swift in Sources */,
 				5A44885E251B1D430005CF22 /* DataExtensions.swift in Sources */,
 				5AA92FE7251A0C6000422E4D /* HalfSizePresentationController.swift in Sources */,
+				5A0A16DB251C774A003037C3 /* FavoriteButton.swift in Sources */,
 				5AA7192D2519DD5F00BC5962 /* UIColorExtensions.swift in Sources */,
 				5A39ED10251B6737004C6FE3 /* ScrollViewExtensions.swift in Sources */,
 				5A44884F251B021F0005CF22 /* TrendRequest.swift in Sources */,
