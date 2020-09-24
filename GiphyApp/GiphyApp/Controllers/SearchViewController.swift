@@ -125,7 +125,7 @@ extension SearchViewController {
 // MARK: - Scroll
 extension SearchViewController {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if searchTextField.isEditing {
+        if isSearchingWhenScrollIsNotTop {
             view.endEditing(true)
         }
         
@@ -136,6 +136,11 @@ extension SearchViewController {
     
     private var isSearching: Bool {
         return searchTextField.text != nil && searchTextField.text != ""
+    }
+    
+    // 스크롤 위치가 top이 아닌 경우에만 키보드를 내리게 한다.
+    private var isSearchingWhenScrollIsNotTop: Bool {
+        gifCollectionView.contentOffset != .zero && searchTextField.isEditing
     }
 }
 
