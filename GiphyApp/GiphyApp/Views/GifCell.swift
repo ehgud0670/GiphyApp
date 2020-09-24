@@ -14,7 +14,9 @@ import Kingfisher
 import SnapKit
 
 final class GifCell: UICollectionViewCell, ReuseIdentifier {
-    private var gifImageView = UIImageView()
+    private var gifImageView = UIImageView().then {
+        $0.image = Images.gifPlaceholder
+    }
     private var disposeBag = DisposeBag()
     private var data = PublishSubject<GiphyData>()
     let onData: AnyObserver<GiphyData>
@@ -69,12 +71,9 @@ final class GifCell: UICollectionViewCell, ReuseIdentifier {
     }
     
     private func bindUI() {
-        data.compactMap { $0.images.original?.url }
-            .bind { [weak self] in
-                self?.gifImageView.setImageWithMemoryCache(
-                    urlString: $0,
-                    placeholder: Images.gifPlaceholder
-                )}
+        data.compactMap { $0.images.downsized?.url }
+            .flatMap { ImageTask().getImageWithRx(with: $0, with: self.bounds.size) }
+            .bind(to: gifImageView.rx.image )
             .disposed(by: disposeBag)
     }
 }
