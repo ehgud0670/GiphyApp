@@ -30,7 +30,7 @@ final class ImageTask {
             }
             
             guard let url = URL(string: urlString) else { return Disposables.create() }
-            self.loadAndDownsample(with: url, for: size, scale: 3) { image in
+            self.loadAndDownsize(with: url, for: size, scale: 3) { image in
                 cache.store(image, forKey: urlString)
                 emitter.onNext(image)
             }
@@ -38,7 +38,7 @@ final class ImageTask {
         }
     }
 
-    private func loadAndDownsample(
+    private func loadAndDownsize(
         with imageURL: URL,
         for size: CGSize,
         scale: CGFloat,
