@@ -54,6 +54,11 @@ extension DetailViewController {
             $0.backgroundColor = .black
         }
         
+        nameLabel.do {
+            guard let title = giphyData?.title.components(separatedBy: " GIF").first else { return }
+            $0.text = title
+        }
+        
         shareButton.do {
             $0.layer.cornerRadius = 20
             $0.backgroundColor = .systemBlue
