@@ -12,7 +12,7 @@ import Kingfisher
 
 extension UIImageView {
     func setImageWithMemoryCache(urlString: String, placeholder: Placeholder?) {
-        let cache = ImageCache.default
+        let cache = KingfisherManager.shared.cache
         let image = cache.retrieveImageInMemoryCache(forKey: urlString)
         
         if let image = image {

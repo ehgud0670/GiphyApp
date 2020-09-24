@@ -39,7 +39,7 @@ final class SearchViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         
-        ImageCache.default.clearCache()
+        KingfisherManager.shared.cache.clearMemoryCache()
     }
     
     private func configureObservers() {
