@@ -35,6 +35,7 @@ final class SearchViewController: UIViewController {
         configureObservers()
     }
     
+    // MARK: - Life Cycle
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         
@@ -71,6 +72,7 @@ final class SearchViewController: UIViewController {
     
     @objc private func reloadDataCollectionView() {
         DispatchQueue.main.async { [weak self] in
+            self?.gifCollectionView.setContentOffset(.zero, animated: false)
             self?.gifCollectionView.reloadData()
         }
     }
@@ -185,10 +187,8 @@ extension SearchViewController {
     private func configureBindings() {
         searchTextField.rx.text.orEmpty
             .distinctUntilChanged()
+            .do { self.gifsViewModel.clear() }
             .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .userInteractive))
-            .do(onNext: { _ in
-                self.gifsViewModel.clear()
-            })
             .subscribe(onNext: {
                 $0 == "" ? self.loadFirstTrendyGIFs() : self.loadFirstSearchGIFs(with: $0)
             })

@@ -42,8 +42,6 @@ final class GifsViewModel: NSObject {
     func clear() {
         gifs = []
         pagination = nil
-        
-        NotificationCenter.default.post(name: Notification.updateFirst, object: self)
     }
     
     func giphyData(at index: Int) -> GiphyData? {
