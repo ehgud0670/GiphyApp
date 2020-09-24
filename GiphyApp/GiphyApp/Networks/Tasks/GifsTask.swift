@@ -16,12 +16,18 @@ final class GifsTask {
     typealias Output = GiphyResponse
     
     private let session: Session
+    private(set) var isLoading = false
     
     init(session: Session = AF) {
         self.session = session
     }
     
+    func setIsLoadingFalse() {
+        isLoading = false
+    }
+    
     func perform(_ request: Input) -> Observable<GiphyResponse> {
+        isLoading = true
         return Observable.create { [weak self] emitter in
             guard let self = self,
             let urlRequest = request.urlRequest() else { return Disposables.create() }
