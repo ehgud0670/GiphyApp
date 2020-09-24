@@ -48,9 +48,13 @@ extension DetailViewController {
         gifImageView.do {
             $0.contentMode = .scaleAspectFit
             guard let urlString = giphyData?.images.downsized?.url else { return }
-            $0.setImageWithMemoryCache(
-                urlString: urlString,
-                placeholder: Images.gifPlaceholder)
+            
+            let image = ImageCache.default.retrieveImageInMemoryCache(forKey: urlString)
+            if let image = image {
+                $0.image = image
+                return
+            }
+            $0.image = Images.gifPlaceholder
         }
         
         nameLabel.do {
