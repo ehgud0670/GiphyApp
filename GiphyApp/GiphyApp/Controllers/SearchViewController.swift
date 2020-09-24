@@ -33,18 +33,6 @@ final class SearchViewController: UIViewController {
         configureAttributes()
         configureLayout()
         configureObservers()
-    }
-    
-    // MARK: - Life Cycle
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        
-        disposeBag = DisposeBag()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
         configureBindings()
     }
     
@@ -150,8 +138,8 @@ extension SearchViewController {
         
         gifsTask.perform(TrendRequest())
             .take(1)
-            .do { self.gifsTask.setIsLoadingFalse() }
-            .bind(onNext: { self.gifsViewModel.updateFirst(with: $0)})
+            .do { [weak self] in self?.gifsTask.setIsLoadingFalse() }
+            .bind(onNext: { [weak self] in self?.gifsViewModel.updateFirst(with: $0)})
             .disposed(by: disposeBag)
     }
     
@@ -160,8 +148,8 @@ extension SearchViewController {
         
         gifsTask.perform(SearchRequest(query: query))
             .take(1)
-            .do { self.gifsTask.setIsLoadingFalse() }
-            .bind(onNext: { self.gifsViewModel.updateFirst(with: $0)})
+            .do { [weak self] in self?.gifsTask.setIsLoadingFalse() }
+            .bind(onNext: { [weak self] in self?.gifsViewModel.updateFirst(with: $0)})
             .disposed(by: disposeBag)
     }
     
@@ -170,13 +158,10 @@ extension SearchViewController {
         guard let pagination = gifsViewModel.pagination else { return }
         let nextOffset = pagination.count + pagination.offset
         
-        print(pagination.offset)
-        print("next: \(nextOffset)")
-        
         gifsTask.perform(TrendRequest(offset: nextOffset))
             .take(1)
-            .do { self.gifsTask.setIsLoadingFalse() }
-            .bind(onNext: { self.gifsViewModel.updateMore(with: $0)})
+            .do { [weak self] in self?.gifsTask.setIsLoadingFalse() }
+            .bind(onNext: { [weak self] in self?.gifsViewModel.updateMore(with: $0)})
             .disposed(by: disposeBag)
     }
     
@@ -187,8 +172,8 @@ extension SearchViewController {
         
         gifsTask.perform(SearchRequest(query: query, offset: nextOffset))
             .take(1)
-            .do { self.gifsTask.setIsLoadingFalse() }
-            .bind(onNext: { self.gifsViewModel.updateMore(with: $0)})
+            .do { [weak self] in self?.gifsTask.setIsLoadingFalse() }
+            .bind(onNext: { [weak self] in self?.gifsViewModel.updateMore(with: $0)})
             .disposed(by: disposeBag)
     }
 }
@@ -198,10 +183,10 @@ extension SearchViewController {
     private func configureBindings() {
         searchTextField.rx.text.orEmpty
             .distinctUntilChanged()
-            .do { self.gifsViewModel.clear() }
+            .do { [weak self] in self?.gifsViewModel.clear() }
             .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .userInteractive))
-            .subscribe(onNext: {
-                $0 == "" ? self.loadFirstTrendyGIFs() : self.loadFirstSearchGIFs(with: $0)
+            .subscribe(onNext: { [weak self] in
+                $0 == "" ? self?.loadFirstTrendyGIFs() : self?.loadFirstSearchGIFs(with: $0)
             })
             .disposed(by: disposeBag)
     }
