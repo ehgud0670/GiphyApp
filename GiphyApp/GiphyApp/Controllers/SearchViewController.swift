@@ -130,7 +130,6 @@ extension SearchViewController {
         }
         
         guard scrollView.isBouncingBottom else { return }
-        
         isSearching ? loadMoreSearchGIFs(with: searchTextField.text!) : loadMoreTrendyGIFs()
     }
     
@@ -147,43 +146,50 @@ extension SearchViewController {
 // MARK: - Networks
 extension SearchViewController {
     private func loadFirstTrendyGIFs() {
+        guard !gifsTask.isLoading else { return }
+        
         gifsTask.perform(TrendRequest())
             .take(1)
+            .do { self.gifsTask.setIsLoadingFalse() }
             .bind(onNext: { self.gifsViewModel.updateFirst(with: $0)})
             .disposed(by: disposeBag)
     }
     
     private func loadFirstSearchGIFs(with query: String) {
+        guard !gifsTask.isLoading else { return }
+        
         gifsTask.perform(SearchRequest(query: query))
             .take(1)
+            .do { self.gifsTask.setIsLoadingFalse() }
             .bind(onNext: { self.gifsViewModel.updateFirst(with: $0)})
             .disposed(by: disposeBag)
     }
     
     private func loadMoreTrendyGIFs() {
+        guard !gifsTask.isLoading else { return }
         guard let pagination = gifsViewModel.pagination else { return }
         let nextOffset = pagination.count + pagination.offset
         
+        print(pagination.offset)
+        print("next: \(nextOffset)")
+        
         gifsTask.perform(TrendRequest(offset: nextOffset))
             .take(1)
-            .filter { self.isNotRepeat(with: $0.pagination.offset) }
+            .do { self.gifsTask.setIsLoadingFalse() }
             .bind(onNext: { self.gifsViewModel.updateMore(with: $0)})
             .disposed(by: disposeBag)
     }
     
     private func loadMoreSearchGIFs(with query: String) {
+        guard !gifsTask.isLoading else { return }
         guard let pagination = gifsViewModel.pagination else { return }
         let nextOffset = pagination.count + pagination.offset
         
         gifsTask.perform(SearchRequest(query: query, offset: nextOffset))
             .take(1)
-            .filter { self.isNotRepeat(with: $0.pagination.offset) }
+            .do { self.gifsTask.setIsLoadingFalse() }
             .bind(onNext: { self.gifsViewModel.updateMore(with: $0)})
             .disposed(by: disposeBag)
-    }
-    
-    private func isNotRepeat(with responseOffset: Int) -> Bool {
-        return responseOffset != gifsViewModel.pagination?.offset
     }
 }
 
