@@ -16,7 +16,7 @@ final class GifsViewModel: NSObject {
         static let updateMore = Foundation.Notification.Name("GifsViewModeldDidUpdateMore")
     }
     
-    var gifs = [GiphyData]()
+    private var gifs = [GiphyData]()
     var pagination: Pagination?
     
     func updateFirst(with response: GiphyResponse) {
@@ -42,8 +42,11 @@ final class GifsViewModel: NSObject {
     func clear() {
         gifs = []
         pagination = nil
-        
-        NotificationCenter.default.post(name: Notification.updateFirst, object: self)
+    }
+    
+    func giphyData(at index: Int) -> GiphyData? {
+        guard index < gifs.count else { return nil }
+        return gifs[index]
     }
 }
 

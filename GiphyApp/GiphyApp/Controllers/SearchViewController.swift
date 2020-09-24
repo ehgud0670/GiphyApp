@@ -12,6 +12,7 @@ import Then
 import SnapKit
 import RxSwift
 import RxCocoa
+import Kingfisher
 
 final class SearchViewController: UIViewController {
     // MARK: - UI
@@ -22,7 +23,7 @@ final class SearchViewController: UIViewController {
     )
     
     // MARK: - Properties
-    private let searchViewModel = SearchViewModel()
+    private let gifsViewModel = GifsViewModel()
     private let gifsTask = GifsTask()
     private var disposeBag = DisposeBag()
     
@@ -34,6 +35,7 @@ final class SearchViewController: UIViewController {
         configureObservers()
     }
     
+    // MARK: - Life Cycle
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         
@@ -46,24 +48,31 @@ final class SearchViewController: UIViewController {
         configureBindings()
     }
     
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        
+        ImageCache.default.clearCache()
+    }
+    
     private func configureObservers() {
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(reloadDataCollectionView),
             name: GifsViewModel.Notification.updateFirst,
-            object: searchViewModel.gifsViewModel
+            object: gifsViewModel
         )
         
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(reloadItemsCollectionView(_:)),
             name: GifsViewModel.Notification.updateMore,
-            object: searchViewModel.gifsViewModel
+            object: gifsViewModel
         )
     }
     
     @objc private func reloadDataCollectionView() {
         DispatchQueue.main.async { [weak self] in
+            self?.gifCollectionView.setContentOffset(.zero, animated: false)
             self?.gifCollectionView.reloadData()
         }
     }
@@ -80,10 +89,14 @@ final class SearchViewController: UIViewController {
 // MARK: - Attributes & Layout
 extension SearchViewController {
     private func configureAttributes() {
+        self.view.do {
+            $0.backgroundColor = .systemPurple
+        }
+        
         gifCollectionView.do {
-            $0.backgroundColor = .systemBackground
+            $0.backgroundColor = .systemPurple
             $0.register(GifCell.self, forCellWithReuseIdentifier: GifCell.reuseIdentifier)
-            $0.dataSource = searchViewModel.gifsViewModel
+            $0.dataSource = gifsViewModel
             $0.delegate = self
         }
     }
@@ -112,7 +125,7 @@ extension SearchViewController {
 // MARK: - Scroll
 extension SearchViewController {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if searchTextField.isEditing {
+        if isSearchingWhenScrollIsNotTop {
             view.endEditing(true)
         }
         
@@ -124,6 +137,11 @@ extension SearchViewController {
     private var isSearching: Bool {
         return searchTextField.text != nil && searchTextField.text != ""
     }
+    
+    // 스크롤 위치가 top이 아닌 경우에만 키보드를 내리게 한다.
+    private var isSearchingWhenScrollIsNotTop: Bool {
+        gifCollectionView.contentOffset != .zero && searchTextField.isEditing
+    }
 }
 
 // MARK: - Networks
@@ -131,41 +149,41 @@ extension SearchViewController {
     private func loadFirstTrendyGIFs() {
         gifsTask.perform(TrendRequest())
             .take(1)
-            .bind(onNext: { self.searchViewModel.gifsViewModel.updateFirst(with: $0)})
+            .bind(onNext: { self.gifsViewModel.updateFirst(with: $0)})
             .disposed(by: disposeBag)
     }
     
     private func loadFirstSearchGIFs(with query: String) {
         gifsTask.perform(SearchRequest(query: query))
             .take(1)
-            .bind(onNext: { self.searchViewModel.gifsViewModel.updateFirst(with: $0)})
+            .bind(onNext: { self.gifsViewModel.updateFirst(with: $0)})
             .disposed(by: disposeBag)
     }
     
     private func loadMoreTrendyGIFs() {
-        guard let pagination = searchViewModel.gifsViewModel.pagination else { return }
+        guard let pagination = gifsViewModel.pagination else { return }
         let nextOffset = pagination.count + pagination.offset
         
         gifsTask.perform(TrendRequest(offset: nextOffset))
             .take(1)
             .filter { self.isNotRepeat(with: $0.pagination.offset) }
-            .bind(onNext: { self.searchViewModel.gifsViewModel.updateMore(with: $0)})
+            .bind(onNext: { self.gifsViewModel.updateMore(with: $0)})
             .disposed(by: disposeBag)
     }
     
     private func loadMoreSearchGIFs(with query: String) {
-        guard let pagination = searchViewModel.gifsViewModel.pagination else { return }
+        guard let pagination = gifsViewModel.pagination else { return }
         let nextOffset = pagination.count + pagination.offset
         
         gifsTask.perform(SearchRequest(query: query, offset: nextOffset))
             .take(1)
             .filter { self.isNotRepeat(with: $0.pagination.offset) }
-            .bind(onNext: { self.searchViewModel.gifsViewModel.updateMore(with: $0)})
+            .bind(onNext: { self.gifsViewModel.updateMore(with: $0)})
             .disposed(by: disposeBag)
     }
     
     private func isNotRepeat(with responseOffset: Int) -> Bool {
-        return responseOffset != searchViewModel.gifsViewModel.pagination?.offset
+        return responseOffset != gifsViewModel.pagination?.offset
     }
 }
 
@@ -173,10 +191,9 @@ extension SearchViewController {
 extension SearchViewController {
     private func configureBindings() {
         searchTextField.rx.text.orEmpty
+            .distinctUntilChanged()
+            .do { self.gifsViewModel.clear() }
             .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .userInteractive))
-            .do(onNext: { _ in
-                self.searchViewModel.gifsViewModel.clear()
-            })
             .subscribe(onNext: {
                 $0 == "" ? self.loadFirstTrendyGIFs() : self.loadFirstSearchGIFs(with: $0)
             })
@@ -187,7 +204,10 @@ extension SearchViewController {
 // MARK: - UICollectionView Delegate
 extension SearchViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let giphyData = gifsViewModel.giphyData(at: indexPath.item) else { return }
+        
         let detailViewController = DetailViewController().then {
+            $0.giphyData = giphyData
             $0.modalPresentationStyle = .custom
             $0.transitioningDelegate = self
         }
