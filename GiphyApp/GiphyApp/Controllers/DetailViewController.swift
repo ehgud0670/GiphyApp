@@ -51,7 +51,6 @@ extension DetailViewController {
             $0.setImageWithMemoryCache(
                 urlString: urlString,
                 placeholder: Images.gifPlaceholder)
-            $0.backgroundColor = .black
         }
         
         nameLabel.do {
