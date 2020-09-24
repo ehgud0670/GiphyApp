@@ -69,7 +69,7 @@ final class GifCell: UICollectionViewCell, ReuseIdentifier {
     }
     
     private func bindUI() {
-        data.compactMap { $0.images.original?.url }
+        data.compactMap { $0.images.downsized?.url }
             .bind { [weak self] in
                 self?.gifImageView.setImageWithMemoryCache(
                     urlString: $0,
