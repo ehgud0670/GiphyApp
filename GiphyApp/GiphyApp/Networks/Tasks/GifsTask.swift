@@ -31,6 +31,7 @@ final class GifsTask {
         return Observable.create { [weak self] emitter in
             guard let self = self,
             let urlRequest = request.urlRequest() else { return Disposables.create() }
+            
             self.session.request(urlRequest)
                 .validate()
                 .responseDecodable(of: Output.self) { response in

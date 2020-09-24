@@ -39,7 +39,7 @@ final class SearchViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         
-        KingfisherManager.shared.cache.clearMemoryCache()
+        ImageCache.default.clearMemoryCache()
     }
     
     private func configureObservers() {
@@ -186,7 +186,7 @@ extension SearchViewController {
             .do { [weak self] in
                 self?.gifsViewModel.clear()
                 ImageCache.default.clearMemoryCache() }
-            .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .userInteractive))
+            .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .userInitiated))
             .subscribe(onNext: { [weak self] in
                 $0 == "" ? self?.loadFirstTrendyGIFs() : self?.loadFirstSearchGIFs(with: $0)
             })
