@@ -72,8 +72,8 @@ final class GifCell: UICollectionViewCell, ReuseIdentifier {
     
     private func bindUI() {
         data.compactMap { $0.images.downsized?.url }
-            .bind { [weak self] in
-                self?.gifImageView.setImage(urlString: $0, with: self?.bounds.size) }
+            .flatMap { ImageTask().getImageWithRx(with: $0, with: self.bounds.size) }
+            .bind(to: gifImageView.rx.image )
             .disposed(by: disposeBag)
     }
 }

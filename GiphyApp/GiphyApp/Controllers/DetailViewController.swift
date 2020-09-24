@@ -11,6 +11,7 @@ import UIKit
 import Then
 import SnapKit
 import Kingfisher
+import RxSwift
 
 final class DetailViewController: UIViewController {
     private let gifImageView = UIImageView()
@@ -18,7 +19,9 @@ final class DetailViewController: UIViewController {
     private let closeButton = CloseButton()
     private let shareButton = UIButton()
     private let favoriteButton = FavoriteButton()
+    
     var giphyData: GiphyData?
+    private var disposeBag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,13 +51,9 @@ extension DetailViewController {
         gifImageView.do {
             $0.contentMode = .scaleAspectFit
             guard let urlString = giphyData?.images.downsized?.url else { return }
-            
-            let image = ImageCache.default.retrieveImageInMemoryCache(forKey: urlString)
-            if let image = image {
-                $0.image = image
-                return
-            }
-            $0.image = Images.gifPlaceholder
+            ImageTask().getImageWithRx(with: urlString, with: .zero)
+                .bind(to: $0.rx.image)
+                .disposed(by: disposeBag)
         }
         
         nameLabel.do {
