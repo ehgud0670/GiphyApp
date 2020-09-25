@@ -60,6 +60,7 @@ extension DetailViewController {
         }
         
         nameLabel.do {
+            $0.textAlignment = .center
             guard let title = giphyData?.title.components(separatedBy: " GIF").first else { return }
             $0.text = title
         }
@@ -126,6 +127,7 @@ extension DetailViewController {
         self.view.addSubview(nameLabel)
         nameLabel.snp.makeConstraints {
             $0.top.equalTo(gifImageView.snp.bottom).offset(5)
+            $0.leading.trailing.equalTo(self.view).inset(10)
             $0.centerX.equalTo(gifImageView.snp.centerX)
         }
         
