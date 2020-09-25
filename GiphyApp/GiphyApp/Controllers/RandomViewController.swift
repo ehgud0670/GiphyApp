@@ -115,8 +115,9 @@ extension RandomViewController {
 extension RandomViewController {
     private func configureBinding() {
         randomButton.rx.tap
-            .withLatestFrom(self.searchTextField.rx.text.orEmpty.distinctUntilChanged(),
-                            resultSelector: { return $1 })
+            .withLatestFrom(
+                self.searchTextField.rx.text.orEmpty.distinctUntilChanged(),
+                resultSelector: { return $1 })
             .flatMap { self.gifTask.perform(RandomRequest(tag: $0))}
             .map { $0.data }
             .bind(to: gifSubject)
@@ -126,6 +127,20 @@ extension RandomViewController {
             .compactMap { $0.images.downsized?.url }
             .flatMap { self.imageTask.getImageWithRx(with: $0, with: self.gifImageView.bounds.size) }
             .bind(to: gifImageView.rx.image )
+            .disposed(by: disposeBag)
+        
+        shareButton.rx.tap
+            .withLatestFrom(gifSubject)
+            .compactMap { $0.images.original?.url }
+            .subscribe(onNext: {
+                let activityViewController = UIActivityViewController(
+                    activityItems: [$0],
+                    applicationActivities: nil
+                ).then {
+                    $0.excludedActivityTypes = [ UIActivity.ActivityType.airDrop ]
+                }
+                self.present(activityViewController, animated: true, completion: nil)
+            })
             .disposed(by: disposeBag)
     }
 }
