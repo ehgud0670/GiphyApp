@@ -12,6 +12,7 @@ import Then
 import SnapKit
 import RxSwift
 import RxCocoa
+import Kingfisher
 
 final class RandomViewController: UIViewController {
     // MARK: - UI
@@ -32,6 +33,12 @@ final class RandomViewController: UIViewController {
         configureAttributes()
         configureLayout()
         configureBinding()
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        
+        ImageCache.default.clearMemoryCache()
     }
 }
 
@@ -108,7 +115,8 @@ extension RandomViewController {
 extension RandomViewController {
     private func configureBinding() {
         randomButton.rx.tap
-            .flatMap { self.searchTextField.rx.text.orEmpty.distinctUntilChanged() }
+            .withLatestFrom(self.searchTextField.rx.text.orEmpty.distinctUntilChanged(),
+                            resultSelector: { return $1 })
             .flatMap { self.gifTask.perform(RandomRequest(tag: $0))}
             .map { $0.data }
             .bind(to: gifSubject)
