@@ -135,7 +135,6 @@ extension SearchViewController {
 extension SearchViewController {
     private func loadFirstTrendyGIFs() {
         guard !gifsTask.isLoading else { return }
-        
         gifsTask.perform(TrendRequest())
             .take(1)
             .do { [weak self] in self?.gifsTask.setIsLoadingFalse() }
