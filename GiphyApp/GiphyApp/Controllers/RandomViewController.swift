@@ -54,7 +54,7 @@ extension RandomViewController {
         }
         
         gifImageView.do {
-            $0.backgroundColor = .red
+            $0.image = Images.randomPlaceholder
         }
         
         randomButton.do {
