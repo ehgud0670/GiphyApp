@@ -12,8 +12,8 @@ import Alamofire
 import RxSwift
 
 final class GifsTask {
-    typealias Input = GiphyRequest
-    typealias Output = GiphyResponse
+    typealias Input = GifsRequest
+    typealias Output = GifsResponse
     
     private let session: Session
     private(set) var isLoading = false
@@ -26,7 +26,7 @@ final class GifsTask {
         isLoading = false
     }
     
-    func perform(_ request: Input) -> Observable<GiphyResponse> {
+    func perform(_ request: Input) -> Observable<GifsResponse> {
         isLoading = true
         return Observable.create { [weak self] emitter in
             guard let self = self,
