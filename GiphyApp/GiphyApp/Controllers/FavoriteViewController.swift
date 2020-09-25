@@ -32,10 +32,14 @@ final class FavoriteViewController: UIViewController {
 // MARK: - Attributes & Layout
 extension FavoriteViewController {
     private func configureAttributes() {
+        self.view.do {
+            $0.backgroundColor = .systemPink
+        }
+        
         gifCollectionView.do {
-            $0.backgroundColor = .systemBackground
+            $0.backgroundColor = .clear
             $0.register(GifCell.self, forCellWithReuseIdentifier: GifCell.reuseIdentifier)
-            
+            $0.dataSource = giphyViewModel
             $0.delegate = self
         }
     }
