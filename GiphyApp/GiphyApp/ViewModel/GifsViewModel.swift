@@ -19,14 +19,14 @@ final class GifsViewModel: NSObject {
     private var gifs = [GiphyData]()
     var pagination: Pagination?
     
-    func updateFirst(with response: GiphyResponse) {
+    func updateFirst(with response: GifsResponse) {
         gifs = response.data
         pagination = response.pagination
         
         NotificationCenter.default.post(name: Notification.updateFirst, object: self)
     }
     
-    func updateMore(with response: GiphyResponse) {
+    func updateMore(with response: GifsResponse) {
         gifs.append(contentsOf: response.data)
         pagination = response.pagination
         

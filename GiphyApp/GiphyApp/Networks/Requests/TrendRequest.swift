@@ -8,9 +8,9 @@
 
 import Foundation
 
-protocol GiphyRequest: Request { }
+protocol GifsRequest: Request { }
 
-struct TrendRequest: GiphyRequest {
+struct TrendRequest: GifsRequest {
     private var offset: String
     
     init(offset: Int = 0) {

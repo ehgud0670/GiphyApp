@@ -10,4 +10,5 @@ import UIKit
 
 enum Images {
     static let gifPlaceholder = UIImage(named: "placeholderPerson")
+    static let randomPlaceholder = UIImage(named: "random")
 }

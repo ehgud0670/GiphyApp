@@ -10,6 +10,9 @@ import UIKit
 
 import Then
 import SnapKit
+import RxSwift
+import RxCocoa
+import Kingfisher
 
 final class RandomViewController: UIViewController {
     // MARK: - UI
@@ -18,11 +21,28 @@ final class RandomViewController: UIViewController {
     private let shareButton = UIButton()
     private let gifImageView = UIImageView()
     
+    // MARK: - Properties
+    private let gifSubject = PublishSubject<GiphyData>()
+    private let gifTask = GifTask()
+    private let imageTask = ImageTask()
+    private var disposeBag = DisposeBag()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         configureAttributes()
         configureLayout()
+        configureBinding()
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        
+        ImageCache.default.clearMemoryCache()
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
     }
 }
 
@@ -38,7 +58,7 @@ extension RandomViewController {
         }
         
         gifImageView.do {
-            $0.backgroundColor = .red
+            $0.image = Images.randomPlaceholder
         }
         
         randomButton.do {
@@ -92,5 +112,39 @@ extension RandomViewController {
             $0.centerX.equalTo(self.view.snp.centerX)
             $0.bottom.equalTo(randomButton.snp.top).offset(-10)
         }
+    }
+}
+
+// MARK: - Binding
+extension RandomViewController {
+    private func configureBinding() {
+        randomButton.rx.tap
+            .withLatestFrom(
+                self.searchTextField.rx.text.orEmpty.distinctUntilChanged(),
+                resultSelector: { return $1 })
+            .flatMap { self.gifTask.perform(RandomRequest(tag: $0))}
+            .map { $0.data }
+            .bind(to: gifSubject)
+            .disposed(by: disposeBag)
+        
+        gifSubject
+            .compactMap { $0.images.downsized?.url }
+            .flatMap { self.imageTask.getImageWithRx(with: $0, with: self.gifImageView.bounds.size) }
+            .bind(to: gifImageView.rx.image )
+            .disposed(by: disposeBag)
+        
+        shareButton.rx.tap
+            .withLatestFrom(gifSubject)
+            .compactMap { $0.images.original?.url }
+            .subscribe(onNext: {
+                let activityViewController = UIActivityViewController(
+                    activityItems: [$0],
+                    applicationActivities: nil
+                ).then {
+                    $0.excludedActivityTypes = [ UIActivity.ActivityType.airDrop ]
+                }
+                self.present(activityViewController, animated: true, completion: nil)
+            })
+            .disposed(by: disposeBag)
     }
 }

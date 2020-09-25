@@ -1,18 +1,12 @@
 //
-//  GiphyResponse.swift
+//  GiphyData.swift
 //  GiphyApp
 //
-//  Created by kimdo2297 on 2020/09/23.
+//  Created by kimdo2297 on 2020/09/25.
 //  Copyright © 2020 jason. All rights reserved.
 //
 
 import Foundation
-
-struct GiphyResponse: Codable {
-    let data: [GiphyData]
-    let pagination: Pagination
-    let meta: Meta
-}
 
 struct GiphyData: Codable {
     let type: String
@@ -26,17 +20,17 @@ struct GiphyData: Codable {
     let title: String
     let rating: String
     let contentURL: String
-    let tags: [String]
-    let featuredTags: [String]
-    let userTags: [String]
+    var tags: [String]?
+    var featuredTags: [String]?
+    var userTags: [String]?
     let sourceTLD: String
     let sourcePostURL: String
     let isSticker: Int
     let importDatetime: String
     let trendingDatetime: String
     let images: GifImages
-    let analyticsResponsePayload: String
-    let analytics: Analytics
+    var analyticsResponsePayload: String?
+    var analytics: Analytics?
     var user: User?
     
     enum CodingKeys: String, CodingKey {
@@ -179,29 +173,5 @@ struct User: Codable {
         case username
         case displayName = "display_name"
         case isVerified = "is_verified"
-    }
-}
-
-struct Pagination: Codable {
-    let totalCount: Int
-    let count: Int
-    let offset: Int
-    
-    enum CodingKeys: String, CodingKey {
-        case totalCount = "total_count"
-        case count
-        case offset
-    }
-}
-
-struct Meta: Codable {
-    let status: Int
-    let msg: String
-    let responseID: String
-    
-    enum CodingKeys: String, CodingKey {
-        case status
-        case msg
-        case responseID = "response_id"
     }
 }
