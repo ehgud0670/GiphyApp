@@ -20,9 +20,16 @@ final class RandomViewController: UIViewController {
     private let randomButton = UIButton()
     private let shareButton = UIButton()
     private let gifImageView = UIImageView()
+    private lazy var alertController = UIAlertController(
+        title: "클릭! 버튼을 먼저 눌러주세요",
+        message: nil,
+        preferredStyle: .alert
+    ).then {
+        $0.addAction(UIAlertAction(title: "OK", style: .default))
+    }
     
     // MARK: - Properties
-    private let gifSubject = PublishSubject<GiphyData>()
+    private let gifSubject = BehaviorSubject<GiphyData?>(value: nil)
     private let gifTask = GifTask()
     private let imageTask = ImageTask()
     private var disposeBag = DisposeBag()
@@ -128,6 +135,7 @@ extension RandomViewController {
             .disposed(by: disposeBag)
         
         gifSubject
+            .compactMap { $0 }
             .compactMap { $0.images.downsized?.url }
             .flatMap { self.imageTask.getImageWithRx(with: $0, with: self.gifImageView.bounds.size) }
             .bind(to: gifImageView.rx.image )
@@ -135,6 +143,8 @@ extension RandomViewController {
         
         shareButton.rx.tap
             .withLatestFrom(gifSubject)
+            .do(onNext: { if $0 == nil { self.present(self.alertController, animated: true) } })
+            .compactMap { $0 }
             .compactMap { $0.images.original?.url }
             .subscribe(onNext: {
                 let activityViewController = UIActivityViewController(
