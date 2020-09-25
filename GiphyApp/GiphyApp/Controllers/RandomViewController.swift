@@ -10,6 +10,8 @@ import UIKit
 
 import Then
 import SnapKit
+import RxSwift
+import RxCocoa
 
 final class RandomViewController: UIViewController {
     // MARK: - UI
@@ -18,11 +20,18 @@ final class RandomViewController: UIViewController {
     private let shareButton = UIButton()
     private let gifImageView = UIImageView()
     
+    // MARK: - Properties
+    private let gifSubject = PublishSubject<GiphyData>()
+    private let gifTask = GifTask()
+    private let imageTask = ImageTask()
+    private var disposeBag = DisposeBag()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         configureAttributes()
         configureLayout()
+        configureBinding()
     }
 }
 
@@ -92,5 +101,23 @@ extension RandomViewController {
             $0.centerX.equalTo(self.view.snp.centerX)
             $0.bottom.equalTo(randomButton.snp.top).offset(-10)
         }
+    }
+}
+
+// MARK: - Binding
+extension RandomViewController {
+    private func configureBinding() {
+        randomButton.rx.tap
+            .flatMap { self.searchTextField.rx.text.orEmpty.distinctUntilChanged() }
+            .flatMap { self.gifTask.perform(RandomRequest(tag: $0))}
+            .map { $0.data }
+            .bind(to: gifSubject)
+            .disposed(by: disposeBag)
+        
+        gifSubject
+            .compactMap { $0.images.downsized?.url }
+            .flatMap { self.imageTask.getImageWithRx(with: $0, with: self.gifImageView.bounds.size) }
+            .bind(to: gifImageView.rx.image )
+            .disposed(by: disposeBag)
     }
 }

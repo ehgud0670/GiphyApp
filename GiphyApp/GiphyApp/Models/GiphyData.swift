@@ -20,17 +20,17 @@ struct GiphyData: Codable {
     let title: String
     let rating: String
     let contentURL: String
-    let tags: [String]
-    let featuredTags: [String]
-    let userTags: [String]
+    var tags: [String]?
+    var featuredTags: [String]?
+    var userTags: [String]?
     let sourceTLD: String
     let sourcePostURL: String
     let isSticker: Int
     let importDatetime: String
     let trendingDatetime: String
     let images: GifImages
-    let analyticsResponsePayload: String
-    let analytics: Analytics
+    var analyticsResponsePayload: String?
+    var analytics: Analytics?
     var user: User?
     
     enum CodingKeys: String, CodingKey {
