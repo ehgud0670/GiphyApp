@@ -88,7 +88,7 @@ extension DetailViewController {
         let textToShare = [imageURLString]
         let activityViewController = UIActivityViewController(activityItems: textToShare, applicationActivities: nil)
         activityViewController.excludedActivityTypes = [ UIActivity.ActivityType.airDrop ]
-    
+        
         self.present(activityViewController, animated: true, completion: nil)
     }
     

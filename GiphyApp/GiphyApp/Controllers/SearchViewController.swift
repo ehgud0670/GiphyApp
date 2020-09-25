@@ -13,6 +13,7 @@ import SnapKit
 import RxSwift
 import RxCocoa
 import Kingfisher
+import Alamofire
 
 final class SearchViewController: UIViewController {
     // MARK: - UI
@@ -135,11 +136,12 @@ extension SearchViewController {
 extension SearchViewController {
     private func loadFirstTrendyGIFs() {
         guard !gifsTask.isLoading else { return }
-        
         gifsTask.perform(TrendRequest())
             .take(1)
             .do { [weak self] in self?.gifsTask.setIsLoadingFalse() }
-            .bind(onNext: { [weak self] in self?.gifsViewModel.updateFirst(with: $0)})
+            .subscribe(
+                onNext: { [weak self] in self?.gifsViewModel.updateFirst(with: $0) },
+                onError: { if $0.isSessionError { Util.presentAlertWithNetworkError(to: self) } })
             .disposed(by: disposeBag)
     }
     
@@ -149,7 +151,9 @@ extension SearchViewController {
         gifsTask.perform(SearchRequest(query: query))
             .take(1)
             .do { [weak self] in self?.gifsTask.setIsLoadingFalse() }
-            .bind(onNext: { [weak self] in self?.gifsViewModel.updateFirst(with: $0)})
+            .subscribe(
+                onNext: { [weak self] in self?.gifsViewModel.updateFirst(with: $0) },
+                onError: { if $0.isSessionError { Util.presentAlertWithNetworkError(to: self) } })
             .disposed(by: disposeBag)
     }
     
@@ -161,7 +165,9 @@ extension SearchViewController {
         gifsTask.perform(TrendRequest(offset: nextOffset))
             .take(1)
             .do { [weak self] in self?.gifsTask.setIsLoadingFalse() }
-            .bind(onNext: { [weak self] in self?.gifsViewModel.updateMore(with: $0)})
+            .subscribe(
+                onNext: { [weak self] in self?.gifsViewModel.updateMore(with: $0) },
+                onError: { if $0.isSessionError { Util.presentAlertWithNetworkError(to: self) } })
             .disposed(by: disposeBag)
     }
     
@@ -169,11 +175,12 @@ extension SearchViewController {
         guard !gifsTask.isLoading else { return }
         guard let pagination = gifsViewModel.pagination else { return }
         let nextOffset = pagination.count + pagination.offset
-        
         gifsTask.perform(SearchRequest(query: query, offset: nextOffset))
             .take(1)
             .do { [weak self] in self?.gifsTask.setIsLoadingFalse() }
-            .bind(onNext: { [weak self] in self?.gifsViewModel.updateMore(with: $0)})
+            .subscribe(
+                onNext: { [weak self] in self?.gifsViewModel.updateMore(with: $0) },
+                onError: { if $0.isSessionError { Util.presentAlertWithNetworkError(to: self) } })
             .disposed(by: disposeBag)
     }
 }
