@@ -54,7 +54,7 @@ extension DetailViewController {
             $0.image = Images.gifPlaceholder
             guard let urlString = giphyData?.images.downsized?.url else { return }
             let max: CGFloat = 160
-            ImageTask().getImageWithRx(with: urlString, with: CGSize(width: max, height: max))
+            imageTask.getImageWithRx(with: urlString, with: CGSize(width: max, height: max))
                 .bind(to: $0.rx.image)
                 .disposed(by: disposeBag)
         }
