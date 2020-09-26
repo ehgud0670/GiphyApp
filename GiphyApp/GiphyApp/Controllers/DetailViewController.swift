@@ -53,7 +53,7 @@ extension DetailViewController {
         gifImageView.do {
             $0.contentMode = .scaleAspectFit
             $0.image = Images.gifPlaceholder
-            guard let urlString = giphy?.downsizedURLString else { return }
+            guard let urlString = giphy?.originalURLString else { return }
             let max: CGFloat = 160
             imageTask.getImageWithRx(with: urlString, with: CGSize(width: max, height: max))
                 .bind(to: $0.rx.image)
