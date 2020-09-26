@@ -87,7 +87,7 @@ extension DetailViewController {
             
             guard let giphy = giphy else { return }
             if giphy.isFavorite {
-                $0.toggle()
+                $0.isFavorited = true
             }
         }
     }
@@ -118,12 +118,12 @@ extension DetailViewController {
             guard let coreDataManager = coreDataManager, !coreDataManager.isLimited
                 else { Util.presetAlertWithCanNotFavorite(to: self); return }
             
-            favoriteButton.toggle()
+            favoriteButton.isFavorited = true
             coreDataManager.insertObject(giphy: strongGiphy)
             return
         }
         
-        favoriteButton.toggle()
+        favoriteButton.isFavorited = false
         guard let coreGiphy = coreDataGiphy else { return }
         coreDataManager?.removeObject(coreDataGiphy: coreGiphy)
     }
