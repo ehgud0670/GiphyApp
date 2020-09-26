@@ -76,9 +76,13 @@ final class CoreDataManager {
     func object(giphy: Giphy) -> CoreDataGiphy? {
         let entityName = String(describing: CoreDataGiphy.self)
         let request = NSFetchRequest<CoreDataGiphy>(entityName: entityName)
-        request.predicate = NSPredicate(format: "title == %@", giphy.title)
-        let giphys = try? context.fetch(request)
+        guard let originalURL = giphy.originalURLString else { return nil}
         
+        request.predicate = NSPredicate(
+            format: "originalURLString == %@",
+            originalURL
+        )
+        let giphys = try? context.fetch(request)
         return giphys?.first
     }
     
