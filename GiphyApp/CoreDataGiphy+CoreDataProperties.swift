@@ -15,6 +15,7 @@ extension CoreDataGiphy {
         return NSFetchRequest<CoreDataGiphy>(entityName: "CoreDataGiphy")
     }
 
+    @NSManaged public var favoriteDate: Date?
     @NSManaged public var downsizedURLString: String?
     @NSManaged public var isFavorite: Bool
     @NSManaged public var originalURLString: String?

@@ -26,7 +26,9 @@ final class DetailViewController: UIViewController {
     
     weak var delegate: DetailViewControllerDelegate?
     var giphy: Giphy?
+    var coreDataGiphy: CoreDataGiphy?
     var giphyIndex: Int?
+    var coreDataManager: CoreDataManager?
     private var disposeBag = DisposeBag()
     private let imageTask = ImageTask()
     
@@ -112,6 +114,15 @@ extension DetailViewController {
         
         guard let giphy = giphy else { return }
         self.giphy?.isFavorite = !giphy.isFavorite
+        
+        guard let strongGiphy = self.giphy else { return }
+        if strongGiphy.isFavorite {
+            coreDataManager?.insertObject(giphy: strongGiphy)
+            return
+        }
+        
+        guard let coreGiphy = coreDataGiphy else { return }
+        coreDataManager?.removeObject(coreDataGiphy: coreGiphy)
     }
     
     private func configureLayout() {

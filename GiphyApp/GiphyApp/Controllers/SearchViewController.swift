@@ -27,6 +27,7 @@ final class SearchViewController: UIViewController {
     private let gifsViewModel = GifsViewModel()
     private let gifsTask = GifsTask()
     private var disposeBag = DisposeBag()
+    var coreDataManager: CoreDataManager?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -212,6 +213,7 @@ extension SearchViewController: UICollectionViewDelegate {
             $0.giphyIndex = indexPath.item
             $0.modalPresentationStyle = .custom
             $0.transitioningDelegate = self
+            $0.coreDataManager = self.coreDataManager
         }
         
         self.present(detailViewController, animated: true)

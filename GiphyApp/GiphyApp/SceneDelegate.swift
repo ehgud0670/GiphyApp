@@ -16,7 +16,20 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         willConnectTo session: UISceneSession,
         options connectionOptions: UIScene.ConnectionOptions
     ) {
+        guard let context = (UIApplication.shared.delegate
+            as? AppDelegate)?.persistentContainer.viewContext else { return }
         
+        let coreDataManager = CoreDataManager(context: context)
+        
+        guard let window = window,
+        let tabController = window.rootViewController as? UITabBarController else { return }
+        
+        guard let searchViewController = tabController.viewControllers?[0] as? SearchViewController,
+            let favoriteViewController = tabController.viewControllers?[1] as? FavoriteViewController
+            else { return }
+        
+        searchViewController.coreDataManager = coreDataManager
+        favoriteViewController.coreDataManager = coreDataManager
     }
     
     func sceneDidDisconnect(_ scene: UIScene) {

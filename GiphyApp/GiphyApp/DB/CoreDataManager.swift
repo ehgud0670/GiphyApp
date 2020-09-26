@@ -10,6 +10,7 @@ import UIKit
 import CoreData
 
 final class CoreDataManager {
+    let countLimit = 20
     let context: NSManagedObjectContext
     
     init(context: NSManagedObjectContext) {
@@ -18,6 +19,7 @@ final class CoreDataManager {
     
     func insertObject(giphy: Giphy) {
         _ = CoreDataGiphy(context: context).then {
+            $0.favoriteDate = Date()
             $0.isFavorite = giphy.isFavorite
             $0.originalURLString = giphy.originalURLString
             $0.downsizedURLString = giphy.downsizedURLString

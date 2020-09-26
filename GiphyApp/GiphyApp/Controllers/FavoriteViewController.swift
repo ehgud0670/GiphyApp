@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 import Then
 import SnapKit
@@ -19,7 +20,8 @@ final class FavoriteViewController: UIViewController {
     )
     
     // MARK: - Properties
-    private let giphyViewModel = GifsViewModel()
+    private var _fetchedResultsController: NSFetchedResultsController<CoreDataGiphy>?
+    var coreDataManager: CoreDataManager?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,7 +41,7 @@ extension FavoriteViewController {
         gifCollectionView.do {
             $0.backgroundColor = .clear
             $0.register(GifCell.self, forCellWithReuseIdentifier: GifCell.reuseIdentifier)
-            $0.dataSource = giphyViewModel
+            $0.dataSource = self
             $0.delegate = self
         }
     }
@@ -52,6 +54,36 @@ extension FavoriteViewController {
             $0.top.equalTo(self.view.safeAreaLayoutGuide).inset(constant)
             $0.leading.trailing.bottom.equalTo(self.view).inset(constant)
         }
+    }
+}
+
+// MARK: - UICollectionView DataSource
+extension FavoriteViewController: UICollectionViewDataSource {
+    func collectionView(
+        _ collectionView: UICollectionView,
+        numberOfItemsInSection section: Int
+    ) -> Int {
+        guard let fetchedResultsController = fetchedResultsController,
+            let sectionInfo = fetchedResultsController.sections?[section]
+            else { return 0 }
+        
+        return sectionInfo.numberOfObjects
+    }
+    
+    func collectionView(
+        _ collectionView: UICollectionView,
+        cellForItemAt indexPath: IndexPath
+    ) -> UICollectionViewCell {
+        guard let giphyCell = collectionView.dequeueReusableCell(
+            withReuseIdentifier: GifCell.reuseIdentifier,
+            for: indexPath
+            ) as? GifCell else { return GifCell() }
+        
+        guard let giphy = fetchedResultsController?.object(at: indexPath).giphy
+            else { return giphyCell }
+        
+        giphyCell.onData.onNext(giphy)
+        return giphyCell
     }
 }
 
@@ -92,4 +124,51 @@ extension FavoriteViewController: UICollectionViewDelegateFlowLayout {
         let diameter = (collectionView.frame.width - 2 * constant) / 3
         return CGSize(width: diameter.rounded(.down), height: diameter)
     }
+}
+
+// MARK: - NSFetchedResultsController
+extension FavoriteViewController {
+    var fetchedResultsController: NSFetchedResultsController<CoreDataGiphy>? {
+        if _fetchedResultsController != nil {
+            return _fetchedResultsController!
+        }
+        
+        guard let context = coreDataManager?.context,
+            let fetchRequest = self.fetchRequest else { return nil }
+        
+        let aFetchedResultsController = NSFetchedResultsController(
+            fetchRequest: fetchRequest,
+            managedObjectContext: context,
+            sectionNameKeyPath: nil,
+            cacheName: "Giphy")
+        
+        aFetchedResultsController.delegate = self
+        _fetchedResultsController = aFetchedResultsController
+        
+        do {
+            try _fetchedResultsController!.performFetch()
+        } catch {
+            let nserror = error as NSError
+            print(nserror.localizedDescription)
+        }
+        
+        return _fetchedResultsController!
+    }
+    
+    private var fetchRequest: NSFetchRequest<CoreDataGiphy>? {
+        let fetchRequest: NSFetchRequest<CoreDataGiphy> = CoreDataGiphy.fetchRequest()
+        
+        if let coreDataManager = coreDataManager {
+            fetchRequest.fetchBatchSize = coreDataManager.countLimit
+        }
+        
+        let sortDescriptor = NSSortDescriptor(key: "favoriteDate", ascending: true)
+        fetchRequest.sortDescriptors = [sortDescriptor]
+        
+        return fetchRequest
+    }
+}
+
+extension FavoriteViewController: NSFetchedResultsControllerDelegate {
+    
 }
