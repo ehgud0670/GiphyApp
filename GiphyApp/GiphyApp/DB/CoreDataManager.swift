@@ -54,6 +54,15 @@ final class CoreDataManager {
         }
     }
     
+    func object(giphy: Giphy) -> CoreDataGiphy? {
+        let entityName = String(describing: CoreDataGiphy.self)
+        let request = NSFetchRequest<CoreDataGiphy>(entityName: entityName)
+        request.predicate = NSPredicate(format: "title == %@", giphy.title)
+        let giphys = try? context.fetch(request)
+        
+        return giphys?.first
+    }
+    
     var isLimited: Bool {
         return countAll() >= countLimit
     }
