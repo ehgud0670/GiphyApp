@@ -13,10 +13,6 @@ import SnapKit
 import Kingfisher
 import RxSwift
 
-protocol DetailViewControllerDelegate: class {
-    func upgrade(giphy: Giphy, at index: Int)
-}
-
 final class DetailViewController: UIViewController {
     private let gifImageView = UIImageView()
     private let nameLabel = UILabel()
@@ -24,10 +20,8 @@ final class DetailViewController: UIViewController {
     private let shareButton = UIButton()
     private let favoriteButton = FavoriteButton()
     
-    weak var delegate: DetailViewControllerDelegate?
     var giphy: Giphy?
     var coreDataGiphy: CoreDataGiphy?
-    var giphyIndex: Int?
     var coreDataManager: CoreDataManager?
     private var disposeBag = DisposeBag()
     private let imageTask = ImageTask()
@@ -93,9 +87,6 @@ extension DetailViewController {
     }
     
     @objc private func close() {
-        if let giphy = giphy, let giphyIndex = giphyIndex {
-            delegate?.upgrade(giphy: giphy, at: giphyIndex)
-        }
         self.dismiss(animated: true)
     }
     
