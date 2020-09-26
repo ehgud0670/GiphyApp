@@ -94,7 +94,6 @@ extension FavoriteViewController: UICollectionViewDelegate {
         
         let detailViewController = DetailViewController().then {
             $0.giphy = coreDatagiphy.giphy
-            $0.coreDataGiphy = coreDatagiphy
             $0.coreDataManager = self.coreDataManager
             $0.modalPresentationStyle = .custom
             $0.transitioningDelegate = self

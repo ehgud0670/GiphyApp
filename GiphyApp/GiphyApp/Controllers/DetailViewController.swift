@@ -21,7 +21,6 @@ final class DetailViewController: UIViewController {
     private let favoriteButton = FavoriteButton()
     
     var giphy: Giphy?
-    var coreDataGiphy: CoreDataGiphy?
     var coreDataManager: CoreDataManager?
     private var disposeBag = DisposeBag()
     private let imageTask = ImageTask()
@@ -79,10 +78,12 @@ extension DetailViewController {
         favoriteButton.do {
             $0.addTarget(self, action: #selector(favorite), for: .touchUpInside)
             
-            guard let giphy = giphy else { return }
-            if giphy.isFavorite {
-                $0.isFavorited = true
-            }
+            guard let giphy = giphy,
+                let coreDataGiphy = coreDataManager?.object(giphy: giphy),
+                coreDataGiphy.isFavorite else { return }
+            
+            $0.isFavorited = true
+            self.giphy?.isFavorite = true
         }
     }
     
@@ -115,7 +116,7 @@ extension DetailViewController {
         }
         
         favoriteButton.isFavorited = false
-        guard let coreGiphy = coreDataGiphy else { return }
+        guard let coreGiphy = coreDataManager?.object(giphy: strongGiphy) else { return }
         coreDataManager?.removeObject(coreDataGiphy: coreGiphy)
     }
     
