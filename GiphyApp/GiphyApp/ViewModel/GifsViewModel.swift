@@ -46,6 +46,12 @@ final class GifsViewModel: NSObject {
         )
     }
     
+    func upgrade(giphy: Giphy, at index: Int) {
+        guard index >= 0, index < gifs.count else { return }
+        
+        gifs[index] = giphy
+    }
+    
     func clear() {
         gifs = []
         pagination = nil

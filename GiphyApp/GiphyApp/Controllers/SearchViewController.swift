@@ -207,7 +207,9 @@ extension SearchViewController: UICollectionViewDelegate {
         guard let giphy = gifsViewModel.giphy(at: indexPath.item) else { return }
         
         let detailViewController = DetailViewController().then {
+            $0.delegate = self
             $0.giphy = giphy
+            $0.giphyIndex = indexPath.item
             $0.modalPresentationStyle = .custom
             $0.transitioningDelegate = self
         }
@@ -240,5 +242,11 @@ extension SearchViewController: UICollectionViewDelegateFlowLayout {
         let constant = (self.view.bounds.width - collectionView.frame.width) / 2
         let diameter = (collectionView.frame.width - 2 * constant) / 3
         return CGSize(width: diameter.rounded(.down), height: diameter)
+    }
+}
+
+extension SearchViewController: DetailViewControllerDelegate {
+    func upgrade(giphy: Giphy, at index: Int) {
+        gifsViewModel.upgrade(giphy: giphy, at: index)
     }
 }

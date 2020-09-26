@@ -13,6 +13,10 @@ import SnapKit
 import Kingfisher
 import RxSwift
 
+protocol DetailViewControllerDelegate: class {
+    func upgrade(giphy: Giphy, at index: Int)
+}
+
 final class DetailViewController: UIViewController {
     private let gifImageView = UIImageView()
     private let nameLabel = UILabel()
@@ -20,7 +24,9 @@ final class DetailViewController: UIViewController {
     private let shareButton = UIButton()
     private let favoriteButton = FavoriteButton()
     
+    weak var delegate: DetailViewControllerDelegate?
     var giphy: Giphy?
+    var giphyIndex: Int?
     private var disposeBag = DisposeBag()
     private let imageTask = ImageTask()
     
@@ -76,10 +82,18 @@ extension DetailViewController {
         
         favoriteButton.do {
             $0.addTarget(self, action: #selector(favorite), for: .touchUpInside)
+            
+            guard let giphy = giphy else { return }
+            if giphy.isFavorite {
+                $0.toggle()
+            }
         }
     }
     
     @objc private func close() {
+        if let giphy = giphy, let giphyIndex = giphyIndex {
+            delegate?.upgrade(giphy: giphy, at: giphyIndex)
+        }
         self.dismiss(animated: true)
     }
     
@@ -95,6 +109,9 @@ extension DetailViewController {
     
     @objc private func favorite() {
         favoriteButton.toggle()
+        
+        guard let giphy = giphy else { return }
+        self.giphy?.isFavorite = !giphy.isFavorite
     }
     
     private func configureLayout() {
