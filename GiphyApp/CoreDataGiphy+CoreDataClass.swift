@@ -1,5 +1,5 @@
 //
-//  Giphy+CoreDataClass.swift
+//  CoreDataGiphy+CoreDataClass.swift
 //  GiphyApp
 //
 //  Created by kimdo2297 on 2020/09/26.
@@ -10,7 +10,7 @@
 import Foundation
 import CoreData
 
-@objc(Giphy)
-public class Giphy: NSManagedObject {
+@objc(CoreDataGiphy)
+public class CoreDataGiphy: NSManagedObject {
 
 }

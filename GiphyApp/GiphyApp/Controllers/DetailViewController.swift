@@ -75,7 +75,7 @@ extension DetailViewController {
         }
         
         favoriteButton.do {
-            $0.addTarget(self, action: #selector(like), for: .touchUpInside)
+            $0.addTarget(self, action: #selector(favorite), for: .touchUpInside)
         }
     }
     
@@ -93,7 +93,7 @@ extension DetailViewController {
         self.present(activityViewController, animated: true, completion: nil)
     }
     
-    @objc private func like() {
+    @objc private func favorite() {
         favoriteButton.toggle()
     }
     

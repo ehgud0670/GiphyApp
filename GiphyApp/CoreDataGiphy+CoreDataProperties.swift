@@ -1,5 +1,5 @@
 //
-//  Giphy+CoreDataProperties.swift
+//  CoreDataGiphy+CoreDataProperties.swift
 //  GiphyApp
 //
 //  Created by kimdo2297 on 2020/09/26.
@@ -10,12 +10,13 @@
 import Foundation
 import CoreData
 
-extension Giphy {
-    @nonobjc public class func fetchRequest() -> NSFetchRequest<Giphy> {
-        return NSFetchRequest<Giphy>(entityName: "Giphy")
+extension CoreDataGiphy {
+    @nonobjc public class func fetchRequest() -> NSFetchRequest<CoreDataGiphy> {
+        return NSFetchRequest<CoreDataGiphy>(entityName: "CoreDataGiphy")
     }
 
     @NSManaged public var downsizedURLString: String?
+    @NSManaged public var isFavorite: Bool
     @NSManaged public var originalURLString: String?
     @NSManaged public var title: String?
 }
