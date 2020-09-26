@@ -14,12 +14,14 @@ import Kingfisher
 import RxSwift
 
 final class DetailViewController: UIViewController {
+    // MARK: - UI
     private let gifImageView = UIImageView()
     private let nameLabel = UILabel()
     private let closeButton = CloseButton()
     private let shareButton = UIButton()
     private let favoriteButton = FavoriteButton()
     
+    // MARK: - Properties
     var giphy: Giphy?
     var coreDataManager: CoreDataManager?
     private var disposeBag = DisposeBag()
@@ -37,8 +39,43 @@ final class DetailViewController: UIViewController {
         
         ImageCache.default.clearCache()
     }
+    
+    // MARK: @objc function
+    @objc private func close() {
+        self.dismiss(animated: true)
+    }
+    
+    @objc private func share() {
+        guard let imageURLString = giphy?.originalURLString else { return }
+        
+        let textToShare = [imageURLString]
+        let activityViewController = UIActivityViewController(activityItems: textToShare, applicationActivities: nil)
+        activityViewController.excludedActivityTypes = [ UIActivity.ActivityType.airDrop ]
+        
+        self.present(activityViewController, animated: true, completion: nil)
+    }
+    
+    @objc private func favorite() {
+        guard let giphy = giphy else { return }
+        self.giphy?.isFavorite = !giphy.isFavorite
+        
+        guard let strongGiphy = self.giphy else { return }
+        if strongGiphy.isFavorite {
+            guard let coreDataManager = coreDataManager, !coreDataManager.isLimited
+                else { Util.presetAlertWithCanNotFavorite(to: self); return }
+            
+            favoriteButton.isFavorited = true
+            coreDataManager.insertObject(giphy: strongGiphy)
+            return
+        }
+        
+        favoriteButton.isFavorited = false
+        guard let coreGiphy = coreDataManager?.object(giphy: strongGiphy) else { return }
+        coreDataManager?.removeObject(coreDataGiphy: coreGiphy)
+    }
 }
 
+// MARK: - Attributes & Layout
 extension DetailViewController {
     private func configureAttributes() {
         self.view.do {
@@ -85,39 +122,6 @@ extension DetailViewController {
             $0.isFavorited = true
             self.giphy?.isFavorite = true
         }
-    }
-    
-    @objc private func close() {
-        self.dismiss(animated: true)
-    }
-    
-    @objc private func share() {
-        guard let imageURLString = giphy?.originalURLString else { return }
-        
-        let textToShare = [imageURLString]
-        let activityViewController = UIActivityViewController(activityItems: textToShare, applicationActivities: nil)
-        activityViewController.excludedActivityTypes = [ UIActivity.ActivityType.airDrop ]
-        
-        self.present(activityViewController, animated: true, completion: nil)
-    }
-    
-    @objc private func favorite() {
-        guard let giphy = giphy else { return }
-        self.giphy?.isFavorite = !giphy.isFavorite
-        
-        guard let strongGiphy = self.giphy else { return }
-        if strongGiphy.isFavorite {
-            guard let coreDataManager = coreDataManager, !coreDataManager.isLimited
-                else { Util.presetAlertWithCanNotFavorite(to: self); return }
-            
-            favoriteButton.isFavorited = true
-            coreDataManager.insertObject(giphy: strongGiphy)
-            return
-        }
-        
-        favoriteButton.isFavorited = false
-        guard let coreGiphy = coreDataManager?.object(giphy: strongGiphy) else { return }
-        coreDataManager?.removeObject(coreDataGiphy: coreGiphy)
     }
     
     private func configureLayout() {
