@@ -175,5 +175,19 @@ extension FavoriteViewController {
 }
 
 extension FavoriteViewController: NSFetchedResultsControllerDelegate {
-    
+    func controller(
+        _ controller: NSFetchedResultsController<NSFetchRequestResult>,
+        didChange anObject: Any, at indexPath: IndexPath?,
+        for type: NSFetchedResultsChangeType,
+        newIndexPath: IndexPath?
+    ) {
+        switch type {
+        case .insert:
+            gifCollectionView.insertItems(at: [newIndexPath!])
+        case .delete:
+            gifCollectionView.deleteItems(at: [indexPath!])
+        default:
+            return
+        }
+    }
 }
