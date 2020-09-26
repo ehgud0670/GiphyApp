@@ -10,9 +10,34 @@ import UIKit
 import CoreData
 
 final class CoreDataManager {
-    static let shared = CoreDataManager()
-    var managedObjectContext: NSManagedObjectContext? =
-        (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext
+    let context: NSManagedObjectContext
     
-    func insertObject() { }
+    init(context: NSManagedObjectContext) {
+        self.context = context
+    }
+    
+    func insertObject(giphy: Giphy) {
+        _ = CoreDataGiphy(context: context).then {
+            $0.isFavorite = giphy.isFavorite
+            $0.originalURLString = giphy.originalURLString
+            $0.downsizedURLString = giphy.downsizedURLString
+            $0.title = giphy.title
+        }
+        
+        do {
+            try context.save()
+        } catch {
+            print(error.localizedDescription)
+        }
+    }
+    
+    func removeObject(coreDataGiphy: CoreDataGiphy) {
+        context.delete(coreDataGiphy)
+        
+        do {
+            try context.save()
+        } catch {
+            print(error.localizedDescription)
+        }
+    }
 }

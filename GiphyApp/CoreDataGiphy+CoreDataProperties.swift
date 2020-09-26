@@ -19,4 +19,15 @@ extension CoreDataGiphy {
     @NSManaged public var isFavorite: Bool
     @NSManaged public var originalURLString: String?
     @NSManaged public var title: String?
+    
+    var giphy: Giphy? {
+        guard let title = title else { return nil }
+        
+        return Giphy(
+            isFavorite: isFavorite,
+            originalURLString: originalURLString,
+            downsizedURLString: downsizedURLString,
+            title: title
+        )
+    }
 }
