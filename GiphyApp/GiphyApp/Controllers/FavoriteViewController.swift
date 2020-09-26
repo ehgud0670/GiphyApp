@@ -167,7 +167,7 @@ extension FavoriteViewController {
             fetchRequest.fetchBatchSize = coreDataManager.countLimit
         }
         
-        let sortDescriptor = NSSortDescriptor(key: "favoriteDate", ascending: true)
+        let sortDescriptor = NSSortDescriptor(key: "favoriteDate", ascending: false)
         fetchRequest.sortDescriptors = [sortDescriptor]
         
         return fetchRequest
