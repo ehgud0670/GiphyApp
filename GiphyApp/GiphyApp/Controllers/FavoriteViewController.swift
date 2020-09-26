@@ -18,6 +18,8 @@ final class FavoriteViewController: UIViewController {
         frame: .zero,
         collectionViewLayout: UICollectionViewFlowLayout()
     )
+    private let emptyTitleLabel = UILabel()
+    private let emptySubTitleLabel = UILabel()
     
     // MARK: - Properties
     private var _fetchedResultsController: NSFetchedResultsController<CoreDataGiphy>?
@@ -28,6 +30,24 @@ final class FavoriteViewController: UIViewController {
         
         configureAttributes()
         configureLayout()
+        configureObserver()
+    }
+    
+    private func configureObserver() {
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(updateEmptyViews(notification:)),
+            name: CoreDataManager.Notification.dataUpdate,
+            object: coreDataManager)
+    }
+    
+    @objc private func updateEmptyViews(notification: Notification) {
+        guard let isHidden = notification.userInfo?["isHidden"] as? Bool else { return }
+        
+        DispatchQueue.main.async {
+            self.emptyTitleLabel.isHidden = isHidden
+            self.emptySubTitleLabel.isHidden = isHidden
+        }
     }
 }
 
@@ -44,6 +64,26 @@ extension FavoriteViewController {
             $0.dataSource = self
             $0.delegate = self
         }
+        
+        emptyTitleLabel.do {
+            $0.text = "즐겨찾기 한 이미지가 없습니다."
+            $0.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
+            $0.textAlignment = .center
+            
+            if coreDataManager?.modelsAllCount != 0 {
+                $0.isHidden = true
+            }
+        }
+        
+        emptySubTitleLabel.do {
+            $0.text = "별 모양을 눌러 즐겨찾기 기능을 이용해 보세요."
+            $0.font = UIFont.systemFont(ofSize: 15, weight: .medium)
+            $0.textAlignment = .center
+            
+            if coreDataManager?.modelsAllCount != 0 {
+                $0.isHidden = true
+            }
+        }
     }
     
     private func configureLayout() {
@@ -53,6 +93,18 @@ extension FavoriteViewController {
             
             $0.top.equalTo(self.view.safeAreaLayoutGuide).inset(constant)
             $0.leading.trailing.bottom.equalTo(self.view).inset(constant)
+        }
+        
+        self.view.addSubview(emptyTitleLabel)
+        emptyTitleLabel.snp.makeConstraints {
+            $0.centerX.equalTo(self.view)
+            $0.centerY.equalTo(self.view).multipliedBy(0.8)
+        }
+        
+        self.view.addSubview(emptySubTitleLabel)
+        emptySubTitleLabel.snp.makeConstraints {
+            $0.centerX.equalTo(self.view)
+            $0.top.equalTo(emptyTitleLabel.snp.bottom).offset(15)
         }
     }
 }

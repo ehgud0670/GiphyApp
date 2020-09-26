@@ -11,6 +11,4 @@ import Foundation
 import CoreData
 
 @objc(CoreDataGiphy)
-public class CoreDataGiphy: NSManagedObject {
-
-}
+public class CoreDataGiphy: NSManagedObject { }

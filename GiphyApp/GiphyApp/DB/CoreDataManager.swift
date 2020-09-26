@@ -10,11 +10,26 @@ import UIKit
 import CoreData
 
 final class CoreDataManager {
+    enum Notification {
+        static let dataUpdate = Foundation.Notification.Name("coredata.upate")
+    }
+    
     let countLimit = 20
     let context: NSManagedObjectContext
+    var modelsAllCount = 0 {
+        didSet { notify() }
+    }
     
     init(context: NSManagedObjectContext) {
         self.context = context
+        modelsAllCount = countAll
+    }
+    
+    private func notify() {
+        NotificationCenter.default.post(
+            name: Notification.dataUpdate,
+            object: self,
+            userInfo: ["isHidden": modelsAllCount != 0])
     }
     
     func insertObject(giphy: Giphy) {
@@ -31,6 +46,8 @@ final class CoreDataManager {
         } catch {
             print(error.localizedDescription)
         }
+        
+        self.modelsAllCount = countAll
     }
     
     func removeObject(coreDataGiphy: CoreDataGiphy) {
@@ -41,9 +58,11 @@ final class CoreDataManager {
         } catch {
             print(error.localizedDescription)
         }
+        
+        self.modelsAllCount = countAll
     }
     
-    func countAll() -> Int {
+    private var countAll: Int {
         let entityName = String(describing: CoreDataGiphy.self)
         let request = NSFetchRequest<CoreDataGiphy>(entityName: entityName)
         do {
@@ -64,6 +83,6 @@ final class CoreDataManager {
     }
     
     var isLimited: Bool {
-        return countAll() >= countLimit
+        return countAll >= countLimit
     }
 }
