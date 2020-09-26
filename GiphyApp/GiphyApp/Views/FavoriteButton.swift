@@ -35,10 +35,6 @@ final class FavoriteButton: UIButton {
         configureAttributes()
     }
     
-    func toggle() {
-        isFavorited.toggle()
-    }
-    
     private func configureAttributes() {
         self.do {
             $0.imageView?.contentMode = .scaleAspectFit

@@ -18,8 +18,8 @@ final class GifCell: UICollectionViewCell, ReuseIdentifier {
         $0.image = Images.gifPlaceholder
     }
     private var disposeBag = DisposeBag()
-    private var data = PublishSubject<GiphyData>()
-    let onData: AnyObserver<GiphyData>
+    private var data = PublishSubject<Giphy>()
+    let onData: AnyObserver<Giphy>
     private let imageTask = ImageTask()
     
     override init(frame: CGRect) {
@@ -33,7 +33,7 @@ final class GifCell: UICollectionViewCell, ReuseIdentifier {
     }
     
     required init?(coder: NSCoder) {
-        let data = PublishSubject<GiphyData>()
+        let data = PublishSubject<Giphy>()
         self.onData = data.asObserver()
         
         super.init(coder: coder)
@@ -72,7 +72,7 @@ final class GifCell: UICollectionViewCell, ReuseIdentifier {
     }
     
     private func bindUI() {
-        data.compactMap { $0.images.downsized?.url }
+        data.compactMap { $0.downsizedURLString }
             .flatMap { self.imageTask.getImageWithRx(with: $0, with: self.bounds.size) }
             .bind(to: gifImageView.rx.image)
             .disposed(by: disposeBag)

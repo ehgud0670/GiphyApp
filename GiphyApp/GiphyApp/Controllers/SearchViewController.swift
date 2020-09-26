@@ -27,6 +27,7 @@ final class SearchViewController: UIViewController {
     private let gifsViewModel = GifsViewModel()
     private let gifsTask = GifsTask()
     private var disposeBag = DisposeBag()
+    var coreDataManager: CoreDataManager?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -204,10 +205,11 @@ extension SearchViewController {
 // MARK: - UICollectionView Delegate
 extension SearchViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let giphyData = gifsViewModel.giphyData(at: indexPath.item) else { return }
+        guard let giphy = gifsViewModel.giphy(at: indexPath.item) else { return }
         
         let detailViewController = DetailViewController().then {
-            $0.giphyData = giphyData
+            $0.giphy = giphy
+            $0.coreDataManager = self.coreDataManager
             $0.modalPresentationStyle = .custom
             $0.transitioningDelegate = self
         }

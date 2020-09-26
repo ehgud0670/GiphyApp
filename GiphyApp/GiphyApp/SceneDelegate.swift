@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SceneDelegate: UIResponder, UIWindowSceneDelegate {
+final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
 
     func scene(
@@ -16,7 +16,20 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         willConnectTo session: UISceneSession,
         options connectionOptions: UIScene.ConnectionOptions
     ) {
+        guard let context = (UIApplication.shared.delegate
+            as? AppDelegate)?.persistentContainer.viewContext else { return }
         
+        let coreDataManager = CoreDataManager(context: context)
+        
+        guard let window = window,
+        let tabController = window.rootViewController as? UITabBarController else { return }
+        
+        guard let searchViewController = tabController.viewControllers?[0] as? SearchViewController,
+            let favoriteViewController = tabController.viewControllers?[1] as? FavoriteViewController
+            else { return }
+        
+        searchViewController.coreDataManager = coreDataManager
+        favoriteViewController.coreDataManager = coreDataManager
     }
     
     func sceneDidDisconnect(_ scene: UIScene) {
@@ -46,5 +59,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Called as the scene transitions from the foreground to the background.
         // Use this method to save data, release shared resources, and store enough scene-specific state information
         // to restore the scene back to its current state.
+        
+        // Save changes in the application's managed object context when the application transitions to the background.
+        (UIApplication.shared.delegate as? AppDelegate)?.saveContext()
     }
 }

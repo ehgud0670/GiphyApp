@@ -20,7 +20,8 @@ final class DetailViewController: UIViewController {
     private let shareButton = UIButton()
     private let favoriteButton = FavoriteButton()
     
-    var giphyData: GiphyData?
+    var giphy: Giphy?
+    var coreDataManager: CoreDataManager?
     private var disposeBag = DisposeBag()
     private let imageTask = ImageTask()
     
@@ -52,7 +53,7 @@ extension DetailViewController {
         gifImageView.do {
             $0.contentMode = .scaleAspectFit
             $0.image = Images.gifPlaceholder
-            guard let urlString = giphyData?.images.downsized?.url else { return }
+            guard let urlString = giphy?.downsizedURLString else { return }
             let max: CGFloat = 160
             imageTask.getImageWithRx(with: urlString, with: CGSize(width: max, height: max))
                 .bind(to: $0.rx.image)
@@ -60,7 +61,8 @@ extension DetailViewController {
         }
         
         nameLabel.do {
-            guard let title = giphyData?.title.components(separatedBy: " GIF").first else { return }
+            $0.textAlignment = .center
+            guard let title = giphy?.title.components(separatedBy: " GIF").first else { return }
             $0.text = title
         }
         
@@ -74,7 +76,14 @@ extension DetailViewController {
         }
         
         favoriteButton.do {
-            $0.addTarget(self, action: #selector(like), for: .touchUpInside)
+            $0.addTarget(self, action: #selector(favorite), for: .touchUpInside)
+            
+            guard let giphy = giphy,
+                let coreDataGiphy = coreDataManager?.object(giphy: giphy),
+                coreDataGiphy.isFavorite else { return }
+            
+            $0.isFavorited = true
+            self.giphy?.isFavorite = true
         }
     }
     
@@ -83,7 +92,7 @@ extension DetailViewController {
     }
     
     @objc private func share() {
-        guard let imageURLString = giphyData?.images.original?.url else { return }
+        guard let imageURLString = giphy?.originalURLString else { return }
         
         let textToShare = [imageURLString]
         let activityViewController = UIActivityViewController(activityItems: textToShare, applicationActivities: nil)
@@ -92,8 +101,23 @@ extension DetailViewController {
         self.present(activityViewController, animated: true, completion: nil)
     }
     
-    @objc private func like() {
-        favoriteButton.toggle()
+    @objc private func favorite() {
+        guard let giphy = giphy else { return }
+        self.giphy?.isFavorite = !giphy.isFavorite
+        
+        guard let strongGiphy = self.giphy else { return }
+        if strongGiphy.isFavorite {
+            guard let coreDataManager = coreDataManager, !coreDataManager.isLimited
+                else { Util.presetAlertWithCanNotFavorite(to: self); return }
+            
+            favoriteButton.isFavorited = true
+            coreDataManager.insertObject(giphy: strongGiphy)
+            return
+        }
+        
+        favoriteButton.isFavorited = false
+        guard let coreGiphy = coreDataManager?.object(giphy: strongGiphy) else { return }
+        coreDataManager?.removeObject(coreDataGiphy: coreGiphy)
     }
     
     private func configureLayout() {
@@ -126,6 +150,7 @@ extension DetailViewController {
         self.view.addSubview(nameLabel)
         nameLabel.snp.makeConstraints {
             $0.top.equalTo(gifImageView.snp.bottom).offset(5)
+            $0.leading.trailing.equalTo(self.view).inset(10)
             $0.centerX.equalTo(gifImageView.snp.centerX)
         }
         
