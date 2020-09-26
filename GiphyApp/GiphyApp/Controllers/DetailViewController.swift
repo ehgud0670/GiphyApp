@@ -110,8 +110,6 @@ extension DetailViewController {
     }
     
     @objc private func favorite() {
-        favoriteButton.toggle()
-        
         guard let giphy = giphy else { return }
         self.giphy?.isFavorite = !giphy.isFavorite
         
@@ -120,10 +118,12 @@ extension DetailViewController {
             guard let coreDataManager = coreDataManager, !coreDataManager.isLimited
                 else { Util.presetAlertWithCanNotFavorite(to: self); return }
             
+            favoriteButton.toggle()
             coreDataManager.insertObject(giphy: strongGiphy)
             return
         }
         
+        favoriteButton.toggle()
         guard let coreGiphy = coreDataGiphy else { return }
         coreDataManager?.removeObject(coreDataGiphy: coreGiphy)
     }
