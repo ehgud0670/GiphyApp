@@ -9,7 +9,7 @@
 import Foundation
 
 struct Giphy {
-    var isFavorite: Bool
+    var isFavorite = false
     var originalURLString: String?
     var downsizedURLString: String?
     let title: String

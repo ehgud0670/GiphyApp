@@ -20,7 +20,7 @@ final class DetailViewController: UIViewController {
     private let shareButton = UIButton()
     private let favoriteButton = FavoriteButton()
     
-    var giphyData: GiphyData?
+    var giphy: Giphy?
     private var disposeBag = DisposeBag()
     private let imageTask = ImageTask()
     
@@ -52,7 +52,7 @@ extension DetailViewController {
         gifImageView.do {
             $0.contentMode = .scaleAspectFit
             $0.image = Images.gifPlaceholder
-            guard let urlString = giphyData?.images.downsized?.url else { return }
+            guard let urlString = giphy?.downsizedURLString else { return }
             let max: CGFloat = 160
             imageTask.getImageWithRx(with: urlString, with: CGSize(width: max, height: max))
                 .bind(to: $0.rx.image)
@@ -61,7 +61,7 @@ extension DetailViewController {
         
         nameLabel.do {
             $0.textAlignment = .center
-            guard let title = giphyData?.title.components(separatedBy: " GIF").first else { return }
+            guard let title = giphy?.title.components(separatedBy: " GIF").first else { return }
             $0.text = title
         }
         
@@ -84,7 +84,7 @@ extension DetailViewController {
     }
     
     @objc private func share() {
-        guard let imageURLString = giphyData?.images.original?.url else { return }
+        guard let imageURLString = giphy?.originalURLString else { return }
         
         let textToShare = [imageURLString]
         let activityViewController = UIActivityViewController(activityItems: textToShare, applicationActivities: nil)

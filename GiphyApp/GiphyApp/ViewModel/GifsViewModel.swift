@@ -16,21 +16,28 @@ final class GifsViewModel: NSObject {
         static let updateMore = Foundation.Notification.Name("GifsViewModeldDidUpdateMore")
     }
     
-    private var gifs = [GiphyData]()
+    private var gifs = [Giphy]()
     var pagination: Pagination?
     
     func updateFirst(with response: GifsResponse) {
-        gifs = response.data
+        let giphys = response.data.map { Giphy(originalURLString: $0.images.original?.url,
+                                             downsizedURLString: $0.images.downsized?.url,
+                                             title: $0.title) }
+        self.gifs = giphys
         pagination = response.pagination
         
         NotificationCenter.default.post(name: Notification.updateFirst, object: self)
     }
     
     func updateMore(with response: GifsResponse) {
-        gifs.append(contentsOf: response.data)
+        let giphys = response.data.map { Giphy(originalURLString: $0.images.original?.url,
+        downsizedURLString: $0.images.downsized?.url,
+        title: $0.title) }
+        
+        self.gifs.append(contentsOf: giphys)
         pagination = response.pagination
         
-        let startIndex = gifs.count - response.data.count
+        let startIndex = self.gifs.count - giphys.count
         let endIndex = startIndex + response.data.count
         NotificationCenter.default.post(
             name: Notification.updateMore,
@@ -44,7 +51,7 @@ final class GifsViewModel: NSObject {
         pagination = nil
     }
     
-    func giphyData(at index: Int) -> GiphyData? {
+    func giphy(at index: Int) -> Giphy? {
         guard index < gifs.count else { return nil }
         return gifs[index]
     }
@@ -65,8 +72,8 @@ extension GifsViewModel: UICollectionViewDataSource {
             ) as? GifCell else { return GifCell() }
         guard indexPath.item < gifs.count else { return giphyCell }
         
-        let giphyData = gifs[indexPath.item]
-        giphyCell.onData.onNext(giphyData)
+        let giphy = gifs[indexPath.item]
+        giphyCell.onData.onNext(giphy)
         
         return giphyCell
     }
