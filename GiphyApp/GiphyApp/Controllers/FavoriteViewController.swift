@@ -90,7 +90,12 @@ extension FavoriteViewController: UICollectionViewDataSource {
 // MARK: - UICollectionView Delegate
 extension FavoriteViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let coreDatagiphy = fetchedResultsController?.object(at: indexPath) else { return }
+        
         let detailViewController = DetailViewController().then {
+            $0.giphy = coreDatagiphy.giphy
+            $0.coreDataGiphy = coreDatagiphy
+            $0.coreDataManager = self.coreDataManager
             $0.modalPresentationStyle = .custom
             $0.transitioningDelegate = self
         }
@@ -99,7 +104,7 @@ extension FavoriteViewController: UICollectionViewDelegate {
     }
 }
 
-// MARK: - UIViewController Transitioning Delegate 
+// MARK: - UIViewController Transitioning Delegate
 extension FavoriteViewController: UIViewControllerTransitioningDelegate {
     func presentationController(
         forPresented presented: UIViewController,

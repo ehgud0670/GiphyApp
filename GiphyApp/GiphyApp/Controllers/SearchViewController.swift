@@ -211,9 +211,9 @@ extension SearchViewController: UICollectionViewDelegate {
             $0.delegate = self
             $0.giphy = giphy
             $0.giphyIndex = indexPath.item
+            $0.coreDataManager = self.coreDataManager
             $0.modalPresentationStyle = .custom
             $0.transitioningDelegate = self
-            $0.coreDataManager = self.coreDataManager
         }
         
         self.present(detailViewController, animated: true)
