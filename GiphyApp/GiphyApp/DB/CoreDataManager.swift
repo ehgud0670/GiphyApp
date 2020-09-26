@@ -42,4 +42,19 @@ final class CoreDataManager {
             print(error.localizedDescription)
         }
     }
+    
+    func countAll() -> Int {
+        let entityName = String(describing: CoreDataGiphy.self)
+        let request = NSFetchRequest<CoreDataGiphy>(entityName: entityName)
+        do {
+            return try context.count(for: request)
+        } catch {
+            print(error.localizedDescription)
+            return 0
+        }
+    }
+    
+    var isLimited: Bool {
+        return countAll() >= countLimit
+    }
 }

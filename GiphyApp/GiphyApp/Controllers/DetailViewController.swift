@@ -117,7 +117,10 @@ extension DetailViewController {
         
         guard let strongGiphy = self.giphy else { return }
         if strongGiphy.isFavorite {
-            coreDataManager?.insertObject(giphy: strongGiphy)
+            guard let coreDataManager = coreDataManager, !coreDataManager.isLimited
+                else { Util.presetAlertWithCanNotFavorite(to: self); return }
+            
+            coreDataManager.insertObject(giphy: strongGiphy)
             return
         }
         
