@@ -194,7 +194,7 @@ extension SearchViewController {
             .do { [weak self] in
                 self?.gifsViewModel.clear()
                 ImageCache.default.clearMemoryCache() }
-            .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .userInitiated))
+            .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .userInteractive))
             .subscribe(onNext: { [weak self] in
                 $0 == "" ? self?.loadFirstTrendyGIFs() : self?.loadFirstSearchGIFs(with: $0)
             })

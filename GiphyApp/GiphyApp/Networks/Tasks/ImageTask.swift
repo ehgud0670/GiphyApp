@@ -13,7 +13,7 @@ import RxSwift
 
 final class ImageTask {
     private let imageCache: ImageCache
-    private let dispatchQueue = DispatchQueue.global(qos: .userInteractive)
+    private let dispatchQueue = DispatchQueue.global(qos: .utility)
     
     init(imageCache: ImageCache = .default) {
         self.imageCache = imageCache
