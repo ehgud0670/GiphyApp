@@ -27,7 +27,7 @@ final class SearchViewController: UIViewController {
     private let gifsViewModel = GifsViewModel()
     private let gifsTask = GifsTask()
     private var disposeBag = DisposeBag()
-    var coreDataManager: CoreDataManager?
+    var coreDataManager: CoreDataGiphyManager?
     
     override func viewDidLoad() {
         super.viewDidLoad()

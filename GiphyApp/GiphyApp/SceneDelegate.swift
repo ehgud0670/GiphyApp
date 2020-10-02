@@ -19,7 +19,7 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let context = (UIApplication.shared.delegate
             as? AppDelegate)?.persistentContainer.viewContext else { return }
         
-        let coreDataManager = CoreDataManager(context: context)
+        let coreDataManager = CoreDataGiphyManager(context: context)
         
         guard let window = window,
         let tabController = window.rootViewController as? UITabBarController else { return }

@@ -22,7 +22,7 @@ final class FavoriteViewController: UIViewController {
     private let emptySubTitleLabel = UILabel()
     
     // MARK: - Properties
-    var coreDataManager: CoreDataManager?
+    var coreDataManager: CoreDataGiphyManager?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,7 +36,7 @@ final class FavoriteViewController: UIViewController {
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(updateEmptyViews(notification:)),
-            name: CoreDataManager.Notification.dataUpdate,
+            name: CoreDataGiphyManager.Notification.dataUpdate,
             object: coreDataManager)
     }
     

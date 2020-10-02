@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-final class CoreDataManager: NSObject {
+final class CoreDataGiphyManager: NSObject {
     enum Notification {
         static let dataUpdate = Foundation.Notification.Name("coredata.upate")
     }
@@ -96,7 +96,7 @@ final class CoreDataManager: NSObject {
 }
 
 // MARK: - NSFetchedResultsController
-extension CoreDataManager {
+extension CoreDataGiphyManager {
     var fetchedResultsController: NSFetchedResultsController<CoreDataGiphy>? {
         if _fetchedResultsController != nil {
             return _fetchedResultsController!
@@ -134,7 +134,7 @@ extension CoreDataManager {
 }
 
 // MARK: - UICollectionView DataSource
-extension CoreDataManager: UICollectionViewDataSource {
+extension CoreDataGiphyManager: UICollectionViewDataSource {
     func collectionView(
         _ collectionView: UICollectionView,
         numberOfItemsInSection section: Int
