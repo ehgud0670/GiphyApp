@@ -25,7 +25,7 @@ final class SearchViewController: UIViewController {
     
     // MARK: - Properties
     private let gifsViewModel = GifsViewModel()
-    private let gifsTask = GifsTask()
+    private let gifsUseCase = GifsUseCase(gifsTask: GifsTask())
     private var disposeBag = DisposeBag()
     var coreDataManager: CoreDataGiphyManager?
     
@@ -120,7 +120,23 @@ extension SearchViewController {
         }
         
         guard scrollView.isBouncingBottom else { return }
-        isSearching ? loadMoreSearchGIFs(with: searchTextField.text!) : loadMoreTrendyGIFs()
+        guard let pagination = gifsViewModel.pagination else { return }
+        
+        let nextOffset = pagination.count + pagination.offset
+        if isSearching {
+            gifsUseCase.loadMoreSearchGIFs(with: searchTextField.text!, nextOffset: nextOffset)?
+                .subscribe(
+                    onNext: { [weak self] in self?.gifsViewModel.updateMore(with: $0) },
+                    onError: { if $0.isSessionError { Util.presentAlertWithNetworkError(on: self) } })
+                .disposed(by: disposeBag)
+            return
+        }
+        
+        gifsUseCase.loadMoreTrendyGIFs(with: nextOffset)?
+            .subscribe(
+                onNext: { [weak self] in self?.gifsViewModel.updateMore(with: $0) },
+                onError: { if $0.isSessionError { Util.presentAlertWithNetworkError(on: self) } })
+            .disposed(by: disposeBag)
     }
     
     private var isSearching: Bool {
@@ -133,73 +149,39 @@ extension SearchViewController {
     }
 }
 
-// MARK: - Networks
-extension SearchViewController {
-    private func loadFirstTrendyGIFs() {
-        guard !gifsTask.isLoading else { return }
-        
-        gifsTask.perform(TrendRequest())
-            .take(1)
-            .do { [weak self] in self?.gifsTask.setIsLoadingFalse() }
-            .subscribe(
-                onNext: { [weak self] in self?.gifsViewModel.updateFirst(with: $0) },
-                onError: { if $0.isSessionError { Util.presentAlertWithNetworkError(on: self) } })
-            .disposed(by: disposeBag)
-    }
-    
-    private func loadFirstSearchGIFs(with query: String) {
-        guard !gifsTask.isLoading else { return }
-        
-        gifsTask.perform(SearchRequest(query: query))
-            .take(1)
-            .do { [weak self] in self?.gifsTask.setIsLoadingFalse() }
-            .subscribe(
-                onNext: { [weak self] in self?.gifsViewModel.updateFirst(with: $0) },
-                onError: { if $0.isSessionError { Util.presentAlertWithNetworkError(on: self) } })
-            .disposed(by: disposeBag)
-    }
-    
-    private func loadMoreTrendyGIFs() {
-        guard !gifsTask.isLoading else { return }
-        guard let pagination = gifsViewModel.pagination else { return }
-        
-        let nextOffset = pagination.count + pagination.offset
-        gifsTask.perform(TrendRequest(offset: nextOffset))
-            .take(1)
-            .do { [weak self] in self?.gifsTask.setIsLoadingFalse() }
-            .subscribe(
-                onNext: { [weak self] in self?.gifsViewModel.updateMore(with: $0) },
-                onError: { if $0.isSessionError { Util.presentAlertWithNetworkError(on: self) } })
-            .disposed(by: disposeBag)
-    }
-    
-    private func loadMoreSearchGIFs(with query: String) {
-        guard !gifsTask.isLoading else { return }
-        guard let pagination = gifsViewModel.pagination else { return }
-        
-        let nextOffset = pagination.count + pagination.offset
-        gifsTask.perform(SearchRequest(query: query, offset: nextOffset))
-            .take(1)
-            .do { [weak self] in self?.gifsTask.setIsLoadingFalse() }
-            .subscribe(
-                onNext: { [weak self] in self?.gifsViewModel.updateMore(with: $0) },
-                onError: { if $0.isSessionError { Util.presentAlertWithNetworkError(on: self) } })
-            .disposed(by: disposeBag)
-    }
-}
-
 // MARK: - Binding
 extension SearchViewController {
     private func configureBindings() {
+        // trendy
         searchTextField.rx.text.orEmpty
             .distinctUntilChanged()
+            .filter { $0 == "" }
             .do { [weak self] in
                 self?.gifsViewModel.clear()
                 ImageCache.default.clearMemoryCache() }
+            .map { [weak self] _ in self?.gifsUseCase.loadFirstTrendyGIFs() }
+            .compactMap { $0?.asObservable() }
+            .flatMap { $0 }
             .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .userInteractive))
-            .subscribe(onNext: { [weak self] in
-                $0 == "" ? self?.loadFirstTrendyGIFs() : self?.loadFirstSearchGIFs(with: $0)
-            })
+            .subscribe(
+                onNext: { [weak self] in self?.gifsViewModel.updateFirst(with: $0) },
+                onError: { if $0.isSessionError { Util.presentAlertWithNetworkError(on: self) } })
+            .disposed(by: disposeBag)
+        
+        // search
+        searchTextField.rx.text.orEmpty
+            .distinctUntilChanged()
+            .filter { $0 != "" }
+            .do { [weak self] in
+                self?.gifsViewModel.clear()
+                ImageCache.default.clearMemoryCache() }
+            .map { [weak self] in self?.gifsUseCase.loadFirstSearchGIFs(with: $0) }
+            .compactMap { $0?.asObservable() }
+            .flatMap { $0 }
+            .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .userInteractive))
+            .subscribe(
+                onNext: { [weak self] in self?.gifsViewModel.updateFirst(with: $0) },
+                onError: { if $0.isSessionError { Util.presentAlertWithNetworkError(on: self) } })
             .disposed(by: disposeBag)
     }
 }
