@@ -166,6 +166,31 @@ chore: (updating grunt tasks etc; no production code change)
 
 * 동적 이미지 만들기: 원래는 Kingfisher로 이미지를 가지고 와서 셀에 입혀줬지만 애니메이션이 적용되는 이미지가 있고, 적용안되는 이미지가 있는 문제가 있었습니다. 때문에 CG 객체들을 이용해 직접 동적 이미지를 만들어 셀에 적용해 이 문제를 해결하였습니다. ( 관련 pr: https://github.com/ehgud0670/Banksalad_iOS_KimDoeHyung/pull/21)  
 
+## 제출기간 이후 리드미 작성 
+
+### 문제점 보완한 점 
+
+> qos 의 성격에 맞지 않게 디스패치 큐를 사용한 점을 수정함 
+ 
+이전에 TextField 입력 관련 코드는 디스패치 큐로 qos가 userInitiated인걸 사용하고, Networking 성격의 코드에서는 디스패치 큐로 qos가 userInteractive 인 걸 사용했습니다. 순전히 우선순위에 맞게 더 빨리 작동시키기 위해 이렇게 코드를 작성했지만, 계속 생각해보니 전혀 성격에 맞게 사용하지 않은 코드라 TextField 입력 관련 코드는 qos를 userInteractive로, 
+Networking 관련 코드는 qos를 utility로 수정하였습니다. [관련 커밋][commit_1]
+
+> 스크롤하면 지나간 셀의 이미지 로드 및 이미지 처리 작업 중인던걸 취소하고, 다음 작업 진행되도록 수정함   
+
+그 전 코드는 이미지를 로드하는 작업을 취소하지 않아 스크롤을 많이 하면 지나쳤던 모든 셀의 이미지를 로드해야 했기 때문에 (기다리느라) **지금 당장의 셀에 이미지가 바로 반영되지 않는 문제점**과 모든 이미지를 로드해야 했기 때문에 과도한 메모리 사용으로 **앱이 크래시 나는 문제점**이 발생하였습니다. 따라서 지나간 셀의 이미지 로드는 **취소**시킴으로써 현재 보이는 셀의 이미지를 빨리 로드해 보이도록 하고, 메모리로 인한 크래시(비교적 훨씬 적게)도 없도록 하게 하였습니다. [관련 커밋][commit_2]
+
+* 이전 코드의 메모리 측정 
+
+<img width="305" alt="cancel_Before" src="https://user-images.githubusercontent.com/38216027/94915751-61859400-04e8-11eb-9ba8-d8ed0fc8c3f3.png">
+
+=> 그리곤 바로 앱이 크래시 되었습니다. 
+
+* 코드 수정 후의 메모리 측정
+
+<img width="306" alt="cancel_After" src="https://user-images.githubusercontent.com/38216027/94915820-85e17080-04e8-11eb-9aa3-e1f0dc6a0b7b.png">
+
 [random]: https://developers.giphy.com/docs/api/endpoint#random
 [link]: https://developers.giphy.com/docs/api/endpoint/#trending
 [memory]: https://sungdoo.dev/programming/imag-and-memory-footprint/ 
+[commit_1]: https://github.com/ehgud0670/Banksalad_iOS_KimDoeHyung/commit/7e290a0796c172bb2c1ae5e7d64b166c6ce75326
+[commit_2]: https://github.com/ehgud0670/Banksalad_iOS_KimDoeHyung/commit/3e5dc2f9161504d4e848b905671a8e83c60b483b 
