@@ -176,8 +176,10 @@ extension FavoriteViewController: UICollectionViewDelegateFlowLayout {
         layout collectionViewLayout: UICollectionViewLayout,
         sizeForItemAt indexPath: IndexPath
     ) -> CGSize {
+        
         let constant = (self.view.bounds.width - collectionView.frame.width) / 2
         let diameter = (collectionView.frame.width - 2 * constant) / 3
+        
         return CGSize(width: diameter.rounded(.down), height: diameter)
     }
 }

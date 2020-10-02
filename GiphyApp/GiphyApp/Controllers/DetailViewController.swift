@@ -138,6 +138,7 @@ extension DetailViewController {
             $0.centerY.equalTo(self.view).dividedBy(1.27)
             
             guard let size = gifImageView.image?.size else { return }
+            
             let max: CGFloat = 160
             if size.height > size.width {
                 $0.height.equalTo(max)

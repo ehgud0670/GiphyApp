@@ -137,6 +137,7 @@ extension SearchViewController {
 extension SearchViewController {
     private func loadFirstTrendyGIFs() {
         guard !gifsTask.isLoading else { return }
+        
         gifsTask.perform(TrendRequest())
             .take(1)
             .do { [weak self] in self?.gifsTask.setIsLoadingFalse() }
@@ -161,8 +162,8 @@ extension SearchViewController {
     private func loadMoreTrendyGIFs() {
         guard !gifsTask.isLoading else { return }
         guard let pagination = gifsViewModel.pagination else { return }
-        let nextOffset = pagination.count + pagination.offset
         
+        let nextOffset = pagination.count + pagination.offset
         gifsTask.perform(TrendRequest(offset: nextOffset))
             .take(1)
             .do { [weak self] in self?.gifsTask.setIsLoadingFalse() }
@@ -175,6 +176,7 @@ extension SearchViewController {
     private func loadMoreSearchGIFs(with query: String) {
         guard !gifsTask.isLoading else { return }
         guard let pagination = gifsViewModel.pagination else { return }
+        
         let nextOffset = pagination.count + pagination.offset
         gifsTask.perform(SearchRequest(query: query, offset: nextOffset))
             .take(1)
@@ -239,8 +241,10 @@ extension SearchViewController: UICollectionViewDelegateFlowLayout {
         layout collectionViewLayout: UICollectionViewLayout,
         sizeForItemAt indexPath: IndexPath
     ) -> CGSize {
+        
         let constant = (self.view.bounds.width - collectionView.frame.width) / 2
         let diameter = (collectionView.frame.width - 2 * constant) / 3
+        
         return CGSize(width: diameter.rounded(.down), height: diameter)
     }
 }
