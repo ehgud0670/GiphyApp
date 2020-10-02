@@ -13,45 +13,51 @@ import RxSwift
 
 final class ImageTask {
     private let imageCache: ImageCache
-    private let dispatchQueue = DispatchQueue.global(qos: .utility)
+    private let urlSession: URLSession
     
-    init(imageCache: ImageCache = .default) {
+    init(imageCache: ImageCache = .default, urlSession: URLSession = .shared) {
         self.imageCache = imageCache
+        self.urlSession = urlSession
     }
     
     func getImageWithRx(with urlString: String, with size: CGSize) -> Observable<UIImage> {
         return Observable.create { [weak self] emitter in
-            self?.dispatchQueue.async {
-                let image = self?.imageCache.retrieveImageInMemoryCache(forKey: urlString)
-                
-                if let image = image {
-                    emitter.onNext(image)
-                    return
-                }
-                
-                guard let url = URL(string: urlString) else { return }
-                self?.load(with: url) { imageResource in
-                    guard let cgImages = self?.downsizedImages(with: imageResource, for: size, scale: 3),
-                    let animatedImage = UIImage.animatedImage(with: cgImages) else { return }
-                    
-                    self?.imageCache.store(animatedImage, forKey: urlString)
-                    emitter.onNext(animatedImage)
-                    emitter.onCompleted()
-                    
-                    return
-                }
+            let image = self?.imageCache.retrieveImageInMemoryCache(forKey: urlString)
+            
+            if let image = image {
+                emitter.onNext(image)
+                return Disposables.create()
             }
-            return Disposables.create()
+            
+            guard let url = URL(string: urlString) else { return Disposables.create() }
+            let task = self?.urlSession.dataTask(with: url) { data, _, _ in
+                guard let imageData = data,
+                    let imageSource = self?.imageSource(with: imageData) else { return }
+                
+                guard let cgImages = self?.downsizedImages(
+                    with: imageSource, for: size, scale: 3),
+                    let animatedImage = UIImage.animatedImage(with: cgImages) else { return }
+                
+                self?.imageCache.store(animatedImage, forKey: urlString)
+                emitter.onNext(animatedImage)
+                emitter.onCompleted()
+            }
+            
+            task?.resume()
+            return Disposables.create {
+                task?.cancel()
+            }
         }
     }
     
-    private func load(with imageURL: URL, completionHandler: @escaping (CGImageSource) -> Void) {
-        guard let imageData = try? Data(contentsOf: imageURL)  else { return }
+    private func imageSource(with imageData: Data) -> CGImageSource? {
         let imageSourceOptions = [kCGImageSourceShouldCache: false] as CFDictionary
         
-        guard let imageSource = CGImageSourceCreateWithData(imageData as CFData, imageSourceOptions) else { return }
+        guard let imageSource = CGImageSourceCreateWithData(
+            imageData as CFData,
+            imageSourceOptions) else { return nil }
         
-        completionHandler(imageSource)
+        return imageSource
     }
     
     private func downsizedImages(
