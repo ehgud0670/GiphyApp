@@ -19,6 +19,7 @@ final class CoreDataManager {
     var modelsAllCount = 0 {
         didSet { notify() }
     }
+    private var _fetchedResultsController: NSFetchedResultsController<CoreDataGiphy>?
     
     init(context: NSManagedObjectContext) {
         self.context = context
@@ -88,5 +89,43 @@ final class CoreDataManager {
     
     var isLimited: Bool {
         return countAll >= countLimit
+    }
+}
+
+// MARK: - NSFetchedResultsController
+extension CoreDataManager {
+    var fetchedResultsController: NSFetchedResultsController<CoreDataGiphy>? {
+        if _fetchedResultsController != nil {
+            return _fetchedResultsController!
+        }
+        
+        guard let fetchRequest = self.fetchRequest else { return nil }
+        
+        let aFetchedResultsController = NSFetchedResultsController(
+            fetchRequest: fetchRequest,
+            managedObjectContext: context,
+            sectionNameKeyPath: nil,
+            cacheName: nil)
+        
+        _fetchedResultsController = aFetchedResultsController
+        
+        do {
+            try _fetchedResultsController!.performFetch()
+        } catch {
+            let nserror = error as NSError
+            print(nserror.localizedDescription)
+        }
+        
+        return _fetchedResultsController!
+    }
+    
+    private var fetchRequest: NSFetchRequest<CoreDataGiphy>? {
+        let fetchRequest: NSFetchRequest<CoreDataGiphy> = CoreDataGiphy.fetchRequest()
+        fetchRequest.fetchBatchSize = countLimit
+        
+        let sortDescriptor = NSSortDescriptor(key: "favoriteDate", ascending: false)
+        fetchRequest.sortDescriptors = [sortDescriptor]
+        
+        return fetchRequest
     }
 }

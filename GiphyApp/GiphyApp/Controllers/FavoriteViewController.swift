@@ -22,7 +22,6 @@ final class FavoriteViewController: UIViewController {
     private let emptySubTitleLabel = UILabel()
     
     // MARK: - Properties
-    private var _fetchedResultsController: NSFetchedResultsController<CoreDataGiphy>?
     var coreDataManager: CoreDataManager?
     
     override func viewDidLoad() {
@@ -57,6 +56,8 @@ extension FavoriteViewController {
         self.view.do {
             $0.backgroundColor = .systemPink
         }
+        
+        coreDataManager?.fetchedResultsController?.delegate = self
         
         gifCollectionView.do {
             $0.backgroundColor = .clear
@@ -115,7 +116,8 @@ extension FavoriteViewController: UICollectionViewDataSource {
         _ collectionView: UICollectionView,
         numberOfItemsInSection section: Int
     ) -> Int {
-        guard let fetchedResultsController = fetchedResultsController,
+        guard let fetchedResultsController =
+            coreDataManager?.fetchedResultsController,
             let sectionInfo = fetchedResultsController.sections?[section]
             else { return 0 }
         
@@ -131,7 +133,9 @@ extension FavoriteViewController: UICollectionViewDataSource {
             for: indexPath
             ) as? GifCell else { return GifCell() }
         
-        guard let giphy = fetchedResultsController?.object(at: indexPath).giphy
+        guard let giphy = coreDataManager?
+            .fetchedResultsController?
+            .object(at: indexPath).giphy
             else { return giphyCell }
         
         giphyCell.onData.onNext(giphy)
@@ -142,7 +146,9 @@ extension FavoriteViewController: UICollectionViewDataSource {
 // MARK: - UICollectionView Delegate
 extension FavoriteViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let coreDatagiphy = fetchedResultsController?.object(at: indexPath) else { return }
+        guard let coreDatagiphy = coreDataManager?
+            .fetchedResultsController?
+            .object(at: indexPath) else { return }
         
         let detailViewController = DetailViewController().then {
             $0.giphy = coreDatagiphy.giphy
@@ -182,49 +188,6 @@ extension FavoriteViewController: UICollectionViewDelegateFlowLayout {
         let diameter = (collectionView.frame.width - 2 * constant) / 3
         
         return CGSize(width: diameter.rounded(.down), height: diameter)
-    }
-}
-
-// MARK: - NSFetchedResultsController
-extension FavoriteViewController {
-    var fetchedResultsController: NSFetchedResultsController<CoreDataGiphy>? {
-        if _fetchedResultsController != nil {
-            return _fetchedResultsController!
-        }
-        
-        guard let context = coreDataManager?.context,
-            let fetchRequest = self.fetchRequest else { return nil }
-        
-        let aFetchedResultsController = NSFetchedResultsController(
-            fetchRequest: fetchRequest,
-            managedObjectContext: context,
-            sectionNameKeyPath: nil,
-            cacheName: "Giphy")
-        
-        aFetchedResultsController.delegate = self
-        _fetchedResultsController = aFetchedResultsController
-        
-        do {
-            try _fetchedResultsController!.performFetch()
-        } catch {
-            let nserror = error as NSError
-            print(nserror.localizedDescription)
-        }
-        
-        return _fetchedResultsController!
-    }
-    
-    private var fetchRequest: NSFetchRequest<CoreDataGiphy>? {
-        let fetchRequest: NSFetchRequest<CoreDataGiphy> = CoreDataGiphy.fetchRequest()
-        
-        if let coreDataManager = coreDataManager {
-            fetchRequest.fetchBatchSize = coreDataManager.countLimit
-        }
-        
-        let sortDescriptor = NSSortDescriptor(key: "favoriteDate", ascending: false)
-        fetchRequest.sortDescriptors = [sortDescriptor]
-        
-        return fetchRequest
     }
 }
 
