@@ -36,6 +36,8 @@ final class ImageTask {
                     
                     self?.imageCache.store(animatedImage, forKey: urlString)
                     emitter.onNext(animatedImage)
+                    emitter.onCompleted()
+                    
                     return
                 }
             }

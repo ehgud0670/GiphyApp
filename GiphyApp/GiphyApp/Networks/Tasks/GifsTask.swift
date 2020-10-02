@@ -41,7 +41,9 @@ final class GifsTask {
                     }
                     
                     guard let giphyResponse = response.value else { return }
+                    
                     emitter.onNext(giphyResponse)
+                    emitter.onCompleted()
             }
             return Disposables.create()
         }
