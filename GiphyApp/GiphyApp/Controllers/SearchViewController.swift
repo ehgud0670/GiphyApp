@@ -143,7 +143,7 @@ extension SearchViewController {
             .do { [weak self] in self?.gifsTask.setIsLoadingFalse() }
             .subscribe(
                 onNext: { [weak self] in self?.gifsViewModel.updateFirst(with: $0) },
-                onError: { if $0.isSessionError { Util.presentAlertWithNetworkError(to: self) } })
+                onError: { if $0.isSessionError { Util.presentAlertWithNetworkError(on: self) } })
             .disposed(by: disposeBag)
     }
     
@@ -155,7 +155,7 @@ extension SearchViewController {
             .do { [weak self] in self?.gifsTask.setIsLoadingFalse() }
             .subscribe(
                 onNext: { [weak self] in self?.gifsViewModel.updateFirst(with: $0) },
-                onError: { if $0.isSessionError { Util.presentAlertWithNetworkError(to: self) } })
+                onError: { if $0.isSessionError { Util.presentAlertWithNetworkError(on: self) } })
             .disposed(by: disposeBag)
     }
     
@@ -169,7 +169,7 @@ extension SearchViewController {
             .do { [weak self] in self?.gifsTask.setIsLoadingFalse() }
             .subscribe(
                 onNext: { [weak self] in self?.gifsViewModel.updateMore(with: $0) },
-                onError: { if $0.isSessionError { Util.presentAlertWithNetworkError(to: self) } })
+                onError: { if $0.isSessionError { Util.presentAlertWithNetworkError(on: self) } })
             .disposed(by: disposeBag)
     }
     
@@ -183,7 +183,7 @@ extension SearchViewController {
             .do { [weak self] in self?.gifsTask.setIsLoadingFalse() }
             .subscribe(
                 onNext: { [weak self] in self?.gifsViewModel.updateMore(with: $0) },
-                onError: { if $0.isSessionError { Util.presentAlertWithNetworkError(to: self) } })
+                onError: { if $0.isSessionError { Util.presentAlertWithNetworkError(on: self) } })
             .disposed(by: disposeBag)
     }
 }

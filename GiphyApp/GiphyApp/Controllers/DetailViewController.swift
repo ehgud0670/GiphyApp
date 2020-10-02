@@ -62,7 +62,7 @@ final class DetailViewController: UIViewController {
         guard let strongGiphy = self.giphy else { return }
         if strongGiphy.isFavorite {
             guard let coreDataManager = coreDataManager, !coreDataManager.isLimited
-                else { Util.presetAlertWithCanNotFavorite(to: self); return }
+                else { Util.presetAlertWithCanNotFavorite(on: self); return }
             
             favoriteButton.isFavorited = true
             coreDataManager.insertObject(giphy: strongGiphy)
