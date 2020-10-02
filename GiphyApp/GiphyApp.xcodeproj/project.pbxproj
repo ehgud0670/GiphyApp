@@ -203,8 +203,6 @@
 		5A02C4AC2519C577009AEC55 = {
 			isa = PBXGroup;
 			children = (
-				5AF759FD251EC83000356F4E /* CoreDataGiphy+CoreDataClass.swift */,
-				5AF759FE251EC83000356F4E /* CoreDataGiphy+CoreDataProperties.swift */,
 				5AA719182519CD5C00BC5962 /* .swiftlint.yml */,
 				5A02C4B72519C577009AEC55 /* GiphyApp */,
 				5A02C4CE2519C57B009AEC55 /* GiphyAppTests */,
@@ -228,7 +226,7 @@
 		5A02C4B72519C577009AEC55 /* GiphyApp */ = {
 			isa = PBXGroup;
 			children = (
-				5AF759FC251EC81E00356F4E /* DB */,
+				5AF759FC251EC81E00356F4E /* CoreData */,
 				5A44884D251B02030005CF22 /* Networks */,
 				5A448849251AFFEA0005CF22 /* Models */,
 				5AA7192B2519DD4F00BC5962 /* Utils */,
@@ -387,13 +385,15 @@
 			path = Utils;
 			sourceTree = "<group>";
 		};
-		5AF759FC251EC81E00356F4E /* DB */ = {
+		5AF759FC251EC81E00356F4E /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
+				5AF759FD251EC83000356F4E /* CoreDataGiphy+CoreDataClass.swift */,
+				5AF759FE251EC83000356F4E /* CoreDataGiphy+CoreDataProperties.swift */,
 				5A35623F251E7928004BD7BE /* Giphy.xcdatamodeld */,
 				5AF32BCE251ED58800B8DDC3 /* CoreDataManager.swift */,
 			);
-			path = DB;
+			path = CoreData;
 			sourceTree = "<group>";
 		};
 		8BE7104E6645D496DB06B444 /* Pods */ = {
