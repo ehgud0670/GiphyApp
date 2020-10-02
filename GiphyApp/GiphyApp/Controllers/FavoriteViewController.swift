@@ -62,7 +62,7 @@ extension FavoriteViewController {
         gifCollectionView.do {
             $0.backgroundColor = .clear
             $0.register(GifCell.self, forCellWithReuseIdentifier: GifCell.reuseIdentifier)
-            $0.dataSource = self
+            $0.dataSource = coreDataManager
             $0.delegate = self
         }
         
@@ -107,39 +107,6 @@ extension FavoriteViewController {
             $0.centerX.equalTo(self.view)
             $0.top.equalTo(emptyTitleLabel.snp.bottom).offset(15)
         }
-    }
-}
-
-// MARK: - UICollectionView DataSource
-extension FavoriteViewController: UICollectionViewDataSource {
-    func collectionView(
-        _ collectionView: UICollectionView,
-        numberOfItemsInSection section: Int
-    ) -> Int {
-        guard let fetchedResultsController =
-            coreDataManager?.fetchedResultsController,
-            let sectionInfo = fetchedResultsController.sections?[section]
-            else { return 0 }
-        
-        return sectionInfo.numberOfObjects
-    }
-    
-    func collectionView(
-        _ collectionView: UICollectionView,
-        cellForItemAt indexPath: IndexPath
-    ) -> UICollectionViewCell {
-        guard let giphyCell = collectionView.dequeueReusableCell(
-            withReuseIdentifier: GifCell.reuseIdentifier,
-            for: indexPath
-            ) as? GifCell else { return GifCell() }
-        
-        guard let giphy = coreDataManager?
-            .fetchedResultsController?
-            .object(at: indexPath).giphy
-            else { return giphyCell }
-        
-        giphyCell.onData.onNext(giphy)
-        return giphyCell
     }
 }
 

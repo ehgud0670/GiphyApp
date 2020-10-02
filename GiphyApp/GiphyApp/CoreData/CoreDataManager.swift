@@ -9,20 +9,23 @@
 import UIKit
 import CoreData
 
-final class CoreDataManager {
+final class CoreDataManager: NSObject {
     enum Notification {
         static let dataUpdate = Foundation.Notification.Name("coredata.upate")
     }
     
-    let countLimit = 20
-    let context: NSManagedObjectContext
-    var modelsAllCount = 0 {
+    private let countLimit = 20
+    private let context: NSManagedObjectContext
+    private(set) var modelsAllCount = 0 {
         didSet { notify() }
     }
+    
     private var _fetchedResultsController: NSFetchedResultsController<CoreDataGiphy>?
     
     init(context: NSManagedObjectContext) {
         self.context = context
+        super.init()
+        
         modelsAllCount = countAll
     }
     
@@ -127,5 +130,36 @@ extension CoreDataManager {
         fetchRequest.sortDescriptors = [sortDescriptor]
         
         return fetchRequest
+    }
+}
+
+// MARK: - UICollectionView DataSource
+extension CoreDataManager: UICollectionViewDataSource {
+    func collectionView(
+        _ collectionView: UICollectionView,
+        numberOfItemsInSection section: Int
+    ) -> Int {
+        guard let fetchedResultsController = fetchedResultsController,
+            let sectionInfo = fetchedResultsController.sections?[section]
+            else { return 0 }
+        
+        return sectionInfo.numberOfObjects
+    }
+    
+    func collectionView(
+        _ collectionView: UICollectionView,
+        cellForItemAt indexPath: IndexPath
+    ) -> UICollectionViewCell {
+        guard let giphyCell = collectionView.dequeueReusableCell(
+            withReuseIdentifier: GifCell.reuseIdentifier,
+            for: indexPath
+            ) as? GifCell else { return GifCell() }
+        
+        guard let giphy = fetchedResultsController?
+            .object(at: indexPath).giphy
+            else { return giphyCell }
+        
+        giphyCell.onData.onNext(giphy)
+        return giphyCell
     }
 }
