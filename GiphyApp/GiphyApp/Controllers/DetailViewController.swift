@@ -25,7 +25,7 @@ final class DetailViewController: UIViewController {
     var giphy: Giphy?
     var coreDataManager: CoreDataGiphyManager?
     private var disposeBag = DisposeBag()
-    private let imageTask = ImageTask()
+    private let imageUseCase = ImageUseCase()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -92,7 +92,7 @@ extension DetailViewController {
             $0.image = Images.gifPlaceholder
             guard let urlString = giphy?.originalURLString else { return }
             let max: CGFloat = 160
-            imageTask.getImageWithRx(with: urlString, with: CGSize(width: max, height: max))
+            imageUseCase.getImageWithRx(with: urlString, with: CGSize(width: max, height: max))
                 .bind(to: $0.rx.image)
                 .disposed(by: disposeBag)
         }

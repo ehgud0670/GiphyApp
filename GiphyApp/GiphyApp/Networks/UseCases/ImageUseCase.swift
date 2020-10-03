@@ -11,8 +11,8 @@ import UIKit
 import Kingfisher
 import RxSwift
 
-final class ImageTask {
-    static let shared = ImageTask()
+final class ImageUseCase {
+    static let shared = ImageUseCase()
     
     private let imageCache: ImageCache
     private let urlSession: URLSession

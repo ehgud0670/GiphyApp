@@ -47,7 +47,7 @@
 		5A66F7882527176200ABD35A /* Analytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A66F7872527176200ABD35A /* Analytics.swift */; };
 		5A66F78A2527177C00ABD35A /* Analytic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A66F7892527177C00ABD35A /* Analytic.swift */; };
 		5A66F78C2527179400ABD35A /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A66F78B2527179400ABD35A /* User.swift */; };
-		5A715E9E251CF35100FAB40F /* ImageTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A715E9D251CF35100FAB40F /* ImageTask.swift */; };
+		5A715E9E251CF35100FAB40F /* ImageUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A715E9D251CF35100FAB40F /* ImageUseCase.swift */; };
 		5A715EA0251D07AA00FAB40F /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A715E9F251D07AA00FAB40F /* UIImageExtension.swift */; };
 		5A814F58251B96E200C94196 /* SearchRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A814F57251B96E200C94196 /* SearchRequest.swift */; };
 		5A836B65251DFDE000F4C38A /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A836B64251DFDE000F4C38A /* Util.swift */; };
@@ -141,7 +141,7 @@
 		5A66F7872527176200ABD35A /* Analytics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Analytics.swift; sourceTree = "<group>"; };
 		5A66F7892527177C00ABD35A /* Analytic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Analytic.swift; sourceTree = "<group>"; };
 		5A66F78B2527179400ABD35A /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		5A715E9D251CF35100FAB40F /* ImageTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageTask.swift; sourceTree = "<group>"; };
+		5A715E9D251CF35100FAB40F /* ImageUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageUseCase.swift; sourceTree = "<group>"; };
 		5A715E9F251D07AA00FAB40F /* UIImageExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageExtension.swift; sourceTree = "<group>"; };
 		5A814F57251B96E200C94196 /* SearchRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRequest.swift; sourceTree = "<group>"; };
 		5A836B64251DFDE000F4C38A /* Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
@@ -286,7 +286,6 @@
 		5A3219B5251B2427002FA565 /* Tasks */ = {
 			isa = PBXGroup;
 			children = (
-				5A715E9D251CF35100FAB40F /* ImageTask.swift */,
 				5A3219B8251B24D0002FA565 /* GifsTask.swift */,
 				5A0917EC251E2850008A6DD8 /* GifTask.swift */,
 			);
@@ -392,6 +391,7 @@
 			isa = PBXGroup;
 			children = (
 				5AC3237425278CF700EB97EB /* GifsUseCase.swift */,
+				5A715E9D251CF35100FAB40F /* ImageUseCase.swift */,
 			);
 			path = UseCases;
 			sourceTree = "<group>";
@@ -683,7 +683,7 @@
 				5A0A16DB251C774A003037C3 /* FavoriteButton.swift in Sources */,
 				5AA7192D2519DD5F00BC5962 /* UIColorExtensions.swift in Sources */,
 				5A39ED10251B6737004C6FE3 /* ScrollViewExtensions.swift in Sources */,
-				5A715E9E251CF35100FAB40F /* ImageTask.swift in Sources */,
+				5A715E9E251CF35100FAB40F /* ImageUseCase.swift in Sources */,
 				5A44884F251B021F0005CF22 /* TrendRequest.swift in Sources */,
 				5A0917F1251E293B008A6DD8 /* GiphyData.swift in Sources */,
 				5AF75A02251EC8DE00356F4E /* Giphy.swift in Sources */,

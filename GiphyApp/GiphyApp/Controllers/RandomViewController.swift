@@ -31,7 +31,7 @@ final class RandomViewController: UIViewController {
     // MARK: - Properties
     private let gifSubject = BehaviorSubject<GiphyData?>(value: nil)
     private let gifTask = GifTask()
-    private let imageTask = ImageTask()
+    private let imageUseCase = ImageUseCase()
     private var disposeBag = DisposeBag()
     
     override func viewDidLoad() {
@@ -137,7 +137,7 @@ extension RandomViewController {
         gifSubject
             .compactMap { $0 }
             .compactMap { $0.images.original?.url }
-            .flatMap { self.imageTask.getImageWithRx(with: $0, with: self.gifImageView.bounds.size) }
+            .flatMap { self.imageUseCase.getImageWithRx(with: $0, with: self.gifImageView.bounds.size) }
             .bind(to: gifImageView.rx.image )
             .disposed(by: disposeBag)
         
