@@ -20,7 +20,7 @@ final class GifCell: UICollectionViewCell, ReuseIdentifier {
     private var disposeBag = DisposeBag()
     private var data = PublishSubject<Giphy>()
     let onData: AnyObserver<Giphy>
-    private let imageTask = ImageTask()
+    private let imageTask = ImageTask.shared
     
     override init(frame: CGRect) {
         self.onData = data.asObserver()
