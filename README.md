@@ -179,7 +179,9 @@ Networking 관련 코드는 qos를 utility로 수정하였습니다. [관련 커
 
 그 전 코드는 이미지를 로드하는 작업을 취소하지 않아 스크롤을 많이 하면 지나쳤던 모든 셀의 이미지를 로드해야 했기 때문에 (기다리느라) **지금 당장의 셀에 이미지가 바로 반영되지 않는 문제점**과 모든 이미지를 로드해야 했기 때문에 과도한 메모리 사용으로 **앱이 크래시 나는 문제점**이 발생하였습니다. 따라서 지나간 셀의 이미지 로드는 **취소**시킴으로써 현재 보이는 셀의 이미지를 빨리 로드해 보이도록 하고, 메모리로 인한 크래시(비교적 훨씬 적게)도 없도록 하게 하였습니다. [관련 커밋][commit_2]
 
-* 이전 코드의 메모리 측정 
+(기종: 6s+)
+
+* 이전 코드의 메모리 측정
 
 <img width="305" alt="cancel_Before" src="https://user-images.githubusercontent.com/38216027/94915751-61859400-04e8-11eb-9ba8-d8ed0fc8c3f3.png">
 
@@ -196,6 +198,19 @@ Networking 관련 코드는 qos를 utility로 수정하였습니다. [관련 커
 따라서 fetch할때 cache 이름을 nil 처리함으로써  캐시가 적용 안된 데이터도 
 가져오도록 하여 **모든 즐겨찾기 데이터가 즐겨찾기 페이지에 보이도록 하였습니다.**
 [관련 커밋][commit_3]
+
+## 4. DispatchSemaphore로 동시적으로 Image 로드하는 횟수 제한하였습니다. 
+
+* 셀의 최대 개수만큼 항상 동시적으로 image를 로드하는 것은 cpu에 많은 부담을 주고, 메모리 이슈로 크래시가 날 확률이 있습니다. 따라서 세마포어 수를 20개로 조절하여 동시적으로 20개의 이미지만 로드하도록 코드 수정했고, 결과적으로 더 오래 앱을 구동시킬 수 있었습니다. 
+
+> 세마포어 없이 동시적으로 최대 32개 이미지를 연동하는 경우 
+
+<img width="1435" alt="노 세마포어" src="https://user-images.githubusercontent.com/38216027/94985767-496b4e80-0594-11eb-9b51-674fdbb23230.png">
+
+> 세마포어 20개로 제한해 동시적으로 최대 20개 이미지를 연동하는 경우 
+
+<img width="1437" alt="세마포어 20" src="https://user-images.githubusercontent.com/38216027/94985769-4e300280-0594-11eb-89a2-2fd39daffe53.png">
+
 
 [random]: https://developers.giphy.com/docs/api/endpoint#random
 [link]: https://developers.giphy.com/docs/api/endpoint/#trending
