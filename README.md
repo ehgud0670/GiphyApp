@@ -229,6 +229,10 @@ Networking 관련 코드는 qos를 utility로 수정하였습니다. [관련 커
 
 Giphy앱과 비교해보았는데 애니메이션 속도가 비슷한 걸 알 수 있습니다. 
 
+## 5. Gif가 이름에 포함된 변수 및 객체를 Giphy로 통일하였습니다.
+
+* 일관성 있는 명명법을 준수하기 위해 Gif를 Giphy로 변수명이나 객체명을 수정하였습니다. [관련 커밋][commit_6]
+
 [random]: https://developers.giphy.com/docs/api/endpoint#random
 [link]: https://developers.giphy.com/docs/api/endpoint/#trending
 [memory]: https://sungdoo.dev/programming/imag-and-memory-footprint/ 
@@ -237,3 +241,4 @@ Giphy앱과 비교해보았는데 애니메이션 속도가 비슷한 걸 알 �
 [commit_3]: https://github.com/ehgud0670/Banksalad_iOS_KimDoeHyung/commit/986c88c6a6e3c2f6806b7c9761abcb50725a249e
 [commit_4]: https://github.com/ehgud0670/Banksalad_iOS_KimDoeHyung/commit/bcdfacfeb5faf861e502a42b066a67e380216514 
 [commit_5]: https://github.com/ehgud0670/Banksalad_iOS_KimDoeHyung/commit/0d6a50ab4eb31d40d8b92e0cc37b20dafc4cb7db 
+[commit_6]: https://github.com/ehgud0670/Banksalad_iOS_KimDoeHyung/commit/c6c4241648387572f2dd65b3fbebdfa948989e43 
