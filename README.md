@@ -201,7 +201,7 @@ Networking 관련 코드는 qos를 utility로 수정하였습니다. [관련 커
 
 ## 4. DispatchSemaphore로 동시적으로 Image 로드하는 횟수 제한하였습니다. 
 
-* 셀의 최대 개수만큼 항상 동시적으로 image를 로드하는 것은 cpu에 많은 부담을 주고, 메모리 이슈로 크래시가 날 확률이 있습니다. 따라서 세마포어 수를 20개로 조절하여 동시적으로 20개의 이미지만 로드하도록 코드 수정했고, 결과적으로 더 오래 앱을 구동시킬 수 있었습니다. 
+* 셀의 최대 개수만큼 항상 동시적으로 image를 로드하는 것은 cpu에 많은 부담을 주고, 메모리 이슈로 크래시가 날 확률이 있습니다. 따라서 세마포어 수를 20개로 조절하여 동시적으로 20개의 이미지만 로드하도록 코드 수정했고, 결과적으로 더 오래 앱을 구동시킬 수 있었습니다. [관련 커밋][commit_4] 
 
 > 세마포어 없이 동시적으로 최대 32개 이미지를 연동하는 경우 
 
@@ -211,6 +211,23 @@ Networking 관련 코드는 qos를 utility로 수정하였습니다. [관련 커
 
 <img width="1437" alt="세마포어 20" src="https://user-images.githubusercontent.com/38216027/94985769-4e300280-0594-11eb-89a2-2fd39daffe53.png">
 
+## 4. 애니메이션이 원래 속도로 나오도록 개선하였습니다. 
+
+그 전에는 아무 이유 없이 duration값으로 5초를 주었지만 이번엔 frame와 duration을 계산해 적용해 제대로 애니메이션이 나오도록 하였습니다. [관련 커밋][commit_5]
+
+> 적용 이전
+
+![animated_before](https://user-images.githubusercontent.com/38216027/95010970-2f02a500-0668-11eb-84b5-35416cd1d665.gif)
+
+> 적용 이후
+
+![animated_after](https://user-images.githubusercontent.com/38216027/95010974-34f88600-0668-11eb-87c8-9679f54916f3.gif)
+
+> Giphy앱 
+
+![real_giphy_animation](https://user-images.githubusercontent.com/38216027/95011143-9b31d880-0669-11eb-94db-1d52fdc931cd.gif)
+
+Giphy앱과 비교해보았는데 애니메이션 속도가 비슷한 걸 알 수 있습니다. 
 
 [random]: https://developers.giphy.com/docs/api/endpoint#random
 [link]: https://developers.giphy.com/docs/api/endpoint/#trending
@@ -218,3 +235,5 @@ Networking 관련 코드는 qos를 utility로 수정하였습니다. [관련 커
 [commit_1]: https://github.com/ehgud0670/Banksalad_iOS_KimDoeHyung/commit/7e290a0796c172bb2c1ae5e7d64b166c6ce75326
 [commit_2]: https://github.com/ehgud0670/Banksalad_iOS_KimDoeHyung/commit/3e5dc2f9161504d4e848b905671a8e83c60b483b
 [commit_3]: https://github.com/ehgud0670/Banksalad_iOS_KimDoeHyung/commit/986c88c6a6e3c2f6806b7c9761abcb50725a249e
+[commit_4]: https://github.com/ehgud0670/Banksalad_iOS_KimDoeHyung/commit/bcdfacfeb5faf861e502a42b066a67e380216514 
+[commit_5]: https://github.com/ehgud0670/Banksalad_iOS_KimDoeHyung/commit/0d6a50ab4eb31d40d8b92e0cc37b20dafc4cb7db 
