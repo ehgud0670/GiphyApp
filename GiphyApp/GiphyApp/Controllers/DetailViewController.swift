@@ -92,7 +92,7 @@ extension DetailViewController {
             $0.image = Images.gifPlaceholder
             guard let urlString = giphy?.originalURLString else { return }
             let max: CGFloat = 160
-            imageUseCase.getImageWithRx(with: urlString, with: CGSize(width: max, height: max))
+            imageUseCase.animatedImageWithRx(with: urlString, with: CGSize(width: max, height: max))
                 .bind(to: $0.rx.image)
                 .disposed(by: disposeBag)
         }

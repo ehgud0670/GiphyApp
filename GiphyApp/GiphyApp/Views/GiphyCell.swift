@@ -73,7 +73,7 @@ final class GiphyCell: UICollectionViewCell, ReuseIdentifier {
     
     private func bindUI() {
         data.compactMap { $0.originalURLString }
-            .flatMap { self.imageUseCase.getImageWithRx(with: $0, with: self.bounds.size) }
+            .flatMap { self.imageUseCase.animatedImageWithRx(with: $0, with: self.bounds.size) }
             .bind(to: giphyImageView.rx.image)
             .disposed(by: disposeBag)
     }

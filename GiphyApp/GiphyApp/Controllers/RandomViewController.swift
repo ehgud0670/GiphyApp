@@ -137,7 +137,7 @@ extension RandomViewController {
         giphySubject
             .compactMap { $0 }
             .compactMap { $0.images.original?.url }
-            .flatMap { self.imageUseCase.getImageWithRx(with: $0, with: self.giphyImageView.bounds.size) }
+            .flatMap { self.imageUseCase.animatedImageWithRx(with: $0, with: self.giphyImageView.bounds.size) }
             .bind(to: giphyImageView.rx.image )
             .disposed(by: disposeBag)
         

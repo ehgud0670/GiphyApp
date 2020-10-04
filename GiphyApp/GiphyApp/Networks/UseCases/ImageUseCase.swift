@@ -24,9 +24,9 @@ final class ImageUseCase {
         self.urlSession = urlSession
     }
     
-    func getImageWithRx(with urlString: String, with size: CGSize) -> Observable<UIImage> {
+    func animatedImageWithRx(with urlString: String, with size: CGSize) -> Observable<UIImage> {
         return Observable.create { [weak self] emitter in
-            let task = self?.loadTask(with: urlString, size: size, emitter: emitter)
+            let task = self?.loadAndMakeAnimatedImageTask(with: urlString, size: size, emitter: emitter)
             
             self?.dispatchQueue.async {
                 self?.semaphore.wait()
@@ -48,7 +48,7 @@ final class ImageUseCase {
         }
     }
     
-    private func loadTask(
+    private func loadAndMakeAnimatedImageTask(
         with urlString: String,
         size: CGSize,
         emitter: RxSwift.AnyObserver<UIImage>
