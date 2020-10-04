@@ -19,7 +19,7 @@ final class RandomViewController: UIViewController {
     private let searchTextField = SearchTextField()
     private let randomButton = UIButton()
     private let shareButton = UIButton()
-    private let gifImageView = UIImageView()
+    private let giphyImageView = UIImageView()
     private lazy var alertController = UIAlertController(
         title: "클릭! 버튼을 먼저 눌러주세요",
         message: nil,
@@ -29,8 +29,8 @@ final class RandomViewController: UIViewController {
     }
     
     // MARK: - Properties
-    private let gifSubject = BehaviorSubject<GiphyData?>(value: nil)
-    private let gifTask = GifTask()
+    private let giphySubject = BehaviorSubject<GiphyData?>(value: nil)
+    private let giphyTask = GiphyTask()
     private let imageUseCase = ImageUseCase()
     private var disposeBag = DisposeBag()
     
@@ -64,7 +64,7 @@ extension RandomViewController {
             $0.layer.borderColor = UIColor.black.cgColor
         }
         
-        gifImageView.do {
+        giphyImageView.do {
             $0.image = Images.randomPlaceholder
         }
         
@@ -88,8 +88,8 @@ extension RandomViewController {
     private func configureLayout() {
         self.view.addSubview(searchTextField)
         
-        self.view.addSubview(gifImageView)
-        gifImageView.snp.makeConstraints {
+        self.view.addSubview(giphyImageView)
+        giphyImageView.snp.makeConstraints {
             $0.width.height.equalTo(self.view.snp.width).dividedBy(2)
             $0.centerX.equalTo(self.view)
             $0.centerY.equalTo(self.view).multipliedBy(0.9)
@@ -98,7 +98,7 @@ extension RandomViewController {
         searchTextField.snp.makeConstraints {
             let constant: CGFloat = 10
             
-            $0.bottom.equalTo(gifImageView.snp.top).offset(-constant)
+            $0.bottom.equalTo(giphyImageView.snp.top).offset(-constant)
             $0.width.equalTo(self.view).dividedBy(2)
             $0.centerX.equalTo(self.view)
             $0.height.equalTo(searchTextField.snp.width).dividedBy(5)
@@ -129,20 +129,20 @@ extension RandomViewController {
             .withLatestFrom(
                 self.searchTextField.rx.text.orEmpty.distinctUntilChanged(),
                 resultSelector: { return $1 })
-            .flatMap { self.gifTask.perform(RandomRequest(tag: $0))}
+            .flatMap { self.giphyTask.perform(RandomRequest(tag: $0))}
             .map { $0.data }
-            .bind(to: gifSubject)
+            .bind(to: giphySubject)
             .disposed(by: disposeBag)
         
-        gifSubject
+        giphySubject
             .compactMap { $0 }
             .compactMap { $0.images.original?.url }
-            .flatMap { self.imageUseCase.getImageWithRx(with: $0, with: self.gifImageView.bounds.size) }
-            .bind(to: gifImageView.rx.image )
+            .flatMap { self.imageUseCase.getImageWithRx(with: $0, with: self.giphyImageView.bounds.size) }
+            .bind(to: giphyImageView.rx.image )
             .disposed(by: disposeBag)
         
         shareButton.rx.tap
-            .withLatestFrom(gifSubject)
+            .withLatestFrom(giphySubject)
             .do(onNext: { if $0 == nil { self.present(self.alertController, animated: true) } })
             .compactMap { $0 }
             .compactMap { $0.images.original?.url }

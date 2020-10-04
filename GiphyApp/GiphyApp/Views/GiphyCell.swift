@@ -13,8 +13,8 @@ import RxCocoa
 import Kingfisher
 import SnapKit
 
-final class GifCell: UICollectionViewCell, ReuseIdentifier {
-    private var gifImageView = UIImageView().then {
+final class GiphyCell: UICollectionViewCell, ReuseIdentifier {
+    private var giphyImageView = UIImageView().then {
         $0.image = Images.gifPlaceholder
     }
     private var disposeBag = DisposeBag()
@@ -45,16 +45,16 @@ final class GifCell: UICollectionViewCell, ReuseIdentifier {
     
     // MARK: - Attributes & Layout
     private func configureAttributes() {
-        gifImageView.do {
+        giphyImageView.do {
             $0.contentMode = .scaleAspectFill
             $0.layer.masksToBounds = true
         }
     }
     
     private func configureLayout() {
-        self.contentView.addSubview(gifImageView)
+        self.contentView.addSubview(giphyImageView)
         
-        gifImageView.snp.makeConstraints {
+        giphyImageView.snp.makeConstraints {
             $0.top.bottom.leading.trailing.equalTo(self.contentView)
         }
     }
@@ -68,13 +68,13 @@ final class GifCell: UICollectionViewCell, ReuseIdentifier {
     }
     
     private func clear() {
-        gifImageView.image = Images.gifPlaceholder
+        giphyImageView.image = Images.gifPlaceholder
     }
     
     private func bindUI() {
         data.compactMap { $0.originalURLString }
             .flatMap { self.imageUseCase.getImageWithRx(with: $0, with: self.bounds.size) }
-            .bind(to: gifImageView.rx.image)
+            .bind(to: giphyImageView.rx.image)
             .disposed(by: disposeBag)
     }
 }

@@ -14,7 +14,7 @@ import SnapKit
 
 final class FavoriteViewController: UIViewController {
     // MARK: - UI
-    private let gifCollectionView = UICollectionView(
+    private let giphysCollectionView = UICollectionView(
         frame: .zero,
         collectionViewLayout: UICollectionViewFlowLayout()
     )
@@ -59,9 +59,9 @@ extension FavoriteViewController {
         
         coreDataManager?.fetchedResultsController?.delegate = self
         
-        gifCollectionView.do {
+        giphysCollectionView.do {
             $0.backgroundColor = .clear
-            $0.register(GifCell.self, forCellWithReuseIdentifier: GifCell.reuseIdentifier)
+            $0.register(GiphyCell.self, forCellWithReuseIdentifier: GiphyCell.reuseIdentifier)
             $0.dataSource = coreDataManager
             $0.delegate = self
         }
@@ -88,8 +88,8 @@ extension FavoriteViewController {
     }
     
     private func configureLayout() {
-        self.view.addSubview(gifCollectionView)
-        gifCollectionView.snp.makeConstraints {
+        self.view.addSubview(giphysCollectionView)
+        giphysCollectionView.snp.makeConstraints {
             let constant: CGFloat = 10
             
             $0.top.equalTo(self.view.safeAreaLayoutGuide).inset(constant)
@@ -167,9 +167,9 @@ extension FavoriteViewController: NSFetchedResultsControllerDelegate {
     ) {
         switch type {
         case .insert:
-            gifCollectionView.insertItems(at: [newIndexPath!])
+            giphysCollectionView.insertItems(at: [newIndexPath!])
         case .delete:
-            gifCollectionView.deleteItems(at: [indexPath!])
+            giphysCollectionView.deleteItems(at: [indexPath!])
         default:
             return
         }

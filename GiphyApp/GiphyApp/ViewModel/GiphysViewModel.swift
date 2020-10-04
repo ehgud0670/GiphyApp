@@ -10,34 +10,34 @@ import UIKit
 
 import RxSwift
 
-final class GifsViewModel: NSObject {
+final class GiphysViewModel: NSObject {
     enum Notification {
-        static let updateFirst = Foundation.Notification.Name("GifsViewModeldDidUpdateFirst")
-        static let updateMore = Foundation.Notification.Name("GifsViewModeldDidUpdateMore")
+        static let updateFirst = Foundation.Notification.Name("GiphysViewModeldDidUpdateFirst")
+        static let updateMore = Foundation.Notification.Name("GiphysViewModeldDidUpdateMore")
     }
     
-    private var gifs = [Giphy]()
+    private var giphys = [Giphy]()
     var pagination: Pagination?
     
-    func updateFirst(with response: GifsResponse) {
+    func updateFirst(with response: GiphysResponse) {
         let giphys = response.data.map { Giphy(originalURLString: $0.images.original?.url,
                                              downsizedURLString: $0.images.downsized?.url,
                                              title: $0.title) }
-        self.gifs = giphys
+        self.giphys = giphys
         pagination = response.pagination
         
         NotificationCenter.default.post(name: Notification.updateFirst, object: self)
     }
     
-    func updateMore(with response: GifsResponse) {
+    func updateMore(with response: GiphysResponse) {
         let giphys = response.data.map { Giphy(originalURLString: $0.images.original?.url,
         downsizedURLString: $0.images.downsized?.url,
         title: $0.title) }
         
-        self.gifs.append(contentsOf: giphys)
+        self.giphys.append(contentsOf: giphys)
         pagination = response.pagination
         
-        let startIndex = self.gifs.count - giphys.count
+        let startIndex = self.giphys.count - giphys.count
         let endIndex = startIndex + response.data.count
         NotificationCenter.default.post(
             name: Notification.updateMore,
@@ -47,19 +47,19 @@ final class GifsViewModel: NSObject {
     }
     
     func clear() {
-        gifs = []
+        giphys = []
         pagination = nil
     }
     
     func giphy(at index: Int) -> Giphy? {
-        guard index < gifs.count else { return nil }
-        return gifs[index]
+        guard index < giphys.count else { return nil }
+        return giphys[index]
     }
 }
 
-extension GifsViewModel: UICollectionViewDataSource {
+extension GiphysViewModel: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return gifs.count
+        return giphys.count
     }
     
     func collectionView(
@@ -67,12 +67,12 @@ extension GifsViewModel: UICollectionViewDataSource {
         cellForItemAt indexPath: IndexPath
     ) -> UICollectionViewCell {
         guard let giphyCell = collectionView.dequeueReusableCell(
-            withReuseIdentifier: GifCell.reuseIdentifier,
+            withReuseIdentifier: GiphyCell.reuseIdentifier,
             for: indexPath
-            ) as? GifCell else { return GifCell() }
-        guard indexPath.item < gifs.count else { return giphyCell }
+            ) as? GiphyCell else { return GiphyCell() }
+        guard indexPath.item < giphys.count else { return giphyCell }
         
-        let giphy = gifs[indexPath.item]
+        let giphy = giphys[indexPath.item]
         giphyCell.onData.onNext(giphy)
         
         return giphyCell

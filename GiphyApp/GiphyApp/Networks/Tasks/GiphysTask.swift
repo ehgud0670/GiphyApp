@@ -1,8 +1,8 @@
 //
-//  GifTask.swift
+//  GifsTask.swift
 //  GiphyApp
 //
-//  Created by kimdo2297 on 2020/09/25.
+//  Created by kimdo2297 on 2020/09/23.
 //  Copyright © 2020 jason. All rights reserved.
 //
 
@@ -11,9 +11,9 @@ import Foundation
 import Alamofire
 import RxSwift
 
-final class GifTask {
-    typealias Input = GifRequest
-    typealias Output = GifResponse
+final class GiphysTask {
+    typealias Input = GiphysRequest
+    typealias Output = GiphysResponse
     
     private let session: Session
     private(set) var isLoading = false
@@ -26,7 +26,7 @@ final class GifTask {
         isLoading = false
     }
     
-    func perform(_ request: Input) -> Observable<GifResponse> {
+    func perform(_ request: Input) -> Observable<GiphysResponse> {
         isLoading = true
         return Observable.create { [weak self] emitter in
             guard let self = self,

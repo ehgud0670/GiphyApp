@@ -151,9 +151,9 @@ extension CoreDataGiphyManager: UICollectionViewDataSource {
         cellForItemAt indexPath: IndexPath
     ) -> UICollectionViewCell {
         guard let giphyCell = collectionView.dequeueReusableCell(
-            withReuseIdentifier: GifCell.reuseIdentifier,
+            withReuseIdentifier: GiphyCell.reuseIdentifier,
             for: indexPath
-            ) as? GifCell else { return GifCell() }
+            ) as? GiphyCell else { return GiphyCell() }
         
         guard let giphy = fetchedResultsController?
             .object(at: indexPath).giphy

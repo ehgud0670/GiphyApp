@@ -13,6 +13,6 @@ final class GiphyResponseTests: XCTestCase {
     func test_giphyResonse_디코딩_성공() throws {
         let jsonData = try XCTUnwrap(Data.readJSON(for: "GiphyResponse"))
         
-        _ = try XCTUnwrap(JSONDecoder().decode(GifsResponse.self, from: jsonData))
+        _ = try XCTUnwrap(JSONDecoder().decode(GiphysResponse.self, from: jsonData))
     }
 }

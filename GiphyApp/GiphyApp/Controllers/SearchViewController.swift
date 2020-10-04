@@ -18,14 +18,14 @@ import Alamofire
 final class SearchViewController: UIViewController {
     // MARK: - UI
     private let searchTextField = SearchTextField()
-    private let gifCollectionView = UICollectionView(
+    private let giphyCollectionView = UICollectionView(
         frame: .zero,
         collectionViewLayout: UICollectionViewFlowLayout()
     )
     
     // MARK: - Properties
-    private let gifsViewModel = GifsViewModel()
-    private let gifsUseCase = GifsUseCase(gifsTask: GifsTask())
+    private let giphysViewModel = GiphysViewModel()
+    private let giphysUseCase = GiphysUseCase(giphysTask: GiphysTask())
     private var disposeBag = DisposeBag()
     var coreDataManager: CoreDataGiphyManager?
     
@@ -48,22 +48,22 @@ final class SearchViewController: UIViewController {
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(reloadDataCollectionView),
-            name: GifsViewModel.Notification.updateFirst,
-            object: gifsViewModel
+            name: GiphysViewModel.Notification.updateFirst,
+            object: giphysViewModel
         )
         
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(reloadItemsCollectionView(_:)),
-            name: GifsViewModel.Notification.updateMore,
-            object: gifsViewModel
+            name: GiphysViewModel.Notification.updateMore,
+            object: giphysViewModel
         )
     }
     
     @objc private func reloadDataCollectionView() {
         DispatchQueue.main.async { [weak self] in
-            self?.gifCollectionView.setContentOffset(.zero, animated: false)
-            self?.gifCollectionView.reloadData()
+            self?.giphyCollectionView.setContentOffset(.zero, animated: false)
+            self?.giphyCollectionView.reloadData()
         }
     }
     
@@ -71,7 +71,7 @@ final class SearchViewController: UIViewController {
         guard let newItems = notification.userInfo?["newItems"] as? [IndexPath] else { return }
         
         DispatchQueue.main.async { [weak self] in
-            self?.gifCollectionView.insertItems(at: newItems)
+            self?.giphyCollectionView.insertItems(at: newItems)
         }
     }
 }
@@ -83,10 +83,10 @@ extension SearchViewController {
             $0.backgroundColor = .systemPurple
         }
         
-        gifCollectionView.do {
+        giphyCollectionView.do {
             $0.backgroundColor = .systemPurple
-            $0.register(GifCell.self, forCellWithReuseIdentifier: GifCell.reuseIdentifier)
-            $0.dataSource = gifsViewModel
+            $0.register(GiphyCell.self, forCellWithReuseIdentifier: GiphyCell.reuseIdentifier)
+            $0.dataSource = giphysViewModel
             $0.delegate = self
         }
     }
@@ -102,8 +102,8 @@ extension SearchViewController {
             $0.height.equalTo(searchTextField.snp.width).dividedBy(7)
         }
         
-        self.view.addSubview(gifCollectionView)
-        gifCollectionView.snp.makeConstraints {
+        self.view.addSubview(giphyCollectionView)
+        giphyCollectionView.snp.makeConstraints {
             let constant: CGFloat = 10
             
             $0.top.equalTo(searchTextField.snp.bottom).offset(constant)
@@ -120,21 +120,21 @@ extension SearchViewController {
         }
         
         guard scrollView.isBouncingBottom else { return }
-        guard let pagination = gifsViewModel.pagination else { return }
+        guard let pagination = giphysViewModel.pagination else { return }
         
         let nextOffset = pagination.count + pagination.offset
         if isSearching {
-            gifsUseCase.loadMoreSearchGIFs(with: searchTextField.text!, nextOffset: nextOffset)?
+            giphysUseCase.loadMoreSearchGiphys(with: searchTextField.text!, nextOffset: nextOffset)?
                 .subscribe(
-                    onNext: { [weak self] in self?.gifsViewModel.updateMore(with: $0) },
+                    onNext: { [weak self] in self?.giphysViewModel.updateMore(with: $0) },
                     onError: { if $0.isSessionError { Util.presentAlertWithNetworkError(on: self) } })
                 .disposed(by: disposeBag)
             return
         }
         
-        gifsUseCase.loadMoreTrendyGIFs(with: nextOffset)?
+        giphysUseCase.loadMoreTrendyGiphys(with: nextOffset)?
             .subscribe(
-                onNext: { [weak self] in self?.gifsViewModel.updateMore(with: $0) },
+                onNext: { [weak self] in self?.giphysViewModel.updateMore(with: $0) },
                 onError: { if $0.isSessionError { Util.presentAlertWithNetworkError(on: self) } })
             .disposed(by: disposeBag)
     }
@@ -145,7 +145,7 @@ extension SearchViewController {
     
     // 스크롤 위치가 top이 아닌 경우에만 키보드를 내리게 한다.
     private var isSearchingWhenScrollIsNotTop: Bool {
-        gifCollectionView.contentOffset != .zero && searchTextField.isEditing
+        giphyCollectionView.contentOffset != .zero && searchTextField.isEditing
     }
 }
 
@@ -157,14 +157,14 @@ extension SearchViewController {
             .distinctUntilChanged()
             .filter { $0 == "" }
             .do { [weak self] in
-                self?.gifsViewModel.clear()
+                self?.giphysViewModel.clear()
                 ImageCache.default.clearMemoryCache() }
-            .map { [weak self] _ in self?.gifsUseCase.loadFirstTrendyGIFs() }
+            .map { [weak self] _ in self?.giphysUseCase.loadFirstTrendyGiphys() }
             .compactMap { $0?.asObservable() }
             .flatMap { $0 }
             .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .userInteractive))
             .subscribe(
-                onNext: { [weak self] in self?.gifsViewModel.updateFirst(with: $0) },
+                onNext: { [weak self] in self?.giphysViewModel.updateFirst(with: $0) },
                 onError: { if $0.isSessionError { Util.presentAlertWithNetworkError(on: self) } })
             .disposed(by: disposeBag)
         
@@ -173,14 +173,14 @@ extension SearchViewController {
             .distinctUntilChanged()
             .filter { $0 != "" }
             .do { [weak self] in
-                self?.gifsViewModel.clear()
+                self?.giphysViewModel.clear()
                 ImageCache.default.clearMemoryCache() }
-            .map { [weak self] in self?.gifsUseCase.loadFirstSearchGIFs(with: $0) }
+            .map { [weak self] in self?.giphysUseCase.loadFirstSearchGiphys(with: $0) }
             .compactMap { $0?.asObservable() }
             .flatMap { $0 }
             .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .userInteractive))
             .subscribe(
-                onNext: { [weak self] in self?.gifsViewModel.updateFirst(with: $0) },
+                onNext: { [weak self] in self?.giphysViewModel.updateFirst(with: $0) },
                 onError: { if $0.isSessionError { Util.presentAlertWithNetworkError(on: self) } })
             .disposed(by: disposeBag)
     }
@@ -189,7 +189,7 @@ extension SearchViewController {
 // MARK: - UICollectionView Delegate
 extension SearchViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let giphy = gifsViewModel.giphy(at: indexPath.item) else { return }
+        guard let giphy = giphysViewModel.giphy(at: indexPath.item) else { return }
         
         let detailViewController = DetailViewController().then {
             $0.giphy = giphy
