@@ -60,7 +60,9 @@ final class ImageUseCase {
                 let imageSource = UIImage.imageSource(with: imageData) else { return }
             
             let cgImages = UIImage.downsizedImages(with: imageSource, for: size, scale: 3)
-            guard let animatedImage = UIImage.animatedImage(with: cgImages) else { return }
+            guard let animatedImage = UIImage.animatedImage(
+                with: cgImages,
+                source: imageSource) else { return }
             
             self.imageCache.store(animatedImage, forKey: urlString)
             emitter.onNext(animatedImage)
