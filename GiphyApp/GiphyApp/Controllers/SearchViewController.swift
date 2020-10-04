@@ -119,12 +119,16 @@ extension SearchViewController {
             view.endEditing(true)
         }
         
-        guard scrollView.isBouncingBottom else { return }
-        guard let pagination = giphysViewModel.pagination else { return }
+        guard scrollView.isBouncingBottom,
+            let pagination = giphysViewModel.pagination,
+            giphysUseCase.isNotLoading else { return }
         
         let nextOffset = pagination.count + pagination.offset
+        
         if isSearching {
-            giphysUseCase.loadMoreSearchGiphys(with: searchTextField.text!, nextOffset: nextOffset)?
+            giphysUseCase.loadMoreSearchGiphys(
+                with: searchTextField.text!,
+                nextOffset: nextOffset)
                 .subscribe(
                     onNext: { [weak self] in self?.giphysViewModel.updateMore(with: $0) },
                     onError: { if $0.isSessionError { Util.presentAlertWithNetworkError(on: self) } })
@@ -132,7 +136,7 @@ extension SearchViewController {
             return
         }
         
-        giphysUseCase.loadMoreTrendyGiphys(with: nextOffset)?
+        giphysUseCase.loadMoreTrendyGiphys(with: nextOffset)
             .subscribe(
                 onNext: { [weak self] in self?.giphysViewModel.updateMore(with: $0) },
                 onError: { if $0.isSessionError { Util.presentAlertWithNetworkError(on: self) } })
@@ -152,37 +156,43 @@ extension SearchViewController {
 // MARK: - Binding
 extension SearchViewController {
     private func configureBindings() {
-        // trendy
+        // use trend API
         searchTextField.rx.text.orEmpty
             .distinctUntilChanged()
+            .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .userInteractive))
             .filter { $0 == "" }
             .do { [weak self] in
                 self?.giphysViewModel.clear()
                 ImageCache.default.clearMemoryCache() }
-            .map { [weak self] _ in self?.giphysUseCase.loadFirstTrendyGiphys() }
-            .compactMap { $0?.asObservable() }
-            .flatMap { $0 }
-            .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .userInteractive))
-            .subscribe(
-                onNext: { [weak self] in self?.giphysViewModel.updateFirst(with: $0) },
-                onError: { if $0.isSessionError { Util.presentAlertWithNetworkError(on: self) } })
-            .disposed(by: disposeBag)
+            .subscribe(onNext: { [weak self] _ in
+                guard let self = self, self.giphysUseCase.isNotLoading else { return }
+                
+                self.giphysUseCase.loadFirstTrendyGiphys()
+                    .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .utility))
+                    .subscribe(
+                        onNext: { self.giphysViewModel.updateFirst(with: $0) },
+                        onError: { if $0.isSessionError { Util.presentAlertWithNetworkError(on: self) } })
+                    .disposed(by: self.disposeBag)
+            }).disposed(by: disposeBag)
         
-        // search
+        // use search API
         searchTextField.rx.text.orEmpty
             .distinctUntilChanged()
+            .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .userInteractive))
             .filter { $0 != "" }
             .do { [weak self] in
                 self?.giphysViewModel.clear()
                 ImageCache.default.clearMemoryCache() }
-            .map { [weak self] in self?.giphysUseCase.loadFirstSearchGiphys(with: $0) }
-            .compactMap { $0?.asObservable() }
-            .flatMap { $0 }
-            .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .userInteractive))
-            .subscribe(
-                onNext: { [weak self] in self?.giphysViewModel.updateFirst(with: $0) },
-                onError: { if $0.isSessionError { Util.presentAlertWithNetworkError(on: self) } })
-            .disposed(by: disposeBag)
+            .subscribe(onNext: { [weak self] in
+                guard let self = self, self.giphysUseCase.isNotLoading else { return }
+                
+                self.giphysUseCase.loadFirstSearchGiphys(with: $0)
+                    .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .utility))
+                    .subscribe(
+                        onNext: { self.giphysViewModel.updateFirst(with: $0) },
+                        onError: { if $0.isSessionError { Util.presentAlertWithNetworkError(on: self) } })
+                    .disposed(by: self.disposeBag)
+            }).disposed(by: disposeBag)
     }
 }
 

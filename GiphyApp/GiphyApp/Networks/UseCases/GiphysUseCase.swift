@@ -17,27 +17,29 @@ final class GiphysUseCase {
         self.giphysTask = giphysTask
     }
     
-    private func loadGiphys(with giphysRequest: GiphysRequest) -> Observable<GiphysResponse>? {
-        guard !giphysTask.isLoading else { return nil }
-        
+    var isNotLoading: Bool {
+        return !giphysTask.isLoading
+    }
+    
+    private func loadGiphys(with giphysRequest: GiphysRequest) -> Observable<GiphysResponse> {
         return giphysTask.perform(giphysRequest)
             .take(1)
             .do { [weak self] in self?.giphysTask.setIsLoadingFalse() }
     }
     
-    func loadFirstTrendyGiphys() -> Observable<GiphysResponse>? {
+    func loadFirstTrendyGiphys() -> Observable<GiphysResponse> {
         return loadGiphys(with: TrendRequest())
     }
     
-    func loadMoreTrendyGiphys(with nextOffset: Int) -> Observable<GiphysResponse>? {
+    func loadMoreTrendyGiphys(with nextOffset: Int) -> Observable<GiphysResponse> {
         return loadGiphys(with: TrendRequest(offset: nextOffset))
     }
     
-    func loadFirstSearchGiphys(with query: String) -> Observable<GiphysResponse>? {
+    func loadFirstSearchGiphys(with query: String) -> Observable<GiphysResponse> {
         return loadGiphys(with: SearchRequest(query: query))
     }
     
-    func loadMoreSearchGiphys(with query: String, nextOffset: Int) -> Observable<GiphysResponse>? {
+    func loadMoreSearchGiphys(with query: String, nextOffset: Int) -> Observable<GiphysResponse> {
         return loadGiphys(with: SearchRequest(query: query, offset: nextOffset))
     }
 }
