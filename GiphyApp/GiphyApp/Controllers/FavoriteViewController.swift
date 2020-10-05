@@ -68,8 +68,10 @@ extension FavoriteViewController {
         
         emptyTitleLabel.do {
             $0.text = "즐겨찾기 한 이미지가 없습니다."
-            $0.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
             $0.textAlignment = .center
+            $0.font = .preferredFont(forTextStyle: .title2)
+            $0.adjustsFontForContentSizeCategory = true
+            $0.adjustsFontSizeToFitWidth = true
             
             if coreDataManager?.modelsAllCount != 0 {
                 $0.isHidden = true
@@ -78,8 +80,10 @@ extension FavoriteViewController {
         
         emptySubTitleLabel.do {
             $0.text = "별 모양을 눌러 즐겨찾기 기능을 이용해 보세요."
-            $0.font = UIFont.systemFont(ofSize: 15, weight: .medium)
             $0.textAlignment = .center
+            $0.font = .preferredFont(forTextStyle: .headline)
+            $0.adjustsFontForContentSizeCategory = true
+            $0.adjustsFontSizeToFitWidth = true
             
             if coreDataManager?.modelsAllCount != 0 {
                 $0.isHidden = true
@@ -98,13 +102,13 @@ extension FavoriteViewController {
         
         self.view.addSubview(emptyTitleLabel)
         emptyTitleLabel.snp.makeConstraints {
-            $0.centerX.equalTo(self.view)
+            $0.leading.trailing.equalTo(self.view).inset(10)
             $0.centerY.equalTo(self.view).multipliedBy(0.8)
         }
         
         self.view.addSubview(emptySubTitleLabel)
         emptySubTitleLabel.snp.makeConstraints {
-            $0.centerX.equalTo(self.view)
+            $0.leading.trailing.equalTo(self.view).inset(10)
             $0.top.equalTo(emptyTitleLabel.snp.bottom).offset(15)
         }
     }

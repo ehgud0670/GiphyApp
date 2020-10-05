@@ -71,6 +71,7 @@ final class DetailViewController: UIViewController {
         
         favoriteButton.isFavorited = false
         guard let coreGiphy = coreDataManager?.object(giphy: strongGiphy) else { return }
+        
         coreDataManager?.removeObject(coreDataGiphy: coreGiphy)
     }
 }
@@ -99,6 +100,9 @@ extension DetailViewController {
         
         nameLabel.do {
             $0.textAlignment = .center
+            $0.font = .preferredFont(forTextStyle: .callout)
+            $0.adjustsFontForContentSizeCategory = true
+            $0.adjustsFontSizeToFitWidth = true
             guard let title = giphy?.title.components(separatedBy: " GIF").first else { return }
             $0.text = title
         }
@@ -107,6 +111,10 @@ extension DetailViewController {
             $0.layer.cornerRadius = 20
             $0.backgroundColor = .systemBlue
             $0.setTitle("공유", for: .normal)
+            $0.titleLabel?.font = .preferredFont(forTextStyle: .title3)
+            $0.titleLabel?.textAlignment = .center
+            $0.titleLabel?.adjustsFontForContentSizeCategory = true
+            $0.titleLabel?.adjustsFontSizeToFitWidth = true
             $0.setTitleColor(.black, for: .normal)
             $0.setTitleColor(UIColor.black.withAlphaComponent(0.5), for: .highlighted)
             $0.addTarget(self, action: #selector(share), for: .touchUpInside)
@@ -165,6 +173,10 @@ extension DetailViewController {
             $0.height.equalTo(shareButton.snp.width).multipliedBy(0.2)
             $0.centerX.equalTo(self.view.snp.centerX)
             $0.centerY.equalTo(self.view).dividedBy(0.57)
+        }
+        
+        shareButton.titleLabel?.snp.makeConstraints {
+            $0.leading.trailing.equalTo(shareButton).inset(10)
         }
         
         self.view.addSubview(favoriteButton)

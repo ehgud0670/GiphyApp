@@ -74,6 +74,10 @@ extension RandomViewController {
             $0.setTitle("클릭!", for: .normal)
             $0.setTitleColor(.black, for: .normal)
             $0.setTitleColor(UIColor.black.withAlphaComponent(0.5), for: .highlighted)
+            $0.titleLabel?.font = .preferredFont(forTextStyle: .title3)
+            $0.titleLabel?.textAlignment = .center
+            $0.titleLabel?.adjustsFontForContentSizeCategory = true
+            $0.titleLabel?.adjustsFontSizeToFitWidth = true
         }
         
         shareButton.do {
@@ -82,6 +86,10 @@ extension RandomViewController {
             $0.setTitle("공유", for: .normal)
             $0.setTitleColor(.black, for: .normal)
             $0.setTitleColor(UIColor.black.withAlphaComponent(0.5), for: .highlighted)
+            $0.titleLabel?.font = .preferredFont(forTextStyle: .title3)
+            $0.titleLabel?.textAlignment = .center
+            $0.titleLabel?.adjustsFontForContentSizeCategory = true
+            $0.titleLabel?.adjustsFontSizeToFitWidth = true
         }
     }
     
@@ -112,12 +120,20 @@ extension RandomViewController {
             $0.bottom.equalTo(searchTextField.snp.top).offset(-10)
         }
         
+        randomButton.titleLabel?.snp.makeConstraints {
+            $0.leading.trailing.equalTo(randomButton).inset(10)
+        }
+        
         self.view.addSubview(shareButton)
         shareButton.snp.makeConstraints {
             $0.width.equalTo(randomButton.snp.width)
             $0.height.equalTo(shareButton.snp.width).multipliedBy(0.15)
             $0.centerX.equalTo(self.view.snp.centerX)
             $0.bottom.equalTo(randomButton.snp.top).offset(-10)
+        }
+        
+        shareButton.titleLabel?.snp.makeConstraints {
+            $0.leading.trailing.equalTo(shareButton).inset(10)
         }
     }
 }
