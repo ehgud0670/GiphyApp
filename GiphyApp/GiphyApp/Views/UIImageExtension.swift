@@ -61,13 +61,13 @@ extension UIImage {
         return delay
     }
     
-    private static func duration(with delays: [Int]) -> Int {
+    static func duration(with delays: [Int]) -> Int {
         let sum = delays.reduce(0) { $0 + $1 }
         return sum
     }
     
     // GCD: 최대공약수 Great Common Divisor
-    private static func gcd(for array: [Int]) -> Int {
+    static func gcd(for array: [Int]) -> Int {
         guard !array.isEmpty else { return 1 }
         
         var gcd = array[0]
@@ -79,13 +79,11 @@ extension UIImage {
     }
     
     // GCD: 최대공약수 Great Common Divisor
-    private static func gcdForPair(lhs: Int, rhs: Int) -> Int {
+    static func gcdForPair(lhs: Int, rhs: Int) -> Int {
         var lhs = lhs
         var rhs = rhs
         if lhs < rhs {
-            let temp = lhs
-            lhs = rhs
-            rhs = temp
+            swap(&lhs, &rhs)
         }
         
         var rest: Int
@@ -100,7 +98,7 @@ extension UIImage {
         return rhs
     }
     
-    private static func frames(with cgImages: [CGImage], delays: [Int], gcd: Int) -> [UIImage] {
+    static func frames(with cgImages: [CGImage], delays: [Int], gcd: Int) -> [UIImage] {
         var frames = [UIImage]()
         (0 ..< cgImages.count).forEach {
             let frame = UIImage(cgImage: cgImages[$0])

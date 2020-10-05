@@ -62,6 +62,7 @@
 		5AA92FE7251A0C6000422E4D /* HalfSizePresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AA92FE6251A0C6000422E4D /* HalfSizePresentationController.swift */; };
 		5AA92FE9251A0D0500422E4D /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AA92FE8251A0D0500422E4D /* DetailViewController.swift */; };
 		5AA92FEB251A119B00422E4D /* CloseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AA92FEA251A119B00422E4D /* CloseButton.swift */; };
+		5AB11D34252B85E700613506 /* UIImageExtensionsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AB11D33252B85E700613506 /* UIImageExtensionsTest.swift */; };
 		5AC3237525278CF700EB97EB /* GiphysUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AC3237425278CF700EB97EB /* GiphysUseCase.swift */; };
 		5AF32BCF251ED58800B8DDC3 /* CoreDataGiphyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AF32BCE251ED58800B8DDC3 /* CoreDataGiphyManager.swift */; };
 		5AF759FF251EC83000356F4E /* CoreDataGiphy+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AF759FD251EC83000356F4E /* CoreDataGiphy+CoreDataClass.swift */; };
@@ -155,6 +156,7 @@
 		5AA92FE6251A0C6000422E4D /* HalfSizePresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HalfSizePresentationController.swift; sourceTree = "<group>"; };
 		5AA92FE8251A0D0500422E4D /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		5AA92FEA251A119B00422E4D /* CloseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloseButton.swift; sourceTree = "<group>"; };
+		5AB11D33252B85E700613506 /* UIImageExtensionsTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageExtensionsTest.swift; sourceTree = "<group>"; };
 		5AC3237425278CF700EB97EB /* GiphysUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GiphysUseCase.swift; sourceTree = "<group>"; };
 		5AF32BCE251ED58800B8DDC3 /* CoreDataGiphyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataGiphyManager.swift; sourceTree = "<group>"; };
 		5AF759FD251EC83000356F4E /* CoreDataGiphy+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreDataGiphy+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -251,6 +253,7 @@
 				5A02C4D12519C57B009AEC55 /* Info.plist */,
 				5A448853251B08170005CF22 /* TrendRequestTests.swift */,
 				5A44885A251B1C870005CF22 /* GiphyResponseTests.swift */,
+				5AB11D33252B85E700613506 /* UIImageExtensionsTest.swift */,
 			);
 			path = GiphyAppTests;
 			sourceTree = "<group>";
@@ -725,6 +728,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5AB11D34252B85E700613506 /* UIImageExtensionsTest.swift in Sources */,
 				5A448854251B08170005CF22 /* TrendRequestTests.swift in Sources */,
 				5A44885B251B1C870005CF22 /* GiphyResponseTests.swift in Sources */,
 			);
