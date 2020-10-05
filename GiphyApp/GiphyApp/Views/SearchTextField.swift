@@ -22,14 +22,23 @@ final class SearchTextField: UITextField, Shadow {
         
         configureAttributes()
     }
+    
+    func setAccessibilityLabel(with text: String) {
+        self.accessibilityLabel = "search text value: \(text)"
+    }
 }
 
 extension SearchTextField {
     private func configureAttributes() {
         self.do {
+            $0.accessibilityIdentifier = "SearchTextField"
+            $0.accessibilityLabel = "search text value is empty"
             $0.layer.borderWidth = 1
             $0.layer.borderColor = UIColor.searchBarBorderGray.cgColor
             $0.layer.cornerRadius = 5
+            $0.font = .preferredFont(forTextStyle: .title3)
+            $0.adjustsFontForContentSizeCategory = true
+            $0.adjustsFontSizeToFitWidth = true
             $0.configureShadow()
         }
     }

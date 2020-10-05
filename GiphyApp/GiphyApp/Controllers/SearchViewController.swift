@@ -180,9 +180,11 @@ extension SearchViewController {
             .distinctUntilChanged()
             .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .userInteractive))
             .filter { $0 != "" }
-            .do { [weak self] in
+            .do(onNext: {  [weak self] in
+                self?.searchTextField.setAccessibilityLabel(with: $0)
                 self?.giphysViewModel.clear()
-                ImageCache.default.clearMemoryCache() }
+                ImageCache.default.clearMemoryCache()
+            })
             .subscribe(onNext: { [weak self] in
                 guard let self = self, self.giphysUseCase.isNotLoading else { return }
                 
