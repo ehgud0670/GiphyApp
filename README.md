@@ -233,6 +233,38 @@ Giphy앱과 비교해보았는데 애니메이션 속도가 비슷한 걸 알 �
 
 * 일관성 있는 명명법을 준수하기 위해 Gif를 Giphy로 변수명이나 객체명을 수정하였습니다. [관련 커밋][commit_6]
 
+## 6. Accessibility을 고려하여 속성값을 추가하였습니다. 
+
+### 각 레이블, 버튼, 텍스트필드의 폰트가 dynamic한 font가 되도록 설정하였고, Accessiblity Inspecter로 테스트하였습니다. 
+
+* [관련 커밋 1][commit_7], [관련 커밋 2][commit_8]
+
+> 검색 페이지
+
+![dynamicFont_3](https://user-images.githubusercontent.com/38216027/95073150-4cf30700-0747-11eb-864c-ebacc0a3cb2a.gif)
+
+> 즐겨찾기 페이지
+
+![dynamicFont_1](https://user-images.githubusercontent.com/38216027/95072428-21235180-0746-11eb-8bb4-4c41682a9108.gif)
+
+
+> 모달 페이지
+
+![dynamicFont_2](https://user-images.githubusercontent.com/38216027/95072582-634c9300-0746-11eb-98d4-a712bd87ed4f.gif)
+
+### Accessibility Audit을 이용하여 여러 뷰들을 수정하였습니다. 
+
+* 일례로 Accessibility Audit을 통해 랜덤 페이지의 텍스트필드, 버튼들이 너무 작다는 진단을 받았고 크키를 키워 해결하였습니다. [관련 커밋][commit_9]
+
+> 수정 전
+
+<img width="1267" alt="run audit - before" src="https://user-images.githubusercontent.com/38216027/95073484-e8847780-0747-11eb-94a4-b58f752b5a1f.png">
+
+> 수정 후 
+
+<img width="1267" alt="run audit - after" src="https://user-images.githubusercontent.com/38216027/95073498-f0441c00-0747-11eb-9be0-3421e6ed567e.png">
+
+
 [random]: https://developers.giphy.com/docs/api/endpoint#random
 [link]: https://developers.giphy.com/docs/api/endpoint/#trending
 [memory]: https://sungdoo.dev/programming/imag-and-memory-footprint/ 
@@ -242,3 +274,6 @@ Giphy앱과 비교해보았는데 애니메이션 속도가 비슷한 걸 알 �
 [commit_4]: https://github.com/ehgud0670/Banksalad_iOS_KimDoeHyung/commit/bcdfacfeb5faf861e502a42b066a67e380216514 
 [commit_5]: https://github.com/ehgud0670/Banksalad_iOS_KimDoeHyung/commit/0d6a50ab4eb31d40d8b92e0cc37b20dafc4cb7db 
 [commit_6]: https://github.com/ehgud0670/Banksalad_iOS_KimDoeHyung/commit/c6c4241648387572f2dd65b3fbebdfa948989e43 
+[commit_7]: https://github.com/ehgud0670/Banksalad_iOS_KimDoeHyung/commit/e6768f46c579babb591cd5a7dde3cf9fe2318ee4
+[commit_8]: https://github.com/ehgud0670/Banksalad_iOS_KimDoeHyung/commit/bb5374eedfe471505980bd63132f704a34c3a0f7
+[commit_9]: https://github.com/ehgud0670/Banksalad_iOS_KimDoeHyung/commit/5fb114e43ba3d3bf5caeb508685e5249e6be91b4 
