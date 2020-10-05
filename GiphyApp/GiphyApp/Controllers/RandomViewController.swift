@@ -107,15 +107,15 @@ extension RandomViewController {
             let constant: CGFloat = 10
             
             $0.bottom.equalTo(giphyImageView.snp.top).offset(-constant)
-            $0.width.equalTo(self.view).dividedBy(2)
+            $0.width.equalTo(self.view).dividedBy(1.8)
             $0.centerX.equalTo(self.view)
-            $0.height.equalTo(searchTextField.snp.width).dividedBy(5)
+            $0.height.equalTo(searchTextField.snp.width).dividedBy(4.8)
         }
         
         self.view.addSubview(randomButton)
         randomButton.snp.makeConstraints {
             $0.width.equalTo(searchTextField.snp.width)
-            $0.height.equalTo(randomButton.snp.width).multipliedBy(0.15)
+            $0.height.equalTo(randomButton.snp.width).multipliedBy(0.2)
             $0.centerX.equalTo(self.view.snp.centerX)
             $0.bottom.equalTo(searchTextField.snp.top).offset(-10)
         }
@@ -127,7 +127,7 @@ extension RandomViewController {
         self.view.addSubview(shareButton)
         shareButton.snp.makeConstraints {
             $0.width.equalTo(randomButton.snp.width)
-            $0.height.equalTo(shareButton.snp.width).multipliedBy(0.15)
+            $0.height.equalTo(shareButton.snp.width).multipliedBy(0.2)
             $0.centerX.equalTo(self.view.snp.centerX)
             $0.bottom.equalTo(randomButton.snp.top).offset(-10)
         }
