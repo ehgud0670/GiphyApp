@@ -265,6 +265,25 @@ Giphy앱과 비교해보았는데 애니메이션 속도가 비슷한 걸 알 �
 <img width="1267" alt="run audit - after" src="https://user-images.githubusercontent.com/38216027/95073498-f0441c00-0747-11eb-9be0-3421e6ed567e.png">
 
 
+## 보충 공부 
+
+### 1. 스크롤 뷰 
+
+* ContentInset은 패딩값이다.
+* ContentOffset은 bounds를 기준으로 한 content의 origin 값이다. 
+* SafeAreaInsets은 화면을 가릴 수 있는 패딩값으로 스크롤 뷰의 바운싱 유뮤의 기준이 된다.
+* ContentSize는 scrollview content의 전체 사이즈다.
+
+### 애니메이션 delays & durations & gcd(최대 공약수) & frames 
+
+* delays 배열의 한 원소 값은 Source의 해당 index의 Property값을 기준으로 만든다. 아마 애니메이션 이미지들의 각각의 **가중치값**인 것 같다. 
+* delays를 모두 합한게 duration 이다. 
+* delays 의 최대공약수인 gcd를 구한다. 
+* 해당 이미지들을 delays(index) / gcd 만큼 반복해 추가한다. 나중에 애니메이션을 돌릴때, 값이 클수록 해당 이미지는 애니메이션에서 느리고, 값이 작을수록 해당 이미지는 빠르다는 걸 알 수 있다. 
+* 마지막으로 `UIImage.animatedImage(with: frames, duration: Double(duration) / 1000.0)` 를 호출해 애니메이션된 이미지를 최종적으로 만든다. 
+
+
+
 [random]: https://developers.giphy.com/docs/api/endpoint#random
 [link]: https://developers.giphy.com/docs/api/endpoint/#trending
 [memory]: https://sungdoo.dev/programming/imag-and-memory-footprint/ 
