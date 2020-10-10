@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct GifsResponse: Codable {
+struct GiphysResponse: Codable {
     let data: [GiphyData]
     let pagination: Pagination
     let meta: Meta

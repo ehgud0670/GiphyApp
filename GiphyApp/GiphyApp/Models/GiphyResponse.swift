@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct GifResponse: Codable {
+struct GiphyResponse: Codable {
     let data: GiphyData
     let meta: Meta
 }

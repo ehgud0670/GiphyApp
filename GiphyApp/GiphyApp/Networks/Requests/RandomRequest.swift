@@ -8,9 +8,9 @@
 
 import Foundation
 
-protocol GifRequest: Request { }
+protocol GiphyRequest: Request { }
 
-struct RandomRequest: GifRequest {
+struct RandomRequest: GiphyRequest {
     private let tag: String
     
     init(tag: String = "") {

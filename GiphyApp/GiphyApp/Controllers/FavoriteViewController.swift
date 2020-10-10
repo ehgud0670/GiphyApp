@@ -14,7 +14,7 @@ import SnapKit
 
 final class FavoriteViewController: UIViewController {
     // MARK: - UI
-    private let gifCollectionView = UICollectionView(
+    private let giphysCollectionView = UICollectionView(
         frame: .zero,
         collectionViewLayout: UICollectionViewFlowLayout()
     )
@@ -22,8 +22,7 @@ final class FavoriteViewController: UIViewController {
     private let emptySubTitleLabel = UILabel()
     
     // MARK: - Properties
-    private var _fetchedResultsController: NSFetchedResultsController<CoreDataGiphy>?
-    var coreDataManager: CoreDataManager?
+    var coreDataManager: CoreDataGiphyManager?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,7 +36,7 @@ final class FavoriteViewController: UIViewController {
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(updateEmptyViews(notification:)),
-            name: CoreDataManager.Notification.dataUpdate,
+            name: CoreDataGiphyManager.Notification.dataUpdate,
             object: coreDataManager)
     }
     
@@ -58,17 +57,21 @@ extension FavoriteViewController {
             $0.backgroundColor = .systemPink
         }
         
-        gifCollectionView.do {
+        coreDataManager?.fetchedResultsController?.delegate = self
+        
+        giphysCollectionView.do {
             $0.backgroundColor = .clear
-            $0.register(GifCell.self, forCellWithReuseIdentifier: GifCell.reuseIdentifier)
-            $0.dataSource = self
+            $0.register(GiphyCell.self, forCellWithReuseIdentifier: GiphyCell.reuseIdentifier)
+            $0.dataSource = coreDataManager
             $0.delegate = self
         }
         
         emptyTitleLabel.do {
             $0.text = "즐겨찾기 한 이미지가 없습니다."
-            $0.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
             $0.textAlignment = .center
+            $0.font = .preferredFont(forTextStyle: .title2)
+            $0.adjustsFontForContentSizeCategory = true
+            $0.adjustsFontSizeToFitWidth = true
             
             if coreDataManager?.modelsAllCount != 0 {
                 $0.isHidden = true
@@ -77,8 +80,10 @@ extension FavoriteViewController {
         
         emptySubTitleLabel.do {
             $0.text = "별 모양을 눌러 즐겨찾기 기능을 이용해 보세요."
-            $0.font = UIFont.systemFont(ofSize: 15, weight: .medium)
             $0.textAlignment = .center
+            $0.font = .preferredFont(forTextStyle: .headline)
+            $0.adjustsFontForContentSizeCategory = true
+            $0.adjustsFontSizeToFitWidth = true
             
             if coreDataManager?.modelsAllCount != 0 {
                 $0.isHidden = true
@@ -87,8 +92,8 @@ extension FavoriteViewController {
     }
     
     private func configureLayout() {
-        self.view.addSubview(gifCollectionView)
-        gifCollectionView.snp.makeConstraints {
+        self.view.addSubview(giphysCollectionView)
+        giphysCollectionView.snp.makeConstraints {
             let constant: CGFloat = 10
             
             $0.top.equalTo(self.view.safeAreaLayoutGuide).inset(constant)
@@ -97,52 +102,24 @@ extension FavoriteViewController {
         
         self.view.addSubview(emptyTitleLabel)
         emptyTitleLabel.snp.makeConstraints {
-            $0.centerX.equalTo(self.view)
+            $0.leading.trailing.equalTo(self.view).inset(10)
             $0.centerY.equalTo(self.view).multipliedBy(0.8)
         }
         
         self.view.addSubview(emptySubTitleLabel)
         emptySubTitleLabel.snp.makeConstraints {
-            $0.centerX.equalTo(self.view)
+            $0.leading.trailing.equalTo(self.view).inset(10)
             $0.top.equalTo(emptyTitleLabel.snp.bottom).offset(15)
         }
-    }
-}
-
-// MARK: - UICollectionView DataSource
-extension FavoriteViewController: UICollectionViewDataSource {
-    func collectionView(
-        _ collectionView: UICollectionView,
-        numberOfItemsInSection section: Int
-    ) -> Int {
-        guard let fetchedResultsController = fetchedResultsController,
-            let sectionInfo = fetchedResultsController.sections?[section]
-            else { return 0 }
-        
-        return sectionInfo.numberOfObjects
-    }
-    
-    func collectionView(
-        _ collectionView: UICollectionView,
-        cellForItemAt indexPath: IndexPath
-    ) -> UICollectionViewCell {
-        guard let giphyCell = collectionView.dequeueReusableCell(
-            withReuseIdentifier: GifCell.reuseIdentifier,
-            for: indexPath
-            ) as? GifCell else { return GifCell() }
-        
-        guard let giphy = fetchedResultsController?.object(at: indexPath).giphy
-            else { return giphyCell }
-        
-        giphyCell.onData.onNext(giphy)
-        return giphyCell
     }
 }
 
 // MARK: - UICollectionView Delegate
 extension FavoriteViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let coreDatagiphy = fetchedResultsController?.object(at: indexPath) else { return }
+        guard let coreDatagiphy = coreDataManager?
+            .fetchedResultsController?
+            .object(at: indexPath) else { return }
         
         let detailViewController = DetailViewController().then {
             $0.giphy = coreDatagiphy.giphy
@@ -162,6 +139,7 @@ extension FavoriteViewController: UIViewControllerTransitioningDelegate {
         presenting: UIViewController?,
         source: UIViewController
     ) -> UIPresentationController? {
+        
         return HalfSizePresentationController(
             presentedViewController: presented,
             presenting: presenting
@@ -176,52 +154,11 @@ extension FavoriteViewController: UICollectionViewDelegateFlowLayout {
         layout collectionViewLayout: UICollectionViewLayout,
         sizeForItemAt indexPath: IndexPath
     ) -> CGSize {
+        
         let constant = (self.view.bounds.width - collectionView.frame.width) / 2
         let diameter = (collectionView.frame.width - 2 * constant) / 3
+        
         return CGSize(width: diameter.rounded(.down), height: diameter)
-    }
-}
-
-// MARK: - NSFetchedResultsController
-extension FavoriteViewController {
-    var fetchedResultsController: NSFetchedResultsController<CoreDataGiphy>? {
-        if _fetchedResultsController != nil {
-            return _fetchedResultsController!
-        }
-        
-        guard let context = coreDataManager?.context,
-            let fetchRequest = self.fetchRequest else { return nil }
-        
-        let aFetchedResultsController = NSFetchedResultsController(
-            fetchRequest: fetchRequest,
-            managedObjectContext: context,
-            sectionNameKeyPath: nil,
-            cacheName: "Giphy")
-        
-        aFetchedResultsController.delegate = self
-        _fetchedResultsController = aFetchedResultsController
-        
-        do {
-            try _fetchedResultsController!.performFetch()
-        } catch {
-            let nserror = error as NSError
-            print(nserror.localizedDescription)
-        }
-        
-        return _fetchedResultsController!
-    }
-    
-    private var fetchRequest: NSFetchRequest<CoreDataGiphy>? {
-        let fetchRequest: NSFetchRequest<CoreDataGiphy> = CoreDataGiphy.fetchRequest()
-        
-        if let coreDataManager = coreDataManager {
-            fetchRequest.fetchBatchSize = coreDataManager.countLimit
-        }
-        
-        let sortDescriptor = NSSortDescriptor(key: "favoriteDate", ascending: false)
-        fetchRequest.sortDescriptors = [sortDescriptor]
-        
-        return fetchRequest
     }
 }
 
@@ -234,9 +171,9 @@ extension FavoriteViewController: NSFetchedResultsControllerDelegate {
     ) {
         switch type {
         case .insert:
-            gifCollectionView.insertItems(at: [newIndexPath!])
+            giphysCollectionView.insertItems(at: [newIndexPath!])
         case .delete:
-            gifCollectionView.deleteItems(at: [indexPath!])
+            giphysCollectionView.deleteItems(at: [indexPath!])
         default:
             return
         }

@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct SearchRequest: GifsRequest {
+struct SearchRequest: GiphysRequest {
     private let query: String
     private let offset: String
     

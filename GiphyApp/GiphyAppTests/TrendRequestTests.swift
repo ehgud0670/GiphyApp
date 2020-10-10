@@ -28,7 +28,8 @@ final class TrendRequestTests: XCTestCase {
         XCTAssertEqual(
             request.queryItems!,
             [URLQueryItem(name: "api_key", value: "jzwguAwyjE6meldZ3VssS39SWnNA3kDF"),
-             URLQueryItem(name: "limit", value: "24")]
+             URLQueryItem(name: "limit", value: "24"),
+             URLQueryItem(name: "offset", value: "0")]
         )
     }
     
