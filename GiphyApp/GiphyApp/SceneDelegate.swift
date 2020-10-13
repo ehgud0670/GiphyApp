@@ -10,26 +10,50 @@ import UIKit
 
 final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
-
+    
     func scene(
         _ scene: UIScene,
         willConnectTo session: UISceneSession,
         options connectionOptions: UIScene.ConnectionOptions
     ) {
+        guard let windowScene = (scene as? UIWindowScene) else { return }
+        let window = UIWindow(windowScene: windowScene)
+        self.window = window
+        
+        guard let coreDataGiphyManager = coreDataGiphyManager else { return }
+        
+        window.rootViewController = tabBarController(with: coreDataGiphyManager)
+        window.makeKeyAndVisible()
+    }
+    
+    var coreDataGiphyManager: CoreDataGiphyManager? {
         guard let context = (UIApplication.shared.delegate
-            as? AppDelegate)?.persistentContainer.viewContext else { return }
+            as? AppDelegate)?.persistentContainer.viewContext else { return nil }
         
-        let coreDataManager = CoreDataGiphyManager(context: context)
+        return CoreDataGiphyManager(context: context)
+    }
+    
+    private func tabBarController(with coreDataGiphyManager: CoreDataGiphyManager) -> UITabBarController {
+        let tabBarController = UITabBarController()
+        let homeViewController = HomeViewController().then {
+            $0.coreDataManager = coreDataGiphyManager
+            $0.tabBarItem = UITabBarItem(title: "홈", image: UIImage(systemName: "house.fill"), tag: 0)
+        }
         
-        guard let window = window,
-        let tabController = window.rootViewController as? UITabBarController else { return }
+        let favoriteViewController = FavoriteViewController().then {
+            $0.coreDataManager = coreDataGiphyManager
+            $0.tabBarItem = UITabBarItem(title: "즐겨찾기", image: UIImage(systemName: "star.fill"), tag: 1)
+        }
         
-        guard let searchViewController = tabController.viewControllers?[0] as? SearchViewController,
-            let favoriteViewController = tabController.viewControllers?[1] as? FavoriteViewController
-            else { return }
+        let randomViewController = RandomViewController().then {
+            $0.tabBarItem = UITabBarItem(title: "랜덤", image: UIImage(systemName: "questionmark"), tag: 2)
+        }
         
-        searchViewController.coreDataManager = coreDataManager
-        favoriteViewController.coreDataManager = coreDataManager
+        tabBarController.viewControllers = [homeViewController,
+                                            favoriteViewController,
+                                            randomViewController]
+        
+        return tabBarController
     }
     
     func sceneDidDisconnect(_ scene: UIScene) {
@@ -39,22 +63,22 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // The scene may re-connect later, as its session was not neccessarily discarded
         // (see `application:didDiscardSceneSessions` instead).
     }
-
+    
     func sceneDidBecomeActive(_ scene: UIScene) {
         // Called when the scene has moved from an inactive state to an active state.
         // Use this method to restart any tasks that were paused (or not yet started) when the scene was inactive.
     }
-
+    
     func sceneWillResignActive(_ scene: UIScene) {
         // Called when the scene will move from an active state to an inactive state.
         // This may occur due to temporary interruptions (ex. an incoming phone call).
     }
-
+    
     func sceneWillEnterForeground(_ scene: UIScene) {
         // Called as the scene transitions from the background to the foreground.
         // Use this method to undo the changes made on entering the background.
     }
-
+    
     func sceneDidEnterBackground(_ scene: UIScene) {
         // Called as the scene transitions from the foreground to the background.
         // Use this method to save data, release shared resources, and store enough scene-specific state information
