@@ -35,7 +35,7 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     private func tabBarController(with coreDataGiphyManager: CoreDataGiphyManager) -> UITabBarController {
         let tabBarController = UITabBarController()
-        let searchViewController = SearchViewController().then {
+        let homeViewController = HomeViewController().then {
             $0.coreDataManager = coreDataGiphyManager
             $0.tabBarItem = UITabBarItem(title: "홈", image: UIImage(systemName: "house.fill"), tag: 0)
         }
@@ -49,7 +49,7 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             $0.tabBarItem = UITabBarItem(title: "랜덤", image: UIImage(systemName: "questionmark"), tag: 2)
         }
         
-        tabBarController.viewControllers = [searchViewController,
+        tabBarController.viewControllers = [homeViewController,
                                             favoriteViewController,
                                             randomViewController]
         

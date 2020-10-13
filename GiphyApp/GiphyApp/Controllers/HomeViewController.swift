@@ -15,7 +15,7 @@ import RxCocoa
 import Kingfisher
 import Alamofire
 
-final class SearchViewController: UIViewController {
+final class HomeViewController: UIViewController {
     // MARK: - UI
     private let searchTextField = SearchTextField()
     private let giphyCollectionView = UICollectionView(
@@ -77,7 +77,7 @@ final class SearchViewController: UIViewController {
 }
 
 // MARK: - Attributes & Layout
-extension SearchViewController {
+extension HomeViewController {
     private func configureAttributes() {
         self.view.do {
             $0.backgroundColor = .systemPurple
@@ -113,7 +113,7 @@ extension SearchViewController {
 }
 
 // MARK: - Scroll
-extension SearchViewController {
+extension HomeViewController {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if isSearchingWhenScrollIsNotTop {
             view.endEditing(true)
@@ -154,7 +154,7 @@ extension SearchViewController {
 }
 
 // MARK: - Binding
-extension SearchViewController {
+extension HomeViewController {
     private func configureBindings() {
         // use trend API
         searchTextField.rx.text.orEmpty
@@ -199,7 +199,7 @@ extension SearchViewController {
 }
 
 // MARK: - UICollectionView Delegate
-extension SearchViewController: UICollectionViewDelegate {
+extension HomeViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let giphy = giphysViewModel.giphy(at: indexPath.item) else { return }
         
@@ -215,7 +215,7 @@ extension SearchViewController: UICollectionViewDelegate {
 }
 
 // MARK: - UIViewController Transitioning Delegate
-extension SearchViewController: UIViewControllerTransitioningDelegate {
+extension HomeViewController: UIViewControllerTransitioningDelegate {
     func presentationController(
         forPresented presented: UIViewController,
         presenting: UIViewController?,
@@ -230,7 +230,7 @@ extension SearchViewController: UIViewControllerTransitioningDelegate {
 }
 
 // MARK: - UICollectionView Delegate FlowLayout
-extension SearchViewController: UICollectionViewDelegateFlowLayout {
+extension HomeViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(
         _ collectionView: UICollectionView,
         layout collectionViewLayout: UICollectionViewLayout,
