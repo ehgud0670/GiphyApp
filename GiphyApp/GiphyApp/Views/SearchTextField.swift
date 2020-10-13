@@ -44,7 +44,7 @@ extension SearchTextField {
     private func configureAttributes() {
         self.do {
             let attributes = [ NSAttributedString.Key.foregroundColor: UIColor.white ]
-            let placeHolderString = NSAttributedString(string: "Search Giphy", attributes: attributes)
+            let placeHolderString = NSAttributedString(string: "Giphy 검색하기", attributes: attributes)
             $0.attributedPlaceholder = placeHolderString
             
             $0.accessibilityIdentifier = "SearchTextField"
