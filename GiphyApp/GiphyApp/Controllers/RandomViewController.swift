@@ -61,7 +61,13 @@ extension RandomViewController {
         }
         
         searchTextField.do {
-            $0.layer.borderColor = UIColor.black.cgColor
+            let color = UIColor.black
+            $0.layer.borderColor = color.cgColor
+            $0.textColor = color
+            
+            let attributes = [ NSAttributedString.Key.foregroundColor: color ]
+            let placeHolderString = NSAttributedString(string: "검색", attributes: attributes)
+            $0.attributedPlaceholder = placeHolderString
         }
         
         giphyImageView.do {
