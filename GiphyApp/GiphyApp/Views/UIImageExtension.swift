@@ -27,28 +27,34 @@ extension UIImage {
     private static func delayForImage(at index: Int, source: CGImageSource) -> Double {
         var delay = 0.01
         
-        let cfProperties = CGImageSourceCopyPropertiesAtIndex(source, index, nil)
-        let gifProperties: CFDictionary = unsafeBitCast(
-            CFDictionaryGetValue(
+        guard let cfProperties = CGImageSourceCopyPropertiesAtIndex(source, index, nil),
+            let gifValue = CFDictionaryGetValue(
                 cfProperties,
-                Unmanaged.passUnretained(kCGImagePropertyGIFDictionary).toOpaque()
-            ),
+                Unmanaged.passUnretained(kCGImagePropertyGIFDictionary).toOpaque())
+            else { return delay }
+        
+        let gifProperties = unsafeBitCast(
+            gifValue,
             to: CFDictionary.self
         )
         
-        var delayObject: AnyObject = unsafeBitCast(
-            CFDictionaryGetValue(
-                gifProperties,
-                Unmanaged.passUnretained(kCGImagePropertyGIFUnclampedDelayTime).toOpaque()
-            ),
+        guard let delayValue = CFDictionaryGetValue(
+            gifProperties,
+            Unmanaged.passUnretained(kCGImagePropertyGIFUnclampedDelayTime).toOpaque())
+            else { return delay }
+        
+        var delayObject = unsafeBitCast(
+            delayValue,
             to: AnyObject.self)
         
         if delayObject.doubleValue == 0 {
+            guard let delayValue = CFDictionaryGetValue(
+                gifProperties,
+                Unmanaged.passUnretained(kCGImagePropertyGIFDelayTime).toOpaque())
+                else { return delay }
+            
             delayObject = unsafeBitCast(
-                CFDictionaryGetValue(
-                    gifProperties,
-                    Unmanaged.passUnretained(kCGImagePropertyGIFDelayTime).toOpaque()
-                ),
+                delayValue,
                 to: AnyObject.self)
         }
         
@@ -74,7 +80,7 @@ extension UIImage {
         for value in array {
             gcd = gcdForPair(lhs: value, rhs: gcd)
         }
-    
+        
         return gcd
     }
     
