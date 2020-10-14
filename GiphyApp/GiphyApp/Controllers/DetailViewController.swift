@@ -23,7 +23,7 @@ final class DetailViewController: UIViewController {
     
     // MARK: - Properties
     var giphy: Giphy?
-    var coreDataManager: CoreDataGiphyManager?
+    var coreDataManager: CoreDataGiphyViewModel?
     private var disposeBag = DisposeBag()
     private let imageUseCase = ImageUseCase()
     

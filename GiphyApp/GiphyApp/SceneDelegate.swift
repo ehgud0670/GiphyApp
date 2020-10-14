@@ -26,14 +26,14 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window.makeKeyAndVisible()
     }
     
-    var coreDataGiphyManager: CoreDataGiphyManager? {
+    var coreDataGiphyManager: CoreDataGiphyViewModel? {
         guard let context = (UIApplication.shared.delegate
             as? AppDelegate)?.persistentContainer.viewContext else { return nil }
         
-        return CoreDataGiphyManager(context: context)
+        return CoreDataGiphyViewModel(context: context)
     }
     
-    private func tabBarController(with coreDataGiphyManager: CoreDataGiphyManager) -> UITabBarController {
+    private func tabBarController(with coreDataGiphyManager: CoreDataGiphyViewModel) -> UITabBarController {
         let tabBarController = UITabBarController()
         let homeViewController = HomeViewController().then {
             $0.coreDataManager = coreDataGiphyManager
@@ -41,7 +41,7 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         }
         
         let favoriteViewController = FavoriteViewController().then {
-            $0.coreDataManager = coreDataGiphyManager
+            $0.coreDataGiphyViewModel = coreDataGiphyManager
             $0.tabBarItem = UITabBarItem(title: "즐겨찾기", image: UIImage(systemName: "star.fill"), tag: 1)
         }
         

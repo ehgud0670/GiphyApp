@@ -27,7 +27,7 @@ final class HomeViewController: UIViewController {
     private let giphysViewModel = GiphysViewModel()
     private let giphysUseCase = GiphysUseCase(giphysTask: GiphysTask())
     private var disposeBag = DisposeBag()
-    var coreDataManager: CoreDataGiphyManager?
+    var coreDataManager: CoreDataGiphyViewModel?
     
     override func viewDidLoad() {
         super.viewDidLoad()
