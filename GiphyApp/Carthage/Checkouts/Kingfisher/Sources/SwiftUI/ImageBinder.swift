@@ -27,23 +27,22 @@
 #if canImport(SwiftUI) && canImport(Combine)
 import Combine
 import SwiftUI
-#if !KingfisherCocoaPods
-import Kingfisher
-#endif
 
 @available(iOS 13.0, OSX 10.15, tvOS 13.0, watchOS 6.0, *)
 extension KFImage {
 
     /// Represents a binder for `KFImage`. It takes responsibility as an `ObjectBinding` and performs
     /// image downloading and progress reporting based on `KingfisherManager`.
-    public class ImageBinder: ObservableObject {
+    class ImageBinder: ObservableObject {
 
         let source: Source?
-        let options: KingfisherOptionsInfo?
+        var options = KingfisherParsedOptionsInfo(KingfisherManager.shared.defaultOptions)
 
         var downloadTask: DownloadTask?
 
-        var loadingOrSuccessed: Bool = false
+        var loadingOrSucceeded: Bool {
+            return downloadTask != nil || loadedImage != nil
+        }
 
         let onFailureDelegate = Delegate<KingfisherError, Void>()
         let onSuccessDelegate = Delegate<RetrieveImageResult, Void>()
@@ -51,23 +50,39 @@ extension KFImage {
 
         var isLoaded: Binding<Bool>
 
-        @Published var image: KFCrossPlatformImage?
+        @Published var loaded = false
+        @Published var loadedImage: KFCrossPlatformImage? = nil
 
-        init(source: Source?, options: KingfisherOptionsInfo?, isLoaded: Binding<Bool>) {
+        @available(*, deprecated, message: "The `options` version is deprecated And will be removed soon.")
+        init(source: Source?, options: KingfisherOptionsInfo? = nil, isLoaded: Binding<Bool>) {
             self.source = source
-            self.options = options
+            // The refreshing of `KFImage` would happen much more frequently then an `UIImageView`, even as a
+            // "side-effect". To prevent unintended flickering, add `.loadDiskFileSynchronously` as a default.
+            self.options = KingfisherParsedOptionsInfo(
+                KingfisherManager.shared.defaultOptions +
+                (options ?? []) +
+                [.loadDiskFileSynchronously]
+            )
             self.isLoaded = isLoaded
-            self.image = nil
+        }
+
+        init(source: Source?, isLoaded: Binding<Bool>) {
+            self.source = source
+            // The refreshing of `KFImage` would happen much more frequently then an `UIImageView`, even as a
+            // "side-effect". To prevent unintended flickering, add `.loadDiskFileSynchronously` as a default.
+            self.options = KingfisherParsedOptionsInfo(
+                KingfisherManager.shared.defaultOptions +
+                [.loadDiskFileSynchronously]
+            )
+            self.isLoaded = isLoaded
         }
 
         func start() {
 
-            guard !loadingOrSuccessed else { return }
-
-            loadingOrSuccessed = true
+            guard !loadingOrSucceeded else { return }
 
             guard let source = source else {
-                DispatchQueue.main.async {
+                CallbackQueue.mainCurrentOrAsync.execute {
                     self.onFailureDelegate.call(KingfisherError.imageSettingError(reason: .emptySource))
                 }
                 return
@@ -87,20 +102,20 @@ extension KFImage {
                         self.downloadTask = nil
                         switch result {
                         case .success(let value):
-                            // The normalized version of image is used to solve #1395
-                            // It should be not necessary if SwiftUI.Image can handle resizing correctly when created
-                            // by `Image.init(uiImage:)`. (The orientation information should be already contained in
-                            // a `UIImage`)
-                            // https://github.com/onevcat/Kingfisher/issues/1395
-                            let image = value.image.kf.normalized
-                            DispatchQueue.main.async {
-                                self.image = image
+
+                            CallbackQueue.mainCurrentOrAsync.execute {
+                                self.loadedImage = value.image
                                 self.isLoaded.wrappedValue = true
+                                let animation = self.fadeTransitionDuration(cacheType: value.cacheType)
+                                    .map { duration in Animation.linear(duration: duration) }
+                                withAnimation(animation) { self.loaded = true }
+                            }
+
+                            CallbackQueue.mainAsync.execute {
                                 self.onSuccessDelegate.call(value)
                             }
                         case .failure(let error):
-                            self.loadingOrSuccessed = false
-                            DispatchQueue.main.async {
+                            CallbackQueue.mainAsync.execute {
                                 self.onFailureDelegate.call(error)
                             }
                         }
@@ -108,26 +123,43 @@ extension KFImage {
         }
 
         /// Cancels the download task if it is in progress.
-        public func cancel() {
+        func cancel() {
             downloadTask?.cancel()
+            downloadTask = nil
         }
 
-        func setOnFailure(perform action: ((KingfisherError) -> Void)?) {
-            onFailureDelegate.delegate(on: self) { (self, error) in
-                action?(error)
-            }
+        private func shouldApplyFade(cacheType: CacheType) -> Bool {
+            options.forceTransition || cacheType == .none
         }
 
-        func setOnSuccess(perform action: ((RetrieveImageResult) -> Void)?) {
-            onSuccessDelegate.delegate(on: self) { (self, result) in
-                action?(result)
-            }
+        private func fadeTransitionDuration(cacheType: CacheType) -> TimeInterval? {
+            shouldApplyFade(cacheType: cacheType)
+                ? options.transition.fadeDuration
+                : nil
         }
+    }
+}
 
-        func setOnProgress(perform action: ((Int64, Int64) -> Void)?) {
-            onProgressDelegate.delegate(on: self) { (self, result) in
-                action?(result.0, result.1)
-            }
+@available(iOS 13.0, OSX 10.15, tvOS 13.0, watchOS 6.0, *)
+extension KFImage.ImageBinder: Hashable {
+    static func == (lhs: KFImage.ImageBinder, rhs: KFImage.ImageBinder) -> Bool {
+        lhs.source == rhs.source && lhs.options.processor.identifier == rhs.options.processor.identifier
+    }
+
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(source)
+        hasher.combine(options.processor.identifier)
+    }
+}
+
+extension ImageTransition {
+    // Only for fade effect in SwiftUI.
+    fileprivate var fadeDuration: TimeInterval? {
+        switch self {
+        case .fade(let duration):
+            return duration
+        default:
+            return nil
         }
     }
 }
