@@ -1,6 +1,5 @@
 github "ReactorKit/ReactorKit"
 github "ReactorKit/WeakMapTable"
-github "ReactiveX/RxSwift"
 github "Alamofire/Alamofire"
 github "onevcat/Kingfisher"
 github "SnapKit/SnapKit"

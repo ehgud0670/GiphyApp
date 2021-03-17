@@ -1,5 +1,4 @@
 github "Alamofire/Alamofire" "5.4.1"
-github "ReactiveX/RxSwift" "6.1.0"
 github "ReactorKit/ReactorKit" "3.0.0"
 github "ReactorKit/WeakMapTable" "1.2.0"
 github "SnapKit/SnapKit" "5.0.1"
