@@ -100,6 +100,7 @@ extension DetailViewController {
         
         nameLabel.do {
             $0.textAlignment = .center
+            $0.textColor = .white
             $0.font = .preferredFont(forTextStyle: .callout)
             $0.adjustsFontForContentSizeCategory = true
             $0.adjustsFontSizeToFitWidth = true
@@ -137,7 +138,7 @@ extension DetailViewController {
         closeButton.snp.makeConstraints {
             let constant = 18
             $0.top.equalTo(self.view).offset(constant)
-            $0.trailing.equalTo(self.view).offset(-constant)
+            $0.centerX.equalTo(self.view)
         }
         
         self.view.addSubview(giphyImageView)
