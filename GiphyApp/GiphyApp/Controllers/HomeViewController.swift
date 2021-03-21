@@ -80,11 +80,11 @@ final class HomeViewController: UIViewController {
 extension HomeViewController {
     private func configureAttributes() {
         self.view.do {
-            $0.backgroundColor = .systemPurple
+            $0.backgroundColor = .mainDark
         }
         
         giphyCollectionView.do {
-            $0.backgroundColor = .systemPurple
+            $0.backgroundColor = .mainDark
             $0.register(GiphyCell.self, forCellWithReuseIdentifier: GiphyCell.reuseIdentifier)
             $0.dataSource = giphysViewModel
             $0.delegate = self
@@ -159,16 +159,16 @@ extension HomeViewController {
         // use trend API
         searchTextField.rx.text.orEmpty
             .distinctUntilChanged()
-            .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .userInteractive))
+            .subscribe(on: ConcurrentDispatchQueueScheduler(qos: .userInteractive))
             .filter { $0 == "" }
-            .do { [weak self] in
-                self?.giphysViewModel.clear()
-                ImageCache.default.clearMemoryCache() }
+            .do(onDispose: { [weak self] in
+                    self?.giphysViewModel.clear()
+                    ImageCache.default.clearMemoryCache() })
             .subscribe(onNext: { [weak self] _ in
                 guard let self = self, self.giphysUseCase.isNotLoading else { return }
                 
                 self.giphysUseCase.loadFirstTrendyGiphys()
-                    .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .utility))
+                    .subscribe(on: ConcurrentDispatchQueueScheduler(qos: .utility))
                     .subscribe(
                         onNext: { self.giphysViewModel.updateFirst(with: $0) },
                         onError: { if $0.isSessionError { Util.presentAlertWithNetworkError(on: self) } })
@@ -178,7 +178,7 @@ extension HomeViewController {
         // use search API
         searchTextField.rx.text.orEmpty
             .distinctUntilChanged()
-            .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .userInteractive))
+            .subscribe(on: ConcurrentDispatchQueueScheduler(qos: .userInteractive))
             .filter { $0 != "" }
             .do(onNext: {  [weak self] in
                 self?.searchTextField.setAccessibilityLabel(with: $0)
@@ -189,7 +189,7 @@ extension HomeViewController {
                 guard let self = self, self.giphysUseCase.isNotLoading else { return }
                 
                 self.giphysUseCase.loadFirstSearchGiphys(with: $0)
-                    .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .utility))
+                    .subscribe(on: ConcurrentDispatchQueueScheduler(qos: .utility))
                     .subscribe(
                         onNext: { self.giphysViewModel.updateFirst(with: $0) },
                         onError: { if $0.isSessionError { Util.presentAlertWithNetworkError(on: self) } })

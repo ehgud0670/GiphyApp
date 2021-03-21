@@ -34,7 +34,11 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
     
     private func tabBarController(with coreDataGiphyManager: CoreDataGiphyViewModel) -> UITabBarController {
-        let tabBarController = UITabBarController()
+        let tabBarController = UITabBarController().then {
+            $0.tabBar.barTintColor = .black
+            $0.tabBar.tintColor = .systemPink
+        }
+        
         let homeViewController = HomeViewController().then {
             $0.coreDataManager = coreDataGiphyManager
             $0.tabBarItem = UITabBarItem(title: "홈", image: UIImage(systemName: "house.fill"), tag: 0)

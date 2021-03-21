@@ -24,7 +24,7 @@ final class GiphysUseCase {
     private func loadGiphys(with giphysRequest: GiphysRequest) -> Observable<GiphysResponse> {
         return giphysTask.perform(giphysRequest)
             .take(1)
-            .do(onDispose:  { [weak self] in self?.giphysTask.setIsLoadingFalse() })
+            .do(onDispose: { [weak self] in self?.giphysTask.setIsLoadingFalse() })
     }
     
     func loadFirstTrendyGiphys() -> Observable<GiphysResponse> {

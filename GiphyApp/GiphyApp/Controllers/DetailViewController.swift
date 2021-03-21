@@ -80,7 +80,7 @@ final class DetailViewController: UIViewController {
 extension DetailViewController {
     private func configureAttributes() {
         self.view.do {
-            $0.backgroundColor = .systemTeal
+            $0.backgroundColor = .subDark
             $0.layer.cornerRadius = 20
         }
         
@@ -109,7 +109,7 @@ extension DetailViewController {
         
         shareButton.do {
             $0.layer.cornerRadius = 20
-            $0.backgroundColor = .systemBlue
+            $0.backgroundColor = .systemPink
             $0.setTitle("공유", for: .normal)
             $0.titleLabel?.font = .preferredFont(forTextStyle: .title3)
             $0.titleLabel?.textAlignment = .center

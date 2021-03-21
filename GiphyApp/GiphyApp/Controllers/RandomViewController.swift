@@ -57,21 +57,22 @@ final class RandomViewController: UIViewController {
 extension RandomViewController {
     private func configureAttributes() {
         self.view.do {
-            $0.backgroundColor = .cyan
+            $0.backgroundColor = .mainDark
         }
         
         searchTextField.do {
-            let color = UIColor.black
+            let color = UIColor.white
             $0.layer.borderColor = color.cgColor
             $0.textColor = color
             
             let attributes = [ NSAttributedString.Key.foregroundColor: color ]
-            let placeHolderString = NSAttributedString(string: "검색", attributes: attributes)
+            let placeHolderString = NSAttributedString(string: "랜덤 검색", attributes: attributes)
             $0.attributedPlaceholder = placeHolderString
         }
         
         giphyImageView.do {
             $0.image = Images.randomPlaceholder
+            $0.backgroundColor = .lightGray
         }
         
         randomButton.do {
@@ -101,29 +102,30 @@ extension RandomViewController {
     
     private func configureLayout() {
         self.view.addSubview(searchTextField)
+        searchTextField.snp.makeConstraints {
+            let safeArea = self.view.safeAreaLayoutGuide
+            let constant: CGFloat = 10
+            
+            $0.top.equalTo(safeArea).inset(constant)
+            $0.leading.trailing.equalTo(self.view).inset(constant)
+            $0.height.equalTo(searchTextField.snp.width).dividedBy(7)
+        }
         
         self.view.addSubview(giphyImageView)
         giphyImageView.snp.makeConstraints {
-            $0.width.height.equalTo(self.view.snp.width).dividedBy(2)
+            $0.width.height.equalTo(self.view.snp.width).dividedBy(1.5)
             $0.centerX.equalTo(self.view)
-            $0.centerY.equalTo(self.view).multipliedBy(0.9)
-        }
-        
-        searchTextField.snp.makeConstraints {
-            let constant: CGFloat = 10
-            
-            $0.bottom.equalTo(giphyImageView.snp.top).offset(-constant)
-            $0.width.equalTo(self.view).dividedBy(1.8)
-            $0.centerX.equalTo(self.view)
-            $0.height.equalTo(searchTextField.snp.width).dividedBy(4.8)
+            let constant = 30
+            $0.top.equalTo(searchTextField.snp.bottom).offset(constant)
         }
         
         self.view.addSubview(randomButton)
         randomButton.snp.makeConstraints {
-            $0.width.equalTo(searchTextField.snp.width)
+            $0.width.equalTo(self.view.snp.width).dividedBy(1.5)
             $0.height.equalTo(randomButton.snp.width).multipliedBy(0.2)
             $0.centerX.equalTo(self.view.snp.centerX)
-            $0.bottom.equalTo(searchTextField.snp.top).offset(-10)
+            let constant = 15
+            $0.top.equalTo(giphyImageView.snp.bottom).offset(constant)
         }
         
         randomButton.titleLabel?.snp.makeConstraints {
@@ -133,9 +135,10 @@ extension RandomViewController {
         self.view.addSubview(shareButton)
         shareButton.snp.makeConstraints {
             $0.width.equalTo(randomButton.snp.width)
-            $0.height.equalTo(shareButton.snp.width).multipliedBy(0.2)
+            $0.height.equalTo(randomButton.snp.height)
             $0.centerX.equalTo(self.view.snp.centerX)
-            $0.bottom.equalTo(randomButton.snp.top).offset(-10)
+            let constant = 15
+            $0.top.equalTo(randomButton.snp.bottom).offset(constant)
         }
         
         shareButton.titleLabel?.snp.makeConstraints {
