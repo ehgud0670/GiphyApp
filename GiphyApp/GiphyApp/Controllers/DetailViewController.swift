@@ -100,6 +100,7 @@ extension DetailViewController {
         
         nameLabel.do {
             $0.textAlignment = .center
+            $0.textColor = .white
             $0.font = .preferredFont(forTextStyle: .callout)
             $0.adjustsFontForContentSizeCategory = true
             $0.adjustsFontSizeToFitWidth = true
