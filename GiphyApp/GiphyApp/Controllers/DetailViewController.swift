@@ -138,7 +138,7 @@ extension DetailViewController {
         closeButton.snp.makeConstraints {
             let constant = 18
             $0.top.equalTo(self.view).offset(constant)
-            $0.trailing.equalTo(self.view).offset(-constant)
+            $0.centerX.equalTo(self.view)
         }
         
         self.view.addSubview(giphyImageView)
