@@ -28,7 +28,7 @@
 
 * 상세(모달) 화면
 
-  ![detail](https://user-images.githubusercontent.com/38216027/111904786-f165cd00-8a8b-11eb-9c2a-54882dd786ef.gif)
+  ![detail](https://user-images.githubusercontent.com/38216027/111913009-88904c00-8aaf-11eb-966a-7a0100d581a3.gif)
 
   * 셀을 클릭하면 나오는 화면으로, 해당 Gif 이미지의 제목도 같이 보여줍니다. 
   * 별 버튼을 누르면 해당 Gif이미지는 즐겨찾기 데이터로 추가됩니다.
