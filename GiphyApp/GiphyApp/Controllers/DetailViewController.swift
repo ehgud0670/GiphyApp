@@ -23,7 +23,7 @@ final class DetailViewController: UIViewController {
     
     // MARK: - Properties
     var giphy: Giphy?
-    var coreDataManager: CoreDataGiphyManager?
+    var coreDataManager: CoreDataGiphyViewModel?
     private var disposeBag = DisposeBag()
     private let imageUseCase = ImageUseCase()
     
@@ -80,7 +80,7 @@ final class DetailViewController: UIViewController {
 extension DetailViewController {
     private func configureAttributes() {
         self.view.do {
-            $0.backgroundColor = .systemTeal
+            $0.backgroundColor = .subDark
             $0.layer.cornerRadius = 20
         }
         
@@ -90,7 +90,7 @@ extension DetailViewController {
         
         giphyImageView.do {
             $0.contentMode = .scaleAspectFit
-            $0.image = Images.gifPlaceholder
+            $0.image = UIImage.from(color: .mainDark)
             guard let urlString = giphy?.originalURLString else { return }
             let max: CGFloat = 160
             imageUseCase.animatedImageWithRx(with: urlString, with: CGSize(width: max, height: max))
@@ -109,7 +109,7 @@ extension DetailViewController {
         
         shareButton.do {
             $0.layer.cornerRadius = 20
-            $0.backgroundColor = .systemBlue
+            $0.backgroundColor = .systemPink
             $0.setTitle("공유", for: .normal)
             $0.titleLabel?.font = .preferredFont(forTextStyle: .title3)
             $0.titleLabel?.textAlignment = .center
