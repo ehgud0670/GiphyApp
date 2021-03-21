@@ -1,26 +1,26 @@
 # GiphyApp
 
-## 앱 소개 
-
+## 앱 소개
+ 
 [Giphy API][giphy_api]를 이용해 gif 이미지들을 보여주는 앱입니다. 화면은 홈 화면, 즐겨찾기 화면, 랜덤 화면, 상세(모달)화면이 있습니다. 
 
 * 홈 화면 
   
-  ![홈](https://user-images.githubusercontent.com/38216027/95969690-05a4fe80-0e4a-11eb-94d9-b25247a05188.gif)
+  ![home](https://user-images.githubusercontent.com/38216027/111904762-dabf7600-8a8b-11eb-85b3-23af879569ff.gif)
  
   * Gif 이미지를 서버로부터 가져와 보여줍니다. 검색하지 않는 경우 [Trend API][trend_api]를 이용해 gif 이미지를 가져오고, 검색하는 경우 한 글자씩 입력할 때마다, [Search API][search_api]를 이용해 gif 이미지를 가져옵니다.
   * 셀을 클릭하면 상세(모달)화면이 떠오릅니다. 상세(모달)화면으로 해당 gif를 공유하거나 즐겨찾기 할 수 있습니다. 
 
 * 즐겨찾기 화면
-
-  ![즐겨](https://user-images.githubusercontent.com/38216027/95969849-35ec9d00-0e4a-11eb-84d5-d567798a9a63.gif)
+  
+  ![favorite](https://user-images.githubusercontent.com/38216027/111904951-a13b3a80-8a8c-11eb-97c6-02f48f006576.gif)
 
   * 사용자의 즐겨찾기 Gif 이미지들을 보여주는 화면입니다. **CoreData**를 사용해 앱을 껏다 다시 켜도 즐겨찾기 데이터가 유지되도록 하였고, 즐겨찾기 이미지의 추가 및 삭제가 콜렉션 뷰에 실시간으로 반영되도록 하였습니다. 
   * 즐겨찾기 이미지가 없는 경우, 레이블을 이용해 사용자에게 **데이터가 없음**을 가이드합니다. 
 
 * 랜덤 화면 
 
-  ![랜덤](https://user-images.githubusercontent.com/38216027/95970296-bf9c6a80-0e4a-11eb-88c4-f82faa3c3e7c.gif)
+  ![random](https://user-images.githubusercontent.com/38216027/111905064-34747000-8a8d-11eb-9aab-889697366a46.gif)
 
   * [Random API][random_api] 를 이용해 랜덤하게 gif를 보여주는 화면입니다. 
   * 텍스트를 입력하면 텍스트 관련 gif를 랜덤하게 골라 보여줍니다. 
@@ -28,7 +28,7 @@
 
 * 상세(모달) 화면
 
-  ![상세](https://user-images.githubusercontent.com/38216027/95970585-17d36c80-0e4b-11eb-95fe-df7f9f27ddbe.gif)
+  ![detail](https://user-images.githubusercontent.com/38216027/111904786-f165cd00-8a8b-11eb-9c2a-54882dd786ef.gif)
 
   * 셀을 클릭하면 나오는 화면으로, 해당 Gif 이미지의 제목도 같이 보여줍니다. 
   * 별 버튼을 누르면 해당 Gif이미지는 즐겨찾기 데이터로 추가됩니다.
