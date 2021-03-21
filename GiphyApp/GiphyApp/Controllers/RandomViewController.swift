@@ -57,11 +57,11 @@ final class RandomViewController: UIViewController {
 extension RandomViewController {
     private func configureAttributes() {
         self.view.do {
-            $0.backgroundColor = .cyan
+            $0.backgroundColor = .black
         }
         
         searchTextField.do {
-            let color = UIColor.black
+            let color = UIColor.white
             $0.layer.borderColor = color.cgColor
             $0.textColor = color
             
@@ -72,6 +72,7 @@ extension RandomViewController {
         
         giphyImageView.do {
             $0.image = Images.randomPlaceholder
+            $0.backgroundColor = .lightGray
         }
         
         randomButton.do {
