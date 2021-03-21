@@ -20,6 +20,15 @@
         }
       },
       {
+        "package": "RxAnimated",
+        "repositoryURL": "https://github.com/RxSwiftCommunity/RxAnimated",
+        "state": {
+          "branch": null,
+          "revision": "0662b385d5bae8e533c38e979b58a284001286a2",
+          "version": "0.9.0"
+        }
+      },
+      {
         "package": "RxSwift",
         "repositoryURL": "https://github.com/ReactiveX/RxSwift",
         "state": {
