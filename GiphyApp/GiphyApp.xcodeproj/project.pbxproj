@@ -16,9 +16,9 @@
 		5A02C4DB2519C57B009AEC55 /* GiphyAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A02C4DA2519C57B009AEC55 /* GiphyAppUITests.swift */; };
 		5A03DFC82519E619003C43D7 /* GiphyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A03DFC72519E619003C43D7 /* GiphyCell.swift */; };
 		5A03DFCA2519E634003C43D7 /* ReuseIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A03DFC92519E634003C43D7 /* ReuseIdentifier.swift */; };
-		5A073DBA2601D31C005D038B /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 5A073DB92601D31C005D038B /* RxSwift */; };
-		5A073DBE2601D31C005D038B /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = 5A073DBD2601D31C005D038B /* RxRelay */; };
-		5A073DC02601D31C005D038B /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 5A073DBF2601D31C005D038B /* RxCocoa */; };
+		5A073DBA2601D31C005D038B /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 5A073DB92601D31C005D038B /* SwiftPackageProductDependency */; };
+		5A073DBE2601D31C005D038B /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 5A073DBD2601D31C005D038B /* SwiftPackageProductDependency */; };
+		5A073DC02601D31C005D038B /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 5A073DBF2601D31C005D038B /* SwiftPackageProductDependency */; };
 		5A0917ED251E2850008A6DD8 /* GiphyTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A0917EC251E2850008A6DD8 /* GiphyTask.swift */; };
 		5A0917EF251E2883008A6DD8 /* RandomRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A0917EE251E2883008A6DD8 /* RandomRequest.swift */; };
 		5A0917F1251E293B008A6DD8 /* GiphyData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A0917F0251E293B008A6DD8 /* GiphyData.swift */; };
@@ -28,9 +28,9 @@
 		5A0A16DB251C774A003037C3 /* FavoriteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A0A16DA251C774A003037C3 /* FavoriteButton.swift */; };
 		5A3219B9251B24D0002FA565 /* GiphysTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A3219B8251B24D0002FA565 /* GiphysTask.swift */; };
 		5A3219BD251B4D62002FA565 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A3219BC251B4D62002FA565 /* Constant.swift */; };
-		5A343A202601D8800048A550 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 5A343A1F2601D8800048A550 /* Kingfisher */; };
-		5A343A262601D8C00048A550 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 5A343A252601D8C00048A550 /* SnapKit */; };
-		5A343A2C2601D91E0048A550 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 5A343A2B2601D91E0048A550 /* Alamofire */; };
+		5A343A202601D8800048A550 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 5A343A1F2601D8800048A550 /* SwiftPackageProductDependency */; };
+		5A343A262601D8C00048A550 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 5A343A252601D8C00048A550 /* SwiftPackageProductDependency */; };
+		5A343A2C2601D91E0048A550 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 5A343A2B2601D91E0048A550 /* SwiftPackageProductDependency */; };
 		5A356241251E7928004BD7BE /* Giphy.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5A35623F251E7928004BD7BE /* Giphy.xcdatamodeld */; };
 		5A39ED10251B6737004C6FE3 /* ScrollViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A39ED0F251B6737004C6FE3 /* ScrollViewExtensions.swift */; };
 		5A44884F251B021F0005CF22 /* TrendRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A44884E251B021F0005CF22 /* TrendRequest.swift */; };
@@ -52,7 +52,7 @@
 		5A836B65251DFDE000F4C38A /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A836B64251DFDE000F4C38A /* Util.swift */; };
 		5A836B67251E0CDD00F4C38A /* ErrorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A836B66251E0CDD00F4C38A /* ErrorExtensions.swift */; };
 		5AA719192519CD5C00BC5962 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 5AA719182519CD5C00BC5962 /* .swiftlint.yml */; };
-		5AA7191C2519CE7F00BC5962 /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = 5AA7191B2519CE7F00BC5962 /* Then */; };
+		5AA7191C2519CE7F00BC5962 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 5AA7191B2519CE7F00BC5962 /* SwiftPackageProductDependency */; };
 		5AA719202519CFC500BC5962 /* FavoriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AA7191F2519CFC500BC5962 /* FavoriteViewController.swift */; };
 		5AA719222519D04100BC5962 /* RandomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AA719212519D04100BC5962 /* RandomViewController.swift */; };
 		5AA719282519D55F00BC5962 /* SearchTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AA719272519D55F00BC5962 /* SearchTextField.swift */; };
@@ -69,6 +69,7 @@
 		5AF75A02251EC8DE00356F4E /* Giphy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AF75A01251EC8DE00356F4E /* Giphy.swift */; };
 		DAF4AFBE633BF0D8E94D06A4 /* Pods_GiphyApp_GiphyAppUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25014703C4BE121205B4C5ED /* Pods_GiphyApp_GiphyAppUITests.framework */; };
 		E8C3BEBE267F217EA80C9814 /* Pods_GiphyAppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDB3FFF1354DB5E22BC5B449 /* Pods_GiphyAppTests.framework */; };
+		F2EAD85826074275000892B8 /* fixcodeproject.rb in Resources */ = {isa = PBXBuildFile; fileRef = F2EAD85726074275000892B8 /* fixcodeproject.rb */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -165,6 +166,7 @@
 		CDB3FFF1354DB5E22BC5B449 /* Pods_GiphyAppTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GiphyAppTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9D792D6B706E538907D71D3 /* Pods-GiphyAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GiphyAppTests.release.xcconfig"; path = "Target Support Files/Pods-GiphyAppTests/Pods-GiphyAppTests.release.xcconfig"; sourceTree = "<group>"; };
 		E7F2A2B77DE503ACC6B4E58A /* Pods-GiphyApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GiphyApp.debug.xcconfig"; path = "Target Support Files/Pods-GiphyApp/Pods-GiphyApp.debug.xcconfig"; sourceTree = "<group>"; };
+		F2EAD85726074275000892B8 /* fixcodeproject.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = fixcodeproject.rb; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -172,14 +174,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5A073DBA2601D31C005D038B /* RxSwift in Frameworks */,
-				5AA7191C2519CE7F00BC5962 /* Then in Frameworks */,
-				5A073DC02601D31C005D038B /* RxCocoa in Frameworks */,
-				5A343A202601D8800048A550 /* Kingfisher in Frameworks */,
-				5A343A262601D8C00048A550 /* SnapKit in Frameworks */,
+				5A073DBA2601D31C005D038B /* BuildFile in Frameworks */,
+				5AA7191C2519CE7F00BC5962 /* BuildFile in Frameworks */,
+				5A073DC02601D31C005D038B /* BuildFile in Frameworks */,
+				5A343A202601D8800048A550 /* BuildFile in Frameworks */,
+				5A343A262601D8C00048A550 /* BuildFile in Frameworks */,
 				2312062120554E1F342F661C /* Pods_GiphyApp.framework in Frameworks */,
-				5A073DBE2601D31C005D038B /* RxRelay in Frameworks */,
-				5A343A2C2601D91E0048A550 /* Alamofire in Frameworks */,
+				5A073DBE2601D31C005D038B /* BuildFile in Frameworks */,
+				5A343A2C2601D91E0048A550 /* BuildFile in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -205,6 +207,7 @@
 		5A02C4AC2519C577009AEC55 = {
 			isa = PBXGroup;
 			children = (
+				F2EAD85726074275000892B8 /* fixcodeproject.rb */,
 				5AA719182519CD5C00BC5962 /* .swiftlint.yml */,
 				5A02C4B72519C577009AEC55 /* GiphyApp */,
 				5A02C4CE2519C57B009AEC55 /* GiphyAppTests */,
@@ -432,6 +435,7 @@
 				5A02C4B22519C577009AEC55 /* Frameworks */,
 				5A02C4B32519C577009AEC55 /* Resources */,
 				5AA719172519CCE400BC5962 /* ShellScript */,
+				F2EAD85C260742B8000892B8 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -439,13 +443,13 @@
 			);
 			name = GiphyApp;
 			packageProductDependencies = (
-				5AA7191B2519CE7F00BC5962 /* Then */,
-				5A073DB92601D31C005D038B /* RxSwift */,
-				5A073DBD2601D31C005D038B /* RxRelay */,
-				5A073DBF2601D31C005D038B /* RxCocoa */,
-				5A343A1F2601D8800048A550 /* Kingfisher */,
-				5A343A252601D8C00048A550 /* SnapKit */,
-				5A343A2B2601D91E0048A550 /* Alamofire */,
+				5AA7191B2519CE7F00BC5962 /* SwiftPackageProductDependency */,
+				5A073DB92601D31C005D038B /* SwiftPackageProductDependency */,
+				5A073DBD2601D31C005D038B /* SwiftPackageProductDependency */,
+				5A073DBF2601D31C005D038B /* SwiftPackageProductDependency */,
+				5A343A1F2601D8800048A550 /* SwiftPackageProductDependency */,
+				5A343A252601D8C00048A550 /* SwiftPackageProductDependency */,
+				5A343A2B2601D91E0048A550 /* SwiftPackageProductDependency */,
 			);
 			productName = GiphyApp;
 			productReference = 5A02C4B52519C577009AEC55 /* GiphyApp.app */;
@@ -523,11 +527,11 @@
 			);
 			mainGroup = 5A02C4AC2519C577009AEC55;
 			packageReferences = (
-				5AA7191A2519CE7E00BC5962 /* XCRemoteSwiftPackageReference "Then" */,
-				5A073DB82601D31C005D038B /* XCRemoteSwiftPackageReference "RxSwift" */,
-				5A343A1E2601D8800048A550 /* XCRemoteSwiftPackageReference "Kingfisher" */,
-				5A343A242601D8C00048A550 /* XCRemoteSwiftPackageReference "SnapKit" */,
-				5A343A2A2601D91E0048A550 /* XCRemoteSwiftPackageReference "Alamofire" */,
+				5AA7191A2519CE7E00BC5962 /* RemoteSwiftPackageReference */,
+				5A073DB82601D31C005D038B /* RemoteSwiftPackageReference */,
+				5A343A1E2601D8800048A550 /* RemoteSwiftPackageReference */,
+				5A343A242601D8C00048A550 /* RemoteSwiftPackageReference */,
+				5A343A2A2601D91E0048A550 /* RemoteSwiftPackageReference */,
 			);
 			productRefGroup = 5A02C4B62519C577009AEC55 /* Products */;
 			projectDirPath = "";
@@ -545,6 +549,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F2EAD85826074275000892B8 /* fixcodeproject.rb in Resources */,
 				5AA719192519CD5C00BC5962 /* .swiftlint.yml in Resources */,
 				5A02C4C52519C57B009AEC55 /* LaunchScreen.storyboard in Resources */,
 				5A02C4C22519C57B009AEC55 /* Assets.xcassets in Resources */,
@@ -651,6 +656,23 @@
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
+		};
+		F2EAD85C260742B8000892B8 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nruby fixcodeproject.rb GiphyApp.xcodeproj\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -1042,7 +1064,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		5A073DB82601D31C005D038B /* XCRemoteSwiftPackageReference "RxSwift" */ = {
+		5A073DB82601D31C005D038B /* RemoteSwiftPackageReference */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/ReactiveX/RxSwift";
 			requirement = {
@@ -1050,7 +1072,7 @@
 				minimumVersion = 6.1.0;
 			};
 		};
-		5A343A1E2601D8800048A550 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+		5A343A1E2601D8800048A550 /* RemoteSwiftPackageReference */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/onevcat/Kingfisher";
 			requirement = {
@@ -1058,7 +1080,7 @@
 				minimumVersion = 6.2.1;
 			};
 		};
-		5A343A242601D8C00048A550 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+		5A343A242601D8C00048A550 /* RemoteSwiftPackageReference */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit";
 			requirement = {
@@ -1066,7 +1088,7 @@
 				minimumVersion = 5.0.1;
 			};
 		};
-		5A343A2A2601D91E0048A550 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+		5A343A2A2601D91E0048A550 /* RemoteSwiftPackageReference */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Alamofire/Alamofire";
 			requirement = {
@@ -1074,7 +1096,7 @@
 				minimumVersion = 5.4.1;
 			};
 		};
-		5AA7191A2519CE7E00BC5962 /* XCRemoteSwiftPackageReference "Then" */ = {
+		5AA7191A2519CE7E00BC5962 /* RemoteSwiftPackageReference */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/devxoul/Then";
 			requirement = {
@@ -1085,39 +1107,39 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		5A073DB92601D31C005D038B /* RxSwift */ = {
+		5A073DB92601D31C005D038B /* SwiftPackageProductDependency */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 5A073DB82601D31C005D038B /* XCRemoteSwiftPackageReference "RxSwift" */;
+			package = 5A073DB82601D31C005D038B /* RemoteSwiftPackageReference */;
 			productName = RxSwift;
 		};
-		5A073DBD2601D31C005D038B /* RxRelay */ = {
+		5A073DBD2601D31C005D038B /* SwiftPackageProductDependency */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 5A073DB82601D31C005D038B /* XCRemoteSwiftPackageReference "RxSwift" */;
+			package = 5A073DB82601D31C005D038B /* RemoteSwiftPackageReference */;
 			productName = RxRelay;
 		};
-		5A073DBF2601D31C005D038B /* RxCocoa */ = {
+		5A073DBF2601D31C005D038B /* SwiftPackageProductDependency */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 5A073DB82601D31C005D038B /* XCRemoteSwiftPackageReference "RxSwift" */;
+			package = 5A073DB82601D31C005D038B /* RemoteSwiftPackageReference */;
 			productName = RxCocoa;
 		};
-		5A343A1F2601D8800048A550 /* Kingfisher */ = {
+		5A343A1F2601D8800048A550 /* SwiftPackageProductDependency */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 5A343A1E2601D8800048A550 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			package = 5A343A1E2601D8800048A550 /* RemoteSwiftPackageReference */;
 			productName = Kingfisher;
 		};
-		5A343A252601D8C00048A550 /* SnapKit */ = {
+		5A343A252601D8C00048A550 /* SwiftPackageProductDependency */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 5A343A242601D8C00048A550 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			package = 5A343A242601D8C00048A550 /* RemoteSwiftPackageReference */;
 			productName = SnapKit;
 		};
-		5A343A2B2601D91E0048A550 /* Alamofire */ = {
+		5A343A2B2601D91E0048A550 /* SwiftPackageProductDependency */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 5A343A2A2601D91E0048A550 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			package = 5A343A2A2601D91E0048A550 /* RemoteSwiftPackageReference */;
 			productName = Alamofire;
 		};
-		5AA7191B2519CE7F00BC5962 /* Then */ = {
+		5AA7191B2519CE7F00BC5962 /* SwiftPackageProductDependency */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 5AA7191A2519CE7E00BC5962 /* XCRemoteSwiftPackageReference "Then" */;
+			package = 5AA7191A2519CE7E00BC5962 /* RemoteSwiftPackageReference */;
 			productName = Then;
 		};
 /* End XCSwiftPackageProductDependency section */
