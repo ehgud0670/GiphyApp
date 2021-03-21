@@ -54,7 +54,7 @@ final class FavoriteViewController: UIViewController {
 extension FavoriteViewController {
     private func configureAttributes() {
         self.view.do {
-            $0.backgroundColor = .black
+            $0.backgroundColor = .mainDark
         }
         
         coreDataGiphyViewModel?.fetchedResultsController?.delegate = self

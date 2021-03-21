@@ -80,11 +80,11 @@ final class HomeViewController: UIViewController {
 extension HomeViewController {
     private func configureAttributes() {
         self.view.do {
-            $0.backgroundColor = .black
+            $0.backgroundColor = .mainDark
         }
         
         giphyCollectionView.do {
-            $0.backgroundColor = .black
+            $0.backgroundColor = .mainDark
             $0.register(GiphyCell.self, forCellWithReuseIdentifier: GiphyCell.reuseIdentifier)
             $0.dataSource = giphysViewModel
             $0.delegate = self

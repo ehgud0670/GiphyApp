@@ -57,7 +57,7 @@ final class RandomViewController: UIViewController {
 extension RandomViewController {
     private func configureAttributes() {
         self.view.do {
-            $0.backgroundColor = .black
+            $0.backgroundColor = .mainDark
         }
         
         searchTextField.do {

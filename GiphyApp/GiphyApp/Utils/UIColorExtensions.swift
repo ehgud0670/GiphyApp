@@ -10,4 +10,6 @@ import UIKit
 
 extension UIColor {
     static let searchBarBorderGray = UIColor(named: "searchBarBorderGray")!
+    static let mainDark = UIColor(named: "mainDark")!
+    static let subDark = UIColor(named: "subDark")!
 }
