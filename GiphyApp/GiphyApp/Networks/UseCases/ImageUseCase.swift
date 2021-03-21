@@ -10,6 +10,7 @@ import UIKit
 
 import Kingfisher
 import RxSwift
+import RxAnimated
 
 final class ImageUseCase {
     static let shared = ImageUseCase()

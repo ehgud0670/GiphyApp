@@ -9,6 +9,7 @@ project.targets.each do |target|
   if [
     "Alamofire",
     "Kingfisher",
+    "RxAnimated",
     "RxSwift",
     "SnapKit",
     "Then",

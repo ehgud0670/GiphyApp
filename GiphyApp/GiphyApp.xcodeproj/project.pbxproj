@@ -69,6 +69,7 @@
 		5AF75A02251EC8DE00356F4E /* Giphy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AF75A01251EC8DE00356F4E /* Giphy.swift */; };
 		DAF4AFBE633BF0D8E94D06A4 /* Pods_GiphyApp_GiphyAppUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25014703C4BE121205B4C5ED /* Pods_GiphyApp_GiphyAppUITests.framework */; };
 		E8C3BEBE267F217EA80C9814 /* Pods_GiphyAppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDB3FFF1354DB5E22BC5B449 /* Pods_GiphyAppTests.framework */; };
+		F24767C2260765E300542CFC /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = F24767C1260765E300542CFC /* SwiftPackageProductDependency */; };
 		F2EAD85826074275000892B8 /* fixcodeproject.rb in Resources */ = {isa = PBXBuildFile; fileRef = F2EAD85726074275000892B8 /* fixcodeproject.rb */; };
 /* End PBXBuildFile section */
 
@@ -178,6 +179,7 @@
 				5AA7191C2519CE7F00BC5962 /* BuildFile in Frameworks */,
 				5A073DC02601D31C005D038B /* BuildFile in Frameworks */,
 				5A343A202601D8800048A550 /* BuildFile in Frameworks */,
+				F24767C2260765E300542CFC /* BuildFile in Frameworks */,
 				5A343A262601D8C00048A550 /* BuildFile in Frameworks */,
 				2312062120554E1F342F661C /* Pods_GiphyApp.framework in Frameworks */,
 				5A073DBE2601D31C005D038B /* BuildFile in Frameworks */,
@@ -450,6 +452,7 @@
 				5A343A1F2601D8800048A550 /* SwiftPackageProductDependency */,
 				5A343A252601D8C00048A550 /* SwiftPackageProductDependency */,
 				5A343A2B2601D91E0048A550 /* SwiftPackageProductDependency */,
+				F24767C1260765E300542CFC /* SwiftPackageProductDependency */,
 			);
 			productName = GiphyApp;
 			productReference = 5A02C4B52519C577009AEC55 /* GiphyApp.app */;
@@ -532,6 +535,7 @@
 				5A343A1E2601D8800048A550 /* RemoteSwiftPackageReference */,
 				5A343A242601D8C00048A550 /* RemoteSwiftPackageReference */,
 				5A343A2A2601D91E0048A550 /* RemoteSwiftPackageReference */,
+				F24767C0260765E300542CFC /* RemoteSwiftPackageReference */,
 			);
 			productRefGroup = 5A02C4B62519C577009AEC55 /* Products */;
 			projectDirPath = "";
@@ -1104,6 +1108,14 @@
 				minimumVersion = 2.7.0;
 			};
 		};
+		F24767C0260765E300542CFC /* RemoteSwiftPackageReference */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/RxSwiftCommunity/RxAnimated";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.9.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1141,6 +1153,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 5AA7191A2519CE7E00BC5962 /* RemoteSwiftPackageReference */;
 			productName = Then;
+		};
+		F24767C1260765E300542CFC /* SwiftPackageProductDependency */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F24767C0260765E300542CFC /* RemoteSwiftPackageReference */;
+			productName = RxAnimated;
 		};
 /* End XCSwiftPackageProductDependency section */
 

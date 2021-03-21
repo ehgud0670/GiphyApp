@@ -90,7 +90,7 @@ extension DetailViewController {
         
         giphyImageView.do {
             $0.contentMode = .scaleAspectFit
-            $0.image = Images.gifPlaceholder
+            $0.image = UIImage.from(color: .mainDark)
             guard let urlString = giphy?.originalURLString else { return }
             let max: CGFloat = 160
             imageUseCase.animatedImageWithRx(with: urlString, with: CGSize(width: max, height: max))
