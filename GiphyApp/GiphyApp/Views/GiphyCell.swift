@@ -9,7 +9,7 @@
 import UIKit
 
 import RxSwift
-import RxCocoa
+import RxAnimated
 import Kingfisher
 import SnapKit
 
@@ -74,7 +74,7 @@ final class GiphyCell: UICollectionViewCell, ReuseIdentifier {
     private func bindUI() {
         data.compactMap { $0.originalURLString }
             .flatMap { self.imageUseCase.animatedImageWithRx(with: $0, with: self.bounds.size) }
-            .bind(to: giphyImageView.rx.image)
+            .bind(to: giphyImageView.rx.animated.fade(duration: 0.33).image)
             .disposed(by: disposeBag)
     }
 }
