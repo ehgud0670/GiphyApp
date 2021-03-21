@@ -17,7 +17,8 @@ final class ImageUseCase {
     
     private let imageCache: ImageCache
     private let urlSession: URLSession
-    private let dispatchQueue = DispatchQueue(label: "imageTask.load.processing.queue")
+    private let dispatchQueue = DispatchQueue(label: "imageTask.load.processing.queue",
+                                              qos: .background)
     private let semaphore = DispatchSemaphore(value: 20)
     
     init(imageCache: ImageCache = .default, urlSession: URLSession = .shared) {
