@@ -3,5 +3,5 @@ disabled_rules:
 - identifier_name
 
 excluded:
-- Pod
+- Pods
 - Carthage

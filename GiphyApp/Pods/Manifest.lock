@@ -1,16 +1,54 @@
 PODS:
+  - Alamofire (5.5.0)
+  - Kingfisher (7.2.1)
+  - RxAnimated (0.9.0):
+    - RxAnimated/Core (= 0.9.0)
+    - RxCocoa (~> 6.0)
+    - RxSwift (~> 6.0)
+  - RxAnimated/Core (0.9.0):
+    - RxCocoa (~> 6.0)
+    - RxSwift (~> 6.0)
+  - RxCocoa (6.5.0):
+    - RxRelay (= 6.5.0)
+    - RxSwift (= 6.5.0)
+  - RxRelay (6.5.0):
+    - RxSwift (= 6.5.0)
+  - RxSwift (6.5.0)
+  - SnapKit (5.0.1)
   - SwiftLint (0.40.1)
+  - Then (2.7.0)
 
 DEPENDENCIES:
+  - Alamofire
+  - Kingfisher
+  - RxAnimated
+  - SnapKit
   - SwiftLint
+  - Then
 
 SPEC REPOS:
   trunk:
+    - Alamofire
+    - Kingfisher
+    - RxAnimated
+    - RxCocoa
+    - RxRelay
+    - RxSwift
+    - SnapKit
     - SwiftLint
+    - Then
 
 SPEC CHECKSUMS:
+  Alamofire: 1c4fb5369c3fe93d2857c780d8bbe09f06f97e7c
+  Kingfisher: 7c084bebf7d548c623ad41bcf765fb200efed369
+  RxAnimated: e53fb66cafc0539faf881b734f7412a624527f0a
+  RxCocoa: 94f817b71c07517321eb4f9ad299112ca8af743b
+  RxRelay: 1de1523e604c72b6c68feadedd1af3b1b4d0ecbd
+  RxSwift: 5710a9e6b17f3c3d6e40d6e559b9fa1e813b2ef8
+  SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
   SwiftLint: bbfed21bf4451dcbd0f5cdbee44a18e06cf91b12
+  Then: acfe0be7e98221c6204e12f8161459606d5d822d
 
-PODFILE CHECKSUM: cf7d35fc996cec738eb715c8bc1635b3d1093953
+PODFILE CHECKSUM: a803fb1ad52db576c398ebabc291029c2f39cd4c
 
-COCOAPODS: 1.9.1
+COCOAPODS: 1.11.2

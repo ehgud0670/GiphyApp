@@ -7,6 +7,11 @@ target 'GiphyApp' do
 
   # Pods for GiphyApp
   pod 'SwiftLint'
+  pod 'Then'
+  pod 'SnapKit'
+  pod 'Kingfisher'
+  pod 'Alamofire'
+  pod 'RxAnimated'
 
   target 'GiphyAppTests' do
     inherit! :search_paths
